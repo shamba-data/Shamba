@@ -1,5 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
@@ -7,6 +8,7 @@ import { GetStaticProps } from "next";
 import PostList from "../components/PostList";
 import { getClient, usePreviewSubscription } from "../utils/sanity";
 import { postquery, configQuery, HomeQuery } from "../utils/groq";
+import Auth from "../components/Auth";
 
 export interface PostProps {
   postdata: [
@@ -39,6 +41,9 @@ const Home: NextPage = ({ postdata, siteconfig, preview }: PostProps) => {
     enabled: preview || router.query.preview !== undefined,
   });
 
+  const { data: sessionData, status } = useSession();
+  // console.log(sessionData.user.image);
+
   return (
     <>
       <Head>
@@ -49,33 +54,60 @@ const Home: NextPage = ({ postdata, siteconfig, preview }: PostProps) => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="max-w-screen container mx-auto px-8 py-5 font-montserrat lg:py-8 xl:max-w-screen-xl xl:px-5 ">
-        <nav className="">
-          <h3 className="text-green-400 text-lg font-medium">Shamba Data</h3>
-        </nav>
-        <div>
-          <article className="max-w-3xl">
-            Agriculture Company profiles that are exporting goods to external
-            market. This data is compiled from the company sources and is close
-            to accurate as possible
-          </article>
-        </div>
-        {/* {posts.map((post) => (
+
+      {sessionData ? (
+        <main className="max-w-screen container mx-auto px-8 py-5 font-montserrat lg:py-8 xl:max-w-screen-xl xl:px-5 ">
+          <nav className="">
+            <h3 className="text-green-400 text-lg font-medium">Shamba Data</h3>
+          </nav>
+          <div>
+            <article className="max-w-3xl">
+              Agriculture Company profiles that are exporting goods to external
+              market. This data is compiled from the company sources and is
+              close to accurate as possible
+            </article>
+            <div className="flex items-center space-x-2">
+              {sessionData.user && (
+                <>
+                  <div className="relative h-[50px] w-[50px] rounded-full border-[0.5px]">
+                    <Image
+                      src={sessionData.user?.image}
+                      alt="profile"
+                      layout="fill"
+                      className="rounded-full"
+                      objectFit="cover"
+                    />
+                  </div>
+                  <h3 className="font-medium">{sessionData.user?.name}</h3>
+                  <button
+                    onClick={() => signOut()}
+                    className="cursor-pointer rounded-md bg-slate-200 px-4 py-1"
+                  >
+                    Logout
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+          {/* {posts.map((post) => (
           <h3>{post.title}</h3>
         ))} */}
-        <section className="">
-          <div className="mt-10 grid gap-10 md:grid-cols-2 lg:gap-10 xl:grid-cols-3">
-            {posts.map((post) => (
-              <PostList
-                key={post._id}
-                post={post}
-                aspect="square"
-                preloadImage={true}
-              />
-            ))}
-          </div>
-        </section>
-      </main>
+          <section className="">
+            <div className="mt-10 grid gap-10 md:grid-cols-2 lg:gap-10 xl:grid-cols-3">
+              {posts.map((post) => (
+                <PostList
+                  key={post._id}
+                  post={post}
+                  aspect="square"
+                  preloadImage={true}
+                />
+              ))}
+            </div>
+          </section>
+        </main>
+      ) : (
+        <Auth />
+      )}
     </>
   );
 };
