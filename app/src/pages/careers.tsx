@@ -41,8 +41,8 @@ const careers = () => {
           Openings
         </h3>
         <p className="mt-[1rem] text-center text-lg">
-          Currently we don't have any openings. Keep in touch with us in our
-          social media pages in case anythings comes up.
+          Currently we don&apos;t have any openings. Keep in touch with us in
+          our social media pages in case anythings comes up.
         </p>
         <Footer />
       </main>
