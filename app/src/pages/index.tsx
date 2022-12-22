@@ -1,155 +1,110 @@
-import { type NextPage } from "next";
-import Head from "next/head";
+import Value from "../components/landingPage/value";
+import Layout from "../components/landingPage/layout";
+import Nav from "../components/landingPage/Nav";
+import Footer from "../components/landingPage/Footer";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { trpc } from "../utils/trpc";
-import { GetStaticProps } from "next";
-import PostList from "../components/PostList";
-import { getClient, usePreviewSubscription } from "../utils/sanity";
-import { postquery, configQuery, HomeQuery } from "../utils/groq";
-import Auth from "../components/Auth";
 
-export interface PostProps {
-  postdata: [
-    _createdAt: string,
-    _id: any,
-    _rev: string,
-    _type: string,
-    _updatedAt: string,
-    slug: {
-      _type: string;
-      current: string;
-    },
-    body: []
-  ];
-  siteconfig: any;
-  preview: any;
-}
-
-const Home: NextPage = ({ postdata, siteconfig, preview }: PostProps) => {
-  const router = useRouter();
-  // const { postdata, siteconfig, preview } = props;
-
-  const { data: posts } = usePreviewSubscription(postquery, {
-    initialData: postdata,
-    enabled: preview || router.query.preview !== undefined,
-  });
-
-  const { data: siteConfig } = usePreviewSubscription(configQuery, {
-    initialData: siteconfig,
-    enabled: preview || router.query.preview !== undefined,
-  });
-
-  const { data: sessionData, status } = useSession();
-  // console.log(sessionData.user.image);
-
+const Index = () => {
   return (
     <>
-      <Head>
-        <title>Shamba Data</title>
-        <meta
-          name="description"
-          content="Import/Export Information of Agriculture Products"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Nav />
 
-      {sessionData ? (
-        <main className="max-w-screen container mx-auto px-8 py-5 font-montserrat lg:py-8 xl:max-w-screen-xl xl:px-5 ">
-          <nav className="">
-            <h3 className="text-green-400 text-lg font-medium">Shamba Data</h3>
-          </nav>
-          <div>
-            <article className="max-w-3xl">
-              Agriculture Company profiles that are exporting goods to external
-              market. This data is compiled from the company sources and is
-              close to accurate as possible
-            </article>
-            <div className="flex items-center space-x-2">
-              {sessionData.user && (
-                <>
-                  <div className="relative h-[50px] w-[50px] rounded-full border-[0.5px]">
-                    <Image
-                      src={sessionData.user?.image}
-                      alt="profile"
-                      layout="fill"
-                      className="rounded-full"
-                      objectFit="cover"
-                    />
-                  </div>
-                  <h3 className="font-medium">{sessionData.user?.name}</h3>
-                  <button
-                    onClick={() => signOut()}
-                    className="cursor-pointer rounded-md bg-slate-200 px-4 py-1"
-                  >
-                    Logout
-                  </button>
-                </>
-              )}
+      <main className="container mt-[4rem] flex flex-col  items-center justify-center font-montserrat md:max-w-[200ch]  ">
+        <section className="pt-[100px] text-center md:w-[700px] lg:w-[900px]">
+          <div className="mx-[1rem] flex justify-between">
+            <div className="relative h-[100px] w-[100px]">
+              <Image src="/tomat1.webp" alt="tomatoes" layout="fill" />
+            </div>
+            <div className="relative mt-[1.5rem] h-[100px] w-[100px]">
+              <Image src="/Tomatoes.webp" alt="tomatoes" layout="fill" />
             </div>
           </div>
-          {/* {posts.map((post) => (
-          <h3>{post.title}</h3>
-        ))} */}
-          <section className="">
-            <div className="mt-10 grid gap-10 md:grid-cols-2 lg:gap-10 xl:grid-cols-3">
-              {posts.map((post) => (
-                <PostList
-                  key={post._id}
-                  post={post}
-                  aspect="square"
-                  preloadImage={true}
-                />
-              ))}
+
+          <div className="flex items-end justify-center">
+            <div className="relative hidden h-[90px] w-[90px] md:block lg:h-[120px] lg:w-[120px]">
+              <Image src="/chilli.webp" alt="tomatoes" layout="fill" />
             </div>
-          </section>
-        </main>
-      ) : (
-        <Auth />
-      )}
+
+            <div className="lg:flex lg:items-center lg:justify-center">
+              <h3 className="max-w-lg text-center text-[2.5rem] font-medium md:-translate-y-[2rem] md:text-[3rem] lg:max-w-none lg:text-[4rem]">
+                Intellig<span className="text-green">en</span>ce in{" "}
+                <span className="text-green">Food</span> Systems
+              </h3>
+            </div>
+
+            <div className="relative hidden h-[90px] w-[90px] md:block lg:h-[120px] lg:w-[120px]">
+              <Image src="/tomat1.webp" alt="tomatoes" layout="fill" />
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center justify-center">
+            <article className="font-regular mt-[25px] max-w-lg text-lg md:-translate-y-[3rem] md:text-xl">
+              We collect, aggregate, and process data that feeds the African
+              Continent
+            </article>
+            <button className="mt-[14px] cursor-pointer rounded-md bg-green px-4 py-2 font-medium text-white md:-translate-y-[3rem] md:py-4 lg:mt-[18px]">
+              Book An Enterprise Demo
+            </button>
+          </div>
+        </section>
+
+        <section
+          className="mt-[73px] flex flex-col text-center md:mt-[40px] md:w-[700px] lg:w-[900px]"
+          id="about"
+        >
+          <div className="md:flex md:space-x-7 md:text-left lg:space-x-10">
+            <div className="mx-1 md:w-[400px]">
+              <h3 className="font-semi-bold text-2xl text-green">
+                We are here to solve the world&apos;s fundamental challenge,
+              </h3>
+              <p className="mt-[10px] text-[1.1rem]">
+                With the global population increasing, we need to find new
+                solutions that are scalable, and sustainable to the planet.
+              </p>
+              <p className="mt-[10px] text-[1.1rem]">
+                To work on this, we start with providing agriculture data of the
+                African continent so that we can increase food production,
+                monitor food security and mitigate the effect of climate change
+                in the continent.
+              </p>
+            </div>
+
+            <div className="relative mx-auto mt-[50px] h-[336px] w-[294px] md:mt-0 md:h-[400px] md:w-[350px]">
+              <Image src="/hero.svg" alt="hero" layout="fill" />
+            </div>
+          </div>
+
+          <div className="md:mt-[170px] md:flex md:space-x-[1rem] md:text-left lg:space-x-[2rem]">
+            <div>
+              <h3 className="mt-[50px] text-2xl font-medium text-gold">
+                Providing Market Information to Farmers in Zambia
+              </h3>
+              <p className="mt-[20px] text-lg">
+                We aim to provide accurate and reliable data to our clients. We
+                provide over 100 Zambian farmers
+              </p>
+              <p className="mt-[15px] text-lg">
+                with market information so that they can know which market has
+                the best prices and return have more financial returns
+              </p>
+              <button className="mt-[27px] cursor-pointer rounded-md bg-gold px-4 py-2 font-medium text-white">
+                Learn More
+              </button>
+            </div>
+            <div className="flex items-center justify-center">
+              <div className="relative z-10 mt-[2rem] h-[359px] w-[311px] sm:h-[400px] sm:w-[300px] lg:h-[400px] lg:w-[400px]">
+                <Image src="/Lady.webp" alt="hero" layout="fill" />
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="mt-[91px]">
+          <Value />
+        </section>
+        <Footer />
+      </main>
     </>
   );
 };
 
-export default Home;
-
-const AuthShowcase: React.FC = () => {
-  const { data: sessionData } = useSession();
-
-  const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
-
-  return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <p className="text-center text-2xl text-white">
-        {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-        {secretMessage && <span> - {secretMessage}</span>}
-      </p>
-      <button
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-        onClick={sessionData ? () => signOut() : () => signIn()}
-      >
-        {sessionData ? "Sign out" : "Sign in"}
-      </button>
-    </div>
-  );
-};
-
-export const getStaticProps: GetStaticProps = async ({
-  params,
-  preview = false,
-}) => {
-  const post = await getClient(preview).fetch(HomeQuery);
-  const config = await getClient(preview).fetch(configQuery);
-  return {
-    props: {
-      postdata: post,
-      siteconfig: { ...config },
-      preview,
-    },
-    revalidate: 10,
-  };
-};
+export default Index;
