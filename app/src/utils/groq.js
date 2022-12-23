@@ -10,12 +10,12 @@ export const postquery = groq`
 `;
 export const HomeQuery = groq`
 *[_type == "post"] {
-  mainImage,
+  mainImage{asset{_ref}},
   _createdAt,
   excerpt,
   title,
-  slug,
-  categories[],
+  slug{current},
+  categories[]->{title},
 }
 `;
 
@@ -26,10 +26,11 @@ export const configQuery = groq`
 `;
 export const singlequery = groq`
 *[_type == "post" && slug.current == $slug][0] {
-  ...,
-  author->,
-  categories[]->,
-  country[]->,
+ author->{slug{current}},
+  categories[]->{title},
+  country[]->{title},
+  body,
+  title,
  
 }
 `;

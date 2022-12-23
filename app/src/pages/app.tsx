@@ -52,21 +52,20 @@ const Home: NextPage = ({ postdata, siteconfig, preview }: PostProps) => {
           name="description"
           content="Import/Export Information of Agriculture Products"
         />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {sessionData ? (
-        <main className="max-w-screen container mx-auto px-8 py-5 font-montserrat lg:py-8 xl:max-w-screen-xl xl:px-5 ">
-          <nav className="">
-            <h3 className="text-green-400 text-lg font-medium">Shamba Data</h3>
-          </nav>
-          <div>
-            <article className="max-w-3xl">
-              Agriculture Company profiles that are exporting goods to external
-              market. This data is compiled from the company sources and is
-              close to accurate as possible
-            </article>
-            <div className="flex items-center space-x-2">
+      {/* {sessionData ? ( */}
+      <main className="max-w-screen container mx-auto px-8 py-5 font-montserrat lg:py-8 xl:max-w-screen-xl xl:px-5 ">
+        <nav className="">
+          <h3 className="text-green-400 text-lg font-medium">Shamba Data</h3>
+        </nav>
+        <div>
+          <article className="max-w-3xl">
+            Agriculture Company profiles that are exporting goods to external
+            market. This data is compiled from the company sources and is close
+            to accurate as possible
+          </article>
+          {/* <div className="flex items-center space-x-2">
               {sessionData.user && (
                 <>
                   <div className="relative h-[50px] w-[50px] rounded-full border-[0.5px]">
@@ -87,27 +86,27 @@ const Home: NextPage = ({ postdata, siteconfig, preview }: PostProps) => {
                   </button>
                 </>
               )}
-            </div>
-          </div>
-          {/* {posts.map((post) => (
+            </div> */}
+        </div>
+        {/* {posts.map((post) => (
           <h3>{post.title}</h3>
         ))} */}
-          <section className="">
-            <div className="mt-10 grid gap-10 md:grid-cols-2 lg:gap-10 xl:grid-cols-3">
-              {posts.map((post) => (
-                <PostList
-                  key={post._id}
-                  post={post}
-                  aspect="square"
-                  preloadImage={true}
-                />
-              ))}
-            </div>
-          </section>
-        </main>
-      ) : (
+        <section className="">
+          <div className="mt-10 grid gap-10 md:grid-cols-2 lg:gap-10 xl:grid-cols-3">
+            {posts.map((post) => (
+              <PostList
+                key={post._id}
+                post={post}
+                aspect="square"
+                preloadImage={true}
+              />
+            ))}
+          </div>
+        </section>
+      </main>
+      {/* ) : (
         <Auth />
-      )}
+      )} */}
     </>
   );
 };
@@ -143,11 +142,11 @@ export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }) => {
   const post = await getClient(preview).fetch(HomeQuery);
-  const config = await getClient(preview).fetch(configQuery);
+  // const config = await getClient(preview).fetch(configQuery);
   return {
     props: {
       postdata: post,
-      siteconfig: { ...config },
+      // siteconfig: { ...config },
       preview,
     },
     revalidate: 10,

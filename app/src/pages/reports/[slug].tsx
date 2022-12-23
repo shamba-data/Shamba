@@ -2,9 +2,7 @@ import { useRouter } from "next/router";
 import { GetStaticProps } from "next";
 import { type NextPage } from "next";
 import client from "../../../client";
-import { Fragment } from "react";
 import { configQuery, singlequery, pathquery } from "../../utils/groq";
-import ErrorPage from "next/error";
 import PortableText from "react-portable-text";
 import { getClient, usePreviewSubscription } from "../../utils/sanity";
 import CategoryLabel from "../../components/blog/category";
@@ -26,7 +24,7 @@ interface PostProps {
   preview: any;
 }
 const Post: NextPage = (props: any) => {
-  const { postdata, siteconfig, preview } = props;
+  const { postdata, preview } = props;
   const router = useRouter();
   const { slug } = router.query;
 
@@ -41,7 +39,7 @@ const Post: NextPage = (props: any) => {
   // }
 
   return (
-    <Fragment>
+    <>
       <main className="mx-auto max-w-screen-lg  py-5 font-montserrat ">
         <h3 className="text-lg font-medium">
           Market Information for{" "}
@@ -75,7 +73,7 @@ const Post: NextPage = (props: any) => {
           )}
         </article>
       </main>
-    </Fragment>
+    </>
   );
 };
 
@@ -97,11 +95,12 @@ export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }) => {
   const post = await client.fetch(singlequery, { slug: params.slug });
-  const config = await getClient(preview).fetch(configQuery);
+  // const config = await getClient(preview).fetch(configQuery);
+  console.log(post);
   return {
     props: {
       postdata: { ...post },
-      siteConfig: { ...config },
+      // siteConfig: { ...config },
       preview,
     },
     revalidate: 10,
