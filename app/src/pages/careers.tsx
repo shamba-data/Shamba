@@ -1,8 +1,9 @@
-import { ProfileImage, Nav, Footer } from "../components/landingPage";
+import { ProfileImage, Nav, Footer, HeadSeo } from "../components/landingPage";
 
 const careers = () => {
   return (
     <>
+      <HeadSeo title="Careers" />
       <Nav />
       <main className="container mt-[3rem] flex  flex-col items-center justify-center font-montserrat md:max-w-[200ch]">
         <div className="mt-[6rem] text-center">

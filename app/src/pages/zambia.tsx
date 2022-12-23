@@ -1,8 +1,16 @@
-import { HeroSection, Card, Nav, Footer } from "../components/landingPage";
+import {
+  HeroSection,
+  Card,
+  Nav,
+  Footer,
+  HeadSeo,
+} from "../components/landingPage";
 import Image from "next/image";
+
 const Zambia = () => {
   return (
     <>
+      <HeadSeo title="Market Information" />
       <Nav />
       <main className="container mt-[5rem] flex flex-col items-center  justify-center font-montserrat md:max-w-[200ch]">
         <HeroSection />

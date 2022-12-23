@@ -1,12 +1,10 @@
-import Value from "../components/landingPage/value";
-import Layout from "../components/landingPage/layout";
-import Nav from "../components/landingPage/Nav";
-import Footer from "../components/landingPage/Footer";
+import { Value, Nav, Footer, HeadSeo } from "../components/landingPage";
 import Image from "next/image";
 
 const Index = () => {
   return (
     <>
+      <HeadSeo title="Shamba Data" />
       <Nav />
 
       <main className="container mt-[4rem] flex flex-col  items-center justify-center font-montserrat md:max-w-[200ch]  ">

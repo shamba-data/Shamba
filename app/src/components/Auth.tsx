@@ -1,7 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 import { FaDiscord } from "react-icons/fa";
-import { FaGoogle } from "react-icons/fa";
+// import { FaGoogle } from "react-icons/fa";
 
 const Auth: React.FC = () => {
   const { data: sessionData, status } = useSession();
