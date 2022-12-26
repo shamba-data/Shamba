@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { GetStaticProps } from "next";
 import { type NextPage } from "next";
 import client from "../../../client";
-import { configQuery, singlequery, pathquery } from "../../utils/groq";
+import { singlequery, pathquery } from "../../utils/groq";
 import PortableText from "react-portable-text";
 import { getClient, usePreviewSubscription } from "../../utils/sanity";
 import CategoryLabel from "../../components/blog/category";
@@ -96,7 +96,6 @@ export const getStaticProps: GetStaticProps = async ({
 }) => {
   const post = await client.fetch(singlequery, { slug: params.slug });
   // const config = await getClient(preview).fetch(configQuery);
-  console.log(post);
   return {
     props: {
       postdata: { ...post },

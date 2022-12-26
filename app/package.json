@@ -10,6 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@builder.io/partytown": "^0.7.3",
     "@next-auth/prisma-adapter": "1.0.5",
     "@next/font": "^13.1.0",
     "@portabletext/react": "^1.0.0",

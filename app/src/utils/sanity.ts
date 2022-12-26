@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { createClient, createPreviewSubscriptionHook } from "next-sanity";
 import createImageUrlBuilder from "@sanity/image-url";
 import { config } from "./config";
