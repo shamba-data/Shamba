@@ -1,0 +1,59 @@
+
+> app@0.1.0 build /home/tony/web-apps/shamba-data/apps/app
+> next build
+
+info  - Loaded env from /home/tony/web-apps/shamba-data/apps/app/.env
+info  - Linting and checking validity of types...
+error - ESLint: Plugin "@next/next" was conflicted between ".eslintrc.json » eslint-config-next/core-web-vitals » plugin:@next/next/core-web-vitals" and "../../.eslintrc.js » eslint-config-custom » eslint-config-next » plugin:@next/next/recommended".
+info  - Creating an optimized production build...
+info  - Compiled successfully
+info  - Collecting page data...
+Using the Sanity client without specifying an API version is deprecated. See https://docs.sanity.io/help/js-client-api-version
+Using the Sanity client without specifying an API version is deprecated. See https://docs.sanity.io/help/js-client-api-version
+Using the Sanity client without specifying an API version is deprecated. See https://docs.sanity.io/help/js-client-api-version
+info  - Generating static pages (0/65)
+Using the Sanity client without specifying an API version is deprecated. See https://docs.sanity.io/help/js-client-api-version
+Using the Sanity client without specifying an API version is deprecated. See https://docs.sanity.io/help/js-client-api-version
+Using the Sanity client without specifying an API version is deprecated. See https://docs.sanity.io/help/js-client-api-version
+undefined
+Using the Sanity client without specifying an API version is deprecated. See https://docs.sanity.io/help/js-client-api-version
+info  - Generating static pages (16/65)
+info  - Generating static pages (32/65)
+info  - Generating static pages (48/65)
+undefined
+info  - Generating static pages (65/65)
+info  - Finalizing page optimization...
+
+Route (pages)                                              Size     First Load JS
+┌ ○ / (528 ms)                                             1.53 kB         120 kB
+├   /_app                                                  0 B             109 kB
+├ ○ /404                                                   182 B           109 kB
+├ λ /api/auth/[...nextauth]                                0 B             109 kB
+├ λ /api/examples                                          0 B             109 kB
+├ λ /api/restricted                                        0 B             109 kB
+├ λ /api/trpc/[trpc]                                       0 B             109 kB
+├ ● /app                                                   2.55 kB         150 kB
+├ ○ /careers (711 ms)                                      879 B           120 kB
+├ ○ /del (781 ms)                                          762 B           133 kB
+├ ● /reports/[slug] (ISR: 10 Seconds) (133827 ms)          9.49 kB         157 kB
+├   ├ /en/reports/mulindi (7492 ms)
+├   ├ /en/reports/kabizu (6239 ms)
+├   ├ /en/reports/souk-farms (5714 ms)
+├   ├ /en/reports/le-geant-business-group-ltd (4467 ms)
+├   ├ /en/reports/jr-coffee (4187 ms)
+├   ├ /en/reports/rwanda-farmers-coffee-company (4137 ms)
+├   ├ /en/reports/mahembe (3878 ms)
+├   └ [+44 more paths] (avg 2221 ms)
+└ ○ /zambia (954 ms)                                       1.29 kB         120 kB
++ First Load JS shared by all                              114 kB
+  ├ chunks/framework-d5f8ed288849d546.js                   45.4 kB
+  ├ chunks/main-3ac0da744c4d1fd0.js                        27.1 kB
+  ├ chunks/pages/_app-7a50f2888de9b781.js                  34.3 kB
+  ├ chunks/webpack-dbe0d03926555f8e.js                     1.77 kB
+  └ css/53dfd90424b5667e.css                               5.42 kB
+
+λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
+○  (Static)  automatically rendered as static HTML (uses no initial props)
+●  (SSG)     automatically generated as static HTML + JSON (uses getStaticProps)
+   (ISR)     incremental static regeneration (uses revalidate in getStaticProps)
+

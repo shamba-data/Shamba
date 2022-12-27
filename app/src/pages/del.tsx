@@ -15,6 +15,7 @@ const Del = () => {
     console.log(dataQuery.error);
   }
   console.log(dataQuery.data);
+  // const reports = trpc.example.getReports(HomeQuery);
 
   return <div>Hey Boo</div>;
 };

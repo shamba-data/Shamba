@@ -2,11 +2,11 @@ import { useRouter } from "next/router";
 import { GetStaticProps } from "next";
 import { type NextPage } from "next";
 import client from "../../../client";
-import { singlequery, pathquery } from "../../utils/groq";
+import { singlequery, pathquery, HomeQuery } from "../../utils/groq";
 import PortableText from "react-portable-text";
 import { getClient, usePreviewSubscription } from "../../utils/sanity";
 import CategoryLabel from "../../components/blog/category";
-
+import { getAllPostsWithSlug, getPostAndMorePosts } from "../../lib/api";
 interface PostProps {
   postdata: [
     _createdAt: string,
@@ -51,7 +51,7 @@ const Post: NextPage = (props: any) => {
         </div>
 
         <article className="mt-5 text-justify">
-          {post.body && (
+          {post?.body && (
             <PortableText
               content={post?.body}
               serializers={{
@@ -80,28 +80,52 @@ const Post: NextPage = (props: any) => {
 export default Post;
 
 export async function getStaticPaths() {
-  const allPosts = await client.fetch(pathquery);
+  // const allPosts = await client.fetch(pathquery);
+  const allPosts = await getAllPostsWithSlug();
   return {
     paths:
       allPosts?.map((page) => ({
         params: { slug: page.slug },
       })) || [],
-    fallback: false,
+    fallback: true,
   };
 }
+// export async function getStaticProps({ params, preview = false }) {
+//   const data = await getPostAndMorePosts(params.slug, preview);
+//   return {
+//     props: {
+//       preview,
+//       post: data?.post || null,
+//       morePosts: data?.morePosts || null,
+//     },
+//     revalidate: 1,
+//   };
+// }
 
-export const getStaticProps: GetStaticProps = async ({
-  params,
-  preview = false,
-}) => {
-  const post = await client.fetch(singlequery, { slug: params.slug });
-  // const config = await getClient(preview).fetch(configQuery);
+export async function getStaticProps({ params, preview = false }) {
+  const data = await getPostAndMorePosts(params.slug, preview);
   return {
     props: {
-      postdata: { ...post },
-      // siteConfig: { ...config },
       preview,
+      postdata: data?.post || null,
+      morePosts: data?.morePosts || null,
     },
     revalidate: 10,
   };
-};
+}
+
+// export const getStaticProps: GetStaticProps = async ({
+//   params,
+//   preview = false,
+// }) => {
+//   const post = await client.fetch(singlequery, { slug: params.slug });
+//   // const config = await getClient(preview).fetch(configQuery);
+//   return {
+//     props: {
+//       postdata: { ...post },
+//       // siteConfig: { ...config },
+//       preview,
+//     },
+//     revalidate: 10,
+//   };
+// };
