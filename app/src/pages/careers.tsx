@@ -20,21 +20,33 @@ const careers = () => {
         </div>
 
         <div className="md:grid md:grid-cols-2 md:gap-[2rem] md:space-x-5 lg:flex">
-          <ProfileImage ringColor="gold" name="Brighton Mboya" position="CTO" />
+          <ProfileImage
+            ringColor="gold"
+            name="Brighton Mboya"
+            position="CTO"
+            imageUrl="/tony.jpeg"
+            xTranslate="0.3"
+          />
           <ProfileImage
             ringColor="green"
             name="Kondwani Ngulube"
             position="CTO"
+            imageUrl="/ngulube.jpeg"
+            xTranslate="-1"
           />
           <ProfileImage
             ringColor="gold"
             name="Aime Bah"
             position="Product Designer"
+            imageUrl="/aime.jpg"
+            xTranslate="0.3"
           />
           <ProfileImage
             ringColor="green"
             name="Abdul Karim"
             position="Data Analyst"
+            imageUrl="/karim.jpeg"
+            xTranslate="-1"
           />
         </div>
 

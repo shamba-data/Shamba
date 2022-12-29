@@ -1,15 +1,29 @@
 import Image from "next/image";
 
-const ProfileImage = ({ ringColor, position, name }) => {
+interface Props {
+  ringColor: string;
+  position: string;
+  name: string;
+  imageUrl: string;
+  xTranslate: string;
+}
+
+const ProfileImage = ({
+  ringColor,
+  position,
+  name,
+  imageUrl,
+  xTranslate,
+}: Props) => {
   return (
     <div className="font-semi-bold flex flex-col items-center text-lg">
       <div className="mt-[2rem] text-center">
         <div
-          className={`absolute h-[200px] w-[200px] rounded-full border-2 border-${ringColor} translate-x-[0.3rem] translate-y-[0.7rem]`}
+          className={`absolute h-[200px] w-[200px] rounded-full border-2 border-${ringColor} translate-x-[${xTranslate}rem] translate-y-[0.7rem]`}
         ></div>
         <div className="relative h-[200px] w-[200px]">
           <Image
-            src="/tony.jpeg"
+            src={imageUrl}
             alt="profile"
             layout="fill"
             objectFit="cover"
