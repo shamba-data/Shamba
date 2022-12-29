@@ -4,6 +4,7 @@
 2. Populate Links and screens for the Footer
 3. Add A formLink to collect emails in the Footer
 4. Do the Book an Enterprise Demo journey
+5. Have a new fuckin database, the railway one got maxed out
 
 ## Stuff for Kondwani
 

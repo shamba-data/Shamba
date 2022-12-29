@@ -11,6 +11,7 @@ const postFields = `
   country[]->{title},
   body,
   title,
+  mainImage{asset{_ref}},
 `;
 const getClient = (preview) => (preview ? previewClient : client);
 

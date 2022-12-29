@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
-import { GetStaticProps } from "next";
 import { type NextPage } from "next";
-import client from "../../../client";
 import { singlequery, pathquery, HomeQuery } from "../../utils/groq";
 import PortableText from "react-portable-text";
 import { getClient, usePreviewSubscription } from "../../utils/sanity";
 import CategoryLabel from "../../components/blog/category";
 import { getAllPostsWithSlug, getPostAndMorePosts } from "../../lib/api";
+import SEO from "../../components/SEO/SEO";
+import GetImage from "../../utils/getImage";
+import { Footer, Nav } from "../../components/landingPage";
+
 interface PostProps {
   postdata: [
     _createdAt: string,
@@ -40,39 +42,45 @@ const Post: NextPage = (props: any) => {
 
   return (
     <>
-      <main className="mx-auto max-w-screen-lg  py-5 font-montserrat ">
-        <h3 className="text-lg font-medium">
-          Market Information for{" "}
-          <span className="text-green">{post?.title}</span>
-        </h3>
-        <h3 className="mt-1">Countries {post?.title} exports to</h3>
-        <div className="mt-1">
-          <CategoryLabel categories={post?.country} />
-        </div>
+      {/* <SEO
+        imageUrl={GetImage(postdata?.mainImage).url()}
+        title={postdata?.title}
+        description={`Import Export Info for ${postdata?.title}`}
+      /> */}
+      <Nav />
 
-        <article className="mt-5 text-justify">
-          {post?.body && (
-            <PortableText
-              content={post?.body}
-              serializers={{
-                // h2: (props) => (
-                //   <h2
-                //     style={{ fontWeight: 400 }}
-                //     className="mt-[2rem] text-lg font-normal text-gray-700 "
-                //     {...props}
-                //   />
-                // ),
-                strong: (props) => (
-                  <h3
-                    className="mt-[3rem] text-lg font-medium text-gold"
-                    {...props}
-                  />
-                ),
-              }}
-            />
-          )}
-        </article>
+      <main className="container mx-auto mt-[3rem] max-w-xs  py-5 font-montserrat  sm:mt-[7rem] sm:max-w-screen-md ">
+        <div>
+          <h3 className="text-lg font-medium">
+            Market Information for{" "}
+            <span className="text-green">{post?.title}</span>
+          </h3>
+          <h3 className="mt-1">Countries {post?.title} exports to</h3>
+          <div className="mt-1">
+            <CategoryLabel categories={post?.country} />
+          </div>
+
+          <article className=" mx-auto mt-5 text-justify">
+            {post?.body && (
+              <PortableText
+                content={post?.body}
+                serializers={{
+                  strong: (props) => (
+                    <h3
+                      className="mt-[3rem] text-lg font-medium text-gold"
+                      {...props}
+                    />
+                  ),
+                  li: ({ children }) => (
+                    <li className="ml-5 list-disc">{children}</li>
+                  ),
+                }}
+              />
+            )}
+          </article>
+        </div>
       </main>
+      <Footer />
     </>
   );
 };
@@ -90,42 +98,15 @@ export async function getStaticPaths() {
     fallback: true,
   };
 }
-// export async function getStaticProps({ params, preview = false }) {
-//   const data = await getPostAndMorePosts(params.slug, preview);
-//   return {
-//     props: {
-//       preview,
-//       post: data?.post || null,
-//       morePosts: data?.morePosts || null,
-//     },
-//     revalidate: 1,
-//   };
-// }
 
 export async function getStaticProps({ params, preview = false }) {
   const data = await getPostAndMorePosts(params.slug, preview);
+  // const data = await client.fetch(singlequery, { slug: params.slug });
   return {
     props: {
       preview,
       postdata: data?.post || null,
-      morePosts: data?.morePosts || null,
     },
     revalidate: 10,
   };
 }
-
-// export const getStaticProps: GetStaticProps = async ({
-//   params,
-//   preview = false,
-// }) => {
-//   const post = await client.fetch(singlequery, { slug: params.slug });
-//   // const config = await getClient(preview).fetch(configQuery);
-//   return {
-//     props: {
-//       postdata: { ...post },
-//       // siteConfig: { ...config },
-//       preview,
-//     },
-//     revalidate: 10,
-//   };
-// };
