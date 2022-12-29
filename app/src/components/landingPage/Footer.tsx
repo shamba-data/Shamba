@@ -23,7 +23,7 @@ const Footer = () => {
             </div>
           </form>
         </div>
-        <div className="mt-[37px] flex flex-col items-start justify-start pl-[30px] md:flex-row md:gap-[3rem] md:pl-0">
+        <div className="mt-[37px] flex flex-col items-start justify-start pl-[30px] sm:pb-[2rem] md:flex-row md:gap-[3rem] md:pl-0">
           <div>
             <h3 className="text-lg font-medium text-white">Company</h3>
             <ul className="space-y-2 text-[#B5C9B2]">
