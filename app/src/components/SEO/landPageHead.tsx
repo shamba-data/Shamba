@@ -25,14 +25,15 @@ const HeadSeo = ({ title }: Props) => {
         property="og:description"
         content="An Agriculture Data Hub that tracks food security Across Africa"
       />
+      <meta content="@vercel" name="twitter:site" />
       <meta
         property="og:image"
         content="https://res.cloudinary.com/dhhcantbj/image/upload/v1672425601/shamba-data/seo_agkwsp.png"
       />
 
       <meta name="twitter:card" content="summary_large_image" />
-      <meta property="twitter:domain" content="shamba-data.com" />
-      <meta property="twitter:url" content="https://shamba-data.com" />
+      <meta name="twitter:domain" content="shamba-data.com" />
+      <meta name="twitter:url" content="https://shamba-data.com" />
       <meta name="twitter:title" content="Shamba Data" />
       <meta
         name="twitter:description"
