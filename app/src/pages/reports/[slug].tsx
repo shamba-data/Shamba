@@ -40,6 +40,8 @@ const Post: NextPage = (props: any) => {
   //   return <ErrorPage statusCode={404} />;
   // }
 
+  const imageProps = postdata?.mainImage ? GetImage(postdata?.mainImage) : null;
+
   return (
     <>
       {/* <SEO

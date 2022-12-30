@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 import { GetStaticProps } from "next";
+import GetImage from "../utils/getImage";
 import PostList from "../components/PostList";
 import { getClient, usePreviewSubscription } from "../utils/sanity";
 import { postquery, configQuery, HomeQuery } from "../utils/groq";
@@ -17,6 +18,7 @@ export interface PostProps {
     _rev: string,
     _type: string,
     _updatedAt: string,
+    mainImage: any,
     slug: {
       _type: string;
       current: string;
@@ -43,6 +45,8 @@ const Home: NextPage = ({ postdata, siteconfig, preview }: PostProps) => {
 
   const { data: sessionData, status } = useSession();
   // console.log(sessionData.user.image);
+
+  // const imageProps = posts?.mainImage ? GetImage(postdata?.mainImage) : null;
 
   return (
     <>
@@ -88,9 +92,7 @@ const Home: NextPage = ({ postdata, siteconfig, preview }: PostProps) => {
               )}
             </div> */}
         </div>
-        {/* {posts.map((post) => (
-          <h3>{post.title}</h3>
-        ))} */}
+
         <section className="">
           <div className="mt-10 grid gap-10 md:grid-cols-2 lg:gap-10 xl:grid-cols-3">
             {posts.map((post) => (
