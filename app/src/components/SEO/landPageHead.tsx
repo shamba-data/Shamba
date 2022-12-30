@@ -25,7 +25,10 @@ const HeadSeo = ({ title }: Props) => {
         property="og:description"
         content="An Agriculture Data Hub that tracks food security Across Africa"
       />
-      <meta property="og:image" content="https://shamba-data.com/seo.png" />
+      <meta
+        property="og:image"
+        content="https://res.cloudinary.com/dhhcantbj/image/upload/v1672425601/shamba-data/seo_agkwsp.png"
+      />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta property="twitter:domain" content="shamba-data.com" />
@@ -35,7 +38,12 @@ const HeadSeo = ({ title }: Props) => {
         name="twitter:description"
         content="An Agriculture Data Hub that tracks food security Across Africa"
       />
-      <meta name="twitter:image" content="https://shamba-data.com/seo.png" />
+
+      <meta
+        name="twitter:image"
+        content="https://res.cloudinary.com/dhhcantbj/image/upload/v1672425601/shamba-data/seo_agkwsp.png"
+      />
+
       <meta
         name="description"
         content="Providing Market prices to Farmers in Zambia"
