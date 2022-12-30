@@ -5,6 +5,7 @@ import { FaTimes } from "react-icons/fa";
 import { RiMenu3Line } from "react-icons/ri";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Nav = () => {
   const [showNav, setShowNav] = useState(false);
@@ -67,6 +68,13 @@ const Nav = () => {
 
       {/* for freaking wide screens */}
       <ul className=" hidden text-xl text-white md:flex md:h-[100px] md:items-center md:justify-center md:space-x-5 md:bg-green md:text-lg">
+        <li>
+          <Link href="/">
+            <div className="relative h-[65px] w-[148px]">
+              <Image src="/logo.png" alt="logo" layout="fill" />
+            </div>
+          </Link>
+        </li>
         <li>
           <Link
             href="/"
