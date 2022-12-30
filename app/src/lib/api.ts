@@ -50,21 +50,6 @@ const getUniquePosts = (posts) => {
 
 
 
-
-
-// export async function getPreviewPostBySlug(slug) {
-//   const data = await getClient(true).fetch(
-//     `*[_type == "post" && slug.current == $slug] | order(publishedAt desc){
-//       ${postFields}
-//       body
-//     }`,
-//     { slug }
-//   )
-//   return data[0]
-// }
-
-
-
 export async function getAllPostsForHome(preview) {
   const results = await getClient(preview)
     .fetch(`*[_type == "post"] | order(publishedAt desc){

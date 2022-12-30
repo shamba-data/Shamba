@@ -1,7 +1,17 @@
 import { Value, Nav, Footer, HeadSeo } from "../components/landingPage";
-import Image from "next/image";
+import Image from "next/legacy/image";
+import { useState } from "react";
+import dynamic from "next/dynamic";
+const ClientOnlyPortal = dynamic(
+  () => import("../components/BookDemo/Portal"),
+  { ssr: false }
+);
+const BookDemo = dynamic(() => import("../components/BookDemo/index"), {
+  ssr: false,
+});
 
 const Index = () => {
+  const [portal, setPortal] = useState(false);
   return (
     <>
       <HeadSeo title="Shamba Data" />
@@ -40,11 +50,25 @@ const Index = () => {
               We collect, aggregate, and process data that feeds the African
               Continent
             </article>
-            <button className="mt-[14px] cursor-pointer rounded-md bg-green px-4 py-2 font-medium text-white md:-translate-y-[3rem] md:py-4 lg:mt-[18px]">
+            <button
+              className="mt-[14px] cursor-pointer rounded-md bg-green px-4 py-2 font-medium text-white md:-translate-y-[3rem] md:py-4 lg:mt-[18px]"
+              onClick={() => setPortal(!portal)}
+            >
               Book An Enterprise Demo
             </button>
           </div>
         </section>
+
+        {portal && (
+          <ClientOnlyPortal selector="#modal">
+            <section
+              className="fixed top-0 right-0 left-0 bottom-0 bg-[rgba(0,0,0,0.8)] font-montserrat"
+              onClick={() => setPortal(!portal)}
+            >
+              <BookDemo />
+            </section>
+          </ClientOnlyPortal>
+        )}
 
         <section
           className="mt-[73px] flex flex-col text-center md:mt-[40px] md:w-[700px] lg:w-[900px]"

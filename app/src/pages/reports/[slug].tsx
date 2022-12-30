@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import { type NextPage } from "next";
-import { singlequery, pathquery, HomeQuery } from "../../utils/groq";
+import { singlequery } from "../../utils/groq";
 import PortableText from "react-portable-text";
-import { getClient, usePreviewSubscription } from "../../utils/sanity";
+import { usePreviewSubscription } from "../../utils/sanity";
 import CategoryLabel from "../../components/blog/category";
 import { getAllPostsWithSlug, getPostAndMorePosts } from "../../lib/api";
-import SEO from "../../components/SEO/SEO";
 import GetImage from "../../utils/getImage";
 import { Footer, Nav } from "../../components/landingPage";
+import ErrorPage from "next/error";
 
 interface PostProps {
   postdata: [
@@ -36,19 +36,14 @@ const Post: NextPage = (props: any) => {
     enabled: preview || router.query.preview !== undefined,
   });
 
-  // if (!router.isFallback && !post?.slug) {
-  //   return <ErrorPage statusCode={404} />;
-  // }
+  if (!router.isFallback && !post?.slug) {
+    return <ErrorPage statusCode={404} />;
+  }
 
   const imageProps = postdata?.mainImage ? GetImage(postdata?.mainImage) : null;
 
   return (
     <>
-      {/* <SEO
-        imageUrl={GetImage(postdata?.mainImage).url()}
-        title={postdata?.title}
-        description={`Import Export Info for ${postdata?.title}`}
-      /> */}
       <Nav />
 
       <main className="container mx-auto mt-[3rem] max-w-xs  py-5 font-montserrat  sm:mt-[7rem] sm:max-w-screen-md ">
@@ -90,7 +85,6 @@ const Post: NextPage = (props: any) => {
 export default Post;
 
 export async function getStaticPaths() {
-  // const allPosts = await client.fetch(pathquery);
   const allPosts = await getAllPostsWithSlug();
   return {
     paths:
