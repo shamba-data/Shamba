@@ -25,6 +25,10 @@ const HeadSeo = ({ title }: Props) => {
         property="og:description"
         content="An Agriculture Data Hub that tracks food security Across Africa"
       />
+      <meta
+        property="description"
+        content="An Agriculture Data Hub that tracks food security Across Africa"
+      />
       <meta content="@vercel" name="twitter:site" />
       <meta
         property="og:image"

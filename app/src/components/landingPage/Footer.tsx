@@ -1,5 +1,7 @@
 const Footer = () => {
   const date = new Date();
+  const autoResponse =
+    "Thank you for Contacting Shamba Data, a member of our team will contact you soon and schedule a meeting to further discuss this";
   return (
     <footer className="mt-[150px] w-full bg-green font-montserrat">
       <div className="md:flex md:flex-row-reverse md:items-start md:justify-center md:gap-[2rem]">
@@ -10,10 +12,14 @@ const Footer = () => {
           <p className="mt-[15px] text-center text-lg text-white">
             Subsribe to our News Letter
           </p>
-          <form>
+          <form
+            action="https://formsubmit.co/b.mboya@alustudent.com"
+            method="POST"
+          >
             <div className="relative mt-[10px]">
               <input
                 type="email"
+                name="Email"
                 placeholder="Enter your Email"
                 className="h-[44px] w-[194px] rounded-md bg-gold px-2 text-white placeholder:text-white focus:outline-none"
               />
@@ -21,6 +27,13 @@ const Footer = () => {
                 Submit
               </button>
             </div>
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_autoresponse" value={autoResponse} />
+            <input
+              type="hidden"
+              name="_cc"
+              value="k.ngulube@alumni.alueducation.com"
+            />
           </form>
         </div>
         <div className="mt-[37px] flex flex-col items-start justify-start pl-[30px] sm:pb-[2rem] md:flex-row md:gap-[3rem] md:pl-0">
