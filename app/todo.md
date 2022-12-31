@@ -1,7 +1,7 @@
 ## Remember to do these
 
-2. Populate Links and screens for the Footer
-3. Do the Book an Enterprise Demo journey
+2. The Links on the footer should direct to "current under maintainance page"
+3. Finish the Booking demo part and correct minor styles
 4. Have a new fuckin database, the railway one got maxed out
 
 ## Stuff for Kondwani
