@@ -1,0 +1,82 @@
+// @import 'variables.scss';
+// @import 'node_modules/react-datepicker/src/stylesheets/datepicker.scss';
+@import 'node_modules/react-datepicker/src/stylesheets/datepicker.scss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;500;900&family=Montserrat:wght@300;400;500;700&display=swap');
+
+.react-datepicker__year-read-view--down-arrow,
+.react-datepicker__month-read-view--down-arrow,
+.react-datepicker__month-year-read-view--down-arrow,
+.react-datepicker__navigation-icon::before {
+    border-color: #fff !important;
+    top: 10px !important;
+}
+
+.react-datepicker-wrapper {
+    border: 2px solid !important;
+    padding: 5px 10px !important;
+    border-color: #46783E !important;
+    border-radius: 5px !important;
+    margin-top: 10px;
+    width: 300px !important;
+    margin-left: 10px;
+}
+
+
+.react-datepicker {
+    font-size: 14px !important;
+    color: #c7c7c7 !important;
+    padding: 5px 10px !important;
+    border: 2px solid #CCB801 !important;
+        margin-left: 10px;
+        margin-top: 20px;
+        font-family: 'Montserrat', sans-serif !important;
+
+    &__header {
+        background-color: blue  !important;
+        padding-top: 15px !important;
+        border: none !important;
+    }
+
+    &__day-name {
+        color: #c7c7c7 !important;
+        font-size: 14px !important;
+    }
+
+    &__day {
+        color:black  !important;
+        font-size: 13px !important;
+
+        &--keyboard-selected,
+        &--selected {
+            border-radius: 25px !important;
+            background: #46783E  !important;
+            color: white  !important;
+        }
+
+        &--disabled {
+            color: #c7c7c7 !important;
+        }
+    }
+}
+
+.react-datepicker__header {
+    background-color: transparent !important;
+    border-bottom: 0.5px solid #d1d5db !important;
+}
+
+.react-datepicker__navigation {
+    background-color: #46783E !important;
+    border-radius: 9999px;
+}
+
+.react-datepicker__navigation--previous {
+    left: 5px !important;
+}
+
+
+.react-datepicker__navigation-icon--next {
+    left: 0px !important;
+}
+.react-datepicker__navigation-icon--previous {
+    right: 0px !important;
+}

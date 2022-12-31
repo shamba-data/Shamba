@@ -29,15 +29,18 @@
     "next-sanity": "^0.5.2",
     "next-sanity-image": "^5.0.0",
     "react": "18.2.0",
+    "react-datepicker": "^4.8.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "react-portable-text": "^0.5.1",
+    "sass": "^1.57.1",
     "superjson": "1.9.1",
     "zod": "^3.18.0"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
     "@types/react": "^18.0.14",
+    "@types/react-datepicker": "^4.8.0",
     "@types/react-dom": "^18.0.5",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",

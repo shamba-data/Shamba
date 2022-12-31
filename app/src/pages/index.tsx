@@ -2,6 +2,7 @@ import { Value, Nav, Footer, HeadSeo } from "../components/landingPage";
 import Image from "next/legacy/image";
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import { FaTimes } from "react-icons/fa";
 const ClientOnlyPortal = dynamic(
   () => import("../components/BookDemo/Portal"),
   { ssr: false }
@@ -61,11 +62,18 @@ const Index = () => {
 
         {portal && (
           <ClientOnlyPortal selector="#modal">
-            <section
-              className="fixed top-0 right-0 left-0 bottom-0 bg-[rgba(0,0,0,0.8)] font-montserrat"
-              onClick={() => setPortal(!portal)}
-            >
-              <BookDemo />
+            <section className="fixed  top-0 right-0 left-0 bottom-0 block bg-[rgba(0,0,0,0.8)] font-montserrat">
+              <div className="absolute top-[10%] right-[10%] bottom-[10%] left-[10%] z-[99999] w-full lg:top-[20%]">
+                <div className="relative h-[500px] w-[80vw] rounded-md bg-white shadow-md">
+                  <button
+                    onClick={() => setPortal(!portal)}
+                    className="absolute right-2 top-5 cursor-pointer"
+                  >
+                    <FaTimes size={30} fill="#46783E" />
+                  </button>
+                  <BookDemo />
+                </div>
+              </div>
             </section>
           </ClientOnlyPortal>
         )}
@@ -114,7 +122,7 @@ const Index = () => {
               </button>
             </div>
             <div className="flex items-center justify-center">
-              <div className="relative z-10 mt-[2rem] h-[359px] w-[311px] sm:h-[400px] sm:w-[300px] lg:h-[400px] lg:w-[400px]">
+              <div className="relative mt-[2rem] h-[359px] w-[311px] sm:h-[400px] sm:w-[300px] lg:h-[400px] lg:w-[400px]">
                 <Image src="/Lady.webp" alt="hero" layout="fill" />
               </div>
             </div>

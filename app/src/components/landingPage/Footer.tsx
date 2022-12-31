@@ -27,6 +27,7 @@ const Footer = () => {
                 Submit
               </button>
             </div>
+            <input type="hidden" name="_next" value="https://shamba-data.com" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_autoresponse" value={autoResponse} />
             <input

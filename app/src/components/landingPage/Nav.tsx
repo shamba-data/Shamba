@@ -5,10 +5,18 @@ import { FaTimes } from "react-icons/fa";
 import { RiMenu3Line } from "react-icons/ri";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Image from "next/image";
+import Image from "next/legacy/image";
+import dynamic from "next/dynamic";
+const ClientOnlyPortal = dynamic(() => import("../BookDemo/Portal"), {
+  ssr: false,
+});
+const BookDemo = dynamic(() => import("../BookDemo"));
+// import ClientOnlyPortal from "../BookDemo/Portal";
+// import BookDemo from "../BookDemo";
 
 const Nav = () => {
   const [showNav, setShowNav] = useState(false);
+  const [portal, setPortal] = useState(false);
   const router = useRouter();
   const activeRoute = "text-gold font-medium border-b-[2px] border-b-gold";
   const normalRoute = "";
@@ -70,7 +78,7 @@ const Nav = () => {
       <ul className=" hidden text-xl text-white md:flex md:h-[100px] md:items-center md:justify-center md:space-x-5 md:bg-green md:text-lg">
         <li>
           <Link href="/">
-            <div className="relative h-[65px] w-[148px]">
+            <div className="relative hidden h-[65px] w-[148px] lg:block">
               <Image src="/logo.png" alt="logo" layout="fill" />
             </div>
           </Link>
@@ -115,11 +123,31 @@ const Nav = () => {
           </Link>
         </li>
         <li>
-          <button className="font-semi-bold rounded-md bg-white px-4 py-2 text-black">
+          <button
+            className="font-semi-bold rounded-md bg-white px-4 py-2 text-black"
+            onClick={() => setPortal(!portal)}
+          >
             Book an Enteprise Demo
           </button>
         </li>
       </ul>
+      {portal && (
+        <ClientOnlyPortal selector="#modal">
+          <section className="fixed  top-0 right-0 left-0 bottom-0 block bg-[rgba(0,0,0,0.8)] font-montserrat">
+            <div className="absolute top-[10%] right-[10%] bottom-[10%] left-[10%] z-[99999] w-full lg:top-[20%]">
+              <div className="relative h-[500px] w-[80vw] rounded-md bg-white shadow-md">
+                <button
+                  onClick={() => setPortal(!portal)}
+                  className="absolute right-2 top-5 cursor-pointer"
+                >
+                  <FaTimes size={30} fill="#46783E" />
+                </button>
+                <BookDemo />
+              </div>
+            </div>
+          </section>
+        </ClientOnlyPortal>
+      )}
     </nav>
   );
 };

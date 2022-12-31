@@ -6,6 +6,7 @@ import type { ReactElement, ReactNode } from "react";
 import type { NextPage } from "next";
 import type { AppProps, AppType } from "next/app";
 import "../styles/globals.css";
+import "../components/BookDemo/styles.scss";
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
