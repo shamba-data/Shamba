@@ -32,7 +32,7 @@ const HeadSeo = ({ title }: Props) => {
       <meta content="@vercel" name="twitter:site" />
       <meta
         property="og:image"
-        content="https://res.cloudinary.com/dhhcantbj/image/upload/v1672425601/shamba-data/seo_agkwsp.png"
+        content="https://res.cloudinary.com/dhhcantbj/image/upload/v1672495614/shamba-data/Screenshot_from_2022-12-31_16-05-47_hfog1w.png"
       />
 
       <meta name="twitter:card" content="summary_large_image" />
