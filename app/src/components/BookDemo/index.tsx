@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { FaGlobeAfrica } from "react-icons/fa";
+import Success from "./Success";
 
 export default function BookDemo() {
   const [startDate, setStartDate] = React.useState(new Date());
@@ -17,7 +18,7 @@ export default function BookDemo() {
 
   return (
     <>
-      <section className="pt-[3rem] font-montserrat">
+      <section className="flex flex-col items-center justify-center pt-[3rem] font-montserrat">
         <DatePicker
           selected={startDate}
           onChange={(date) => setStartDate(date)}
@@ -55,7 +56,15 @@ export default function BookDemo() {
             <h3 className="pt-5 text-lg font-medium text-gold">
               Please Enter your details
             </h3>
-            <form className="ml-5">
+            <form
+              className="ml-5"
+              onSubmit={(event) => {
+                event.preventDefault();
+                setShowSuccess(!success);
+              }}
+              action="https://formsubmit.co/b.mboya@alustudent.com"
+              method="POST"
+            >
               <div className={divClasses}>
                 <label className={labelClasses}>Name</label>
                 <input
@@ -91,16 +100,13 @@ export default function BookDemo() {
               <button
                 className="mt-5 cursor-pointer rounded-md bg-gold px-2 py-1 text-white"
                 type="submit"
-                onSubmit={(event) => {
-                  event.preventDefault();
-                  setShowSuccess(!success);
-                }}
               >
                 Confirm Time
               </button>
             </form>
           </div>
         )}
+        {success && <Success date={startDate.toLocaleString()} />}
       </section>
     </>
   );

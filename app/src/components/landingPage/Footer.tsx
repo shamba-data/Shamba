@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Footer = () => {
   const date = new Date();
   const autoResponse =
@@ -41,10 +43,20 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-medium text-white">Company</h3>
             <ul className="space-y-2 text-[#B5C9B2]">
-              <li>About Us</li>
-              <li>Why Choose Us</li>
-              <li>Pricing</li>
-              <li>Testimonial</li>
+              <Link href="/construction">
+                <li>About Us</li>
+              </Link>
+
+              <Link href="/construction">
+                <li>Why Choose Us</li>
+              </Link>
+              <Link href="/construction">
+                <li>Pricing</li>
+              </Link>
+
+              <Link href="/construction">
+                <li>Testimonial</li>
+              </Link>
             </ul>
           </div>
           <div>
@@ -53,10 +65,21 @@ const Footer = () => {
             </h3>
 
             <ul className="space-y-2 text-[#B5C9B2]">
-              <li>Privacy Policy</li>
-              <li>Terms and Conditions</li>
-              <li>Blog</li>
-              <li>Contact Us</li>
+              <Link href="/construction">
+                <li>Privacy Policy</li>
+              </Link>
+
+              <Link href="/construction">
+                <li>Terms and Conditions</li>
+              </Link>
+
+              <Link href="/construction">
+                <li>Blog</li>
+              </Link>
+
+              <Link href="/construction">
+                <li>Contact Us</li>
+              </Link>
             </ul>
           </div>
         </div>

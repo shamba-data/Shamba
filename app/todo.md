@@ -1,6 +1,6 @@
 ## Remember to do these
 
-2. The Links on the footer should direct to "current under maintainance page"
+2. The links on the footer directs to "under construction", change it
 3. Finish the Booking demo part and correct minor styles
 4. Have a new fuckin database, the railway one got maxed out
 
