@@ -23,14 +23,14 @@ const careers = () => {
           <ProfileImage
             ringColor="gold"
             name="Brighton Mboya"
-            position="CTO"
+            position="Co-founder and Head of Engineering"
             imageUrl="/tony.jpeg"
             xTranslate="0.3"
           />
           <ProfileImage
             ringColor="green"
             name="Kondwani Ngulube"
-            position="CTO"
+            position="Co-founder and CEO"
             imageUrl="/ngulube.jpeg"
             xTranslate="-1"
           />
