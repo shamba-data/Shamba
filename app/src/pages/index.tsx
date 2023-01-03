@@ -10,6 +10,7 @@ const ClientOnlyPortal = dynamic(
 const BookDemo = dynamic(() => import("../components/BookDemo/index"), {
   ssr: false,
 });
+import Link from "next/link";
 
 const Index = () => {
   const [portal, setPortal] = useState(false);
@@ -117,9 +118,11 @@ const Index = () => {
                 with market information so that they can know which market has
                 the best prices and return have more financial returns
               </p>
-              <button className="mt-[27px] cursor-pointer rounded-md bg-gold px-4 py-2 font-medium text-white">
-                Learn More
-              </button>
+              <Link href="/zambia">
+                <button className="mt-[27px] cursor-pointer rounded-md bg-gold px-4 py-2 font-medium text-white">
+                  Learn More
+                </button>
+              </Link>
             </div>
             <div className="flex items-center justify-center">
               <div className="relative mt-[2rem] h-[359px] w-[311px] sm:h-[400px] sm:w-[300px] lg:h-[400px] lg:w-[400px]">
