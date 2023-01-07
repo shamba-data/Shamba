@@ -64,8 +64,8 @@ const Index = () => {
         {portal && (
           <ClientOnlyPortal selector="#modal">
             <section className="fixed  top-0 right-0 left-0 bottom-0 block bg-[rgba(0,0,0,0.8)] font-montserrat">
-              <div className="absolute top-[10%] right-[10%] bottom-[10%] left-[10%] z-[99999] w-full lg:top-[20%]">
-                <div className="relative h-[500px] w-[80vw] rounded-md bg-white shadow-md">
+              <div className="absolute top-[3%] right-[10%] bottom-[10%] left-[10%] z-[99999] w-full lg:top-[20%]">
+                <div className="relative h-[700px] w-[80vw] rounded-md bg-white shadow-md">
                   <button
                     onClick={() => setPortal(!portal)}
                     className="absolute right-2 top-5 cursor-pointer"

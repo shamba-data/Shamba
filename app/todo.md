@@ -1,10 +1,8 @@
 ## Remember to do these
 
 2. The links on the footer directs to "under construction", change it
-3. Fix the portal on small screens, the height is not enough
-   --> ALso the calendar doesnt work well on small screens
-4. Have a new fuckin database, the railway one got maxed out
-5. Changing `Market Information` to `Zambia`
+3. Have a new fuckin database, the railway one got maxed out
+4. Changing `Market Information` to `Zambia`
 
 ## Stuff for Kondwani
 
