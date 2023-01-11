@@ -1,15 +1,12 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../utils/trpc";
 import { GetStaticProps } from "next";
-import GetImage from "../utils/getImage";
 import PostList from "../components/PostList";
 import { getClient, usePreviewSubscription } from "../utils/sanity";
 import { postquery, configQuery, HomeQuery } from "../utils/groq";
-import Auth from "../components/Auth";
 
 export interface PostProps {
   postdata: [

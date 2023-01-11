@@ -23,7 +23,7 @@ const Index = () => {
         <section className="pt-[100px] text-center md:w-[700px] lg:w-[900px]">
           <div className="mx-[1rem] flex justify-between">
             <div className="relative h-[100px] w-[100px]">
-              <Image src="/tomat1.webp" alt="tomatoes" layout="fill" />
+              <Image src="/t1.png" alt="tomatoes" layout="fill" />
             </div>
             <div className="relative mt-[1.5rem] h-[100px] w-[100px]">
               <Image src="/Tomatoes.webp" alt="tomatoes" layout="fill" />

@@ -14,7 +14,7 @@ const config = {
     defaultLocale: "en",
   },
   images: {
-    domains: ["cdn.sanity.io", "cdn.discordapp.com"],
+    domains: ["cdn.sanity.io", "cdn.discordapp.com", "images.unsplash.com"],
   },
 };
 export default config;

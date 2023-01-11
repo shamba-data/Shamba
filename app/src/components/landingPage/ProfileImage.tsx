@@ -1,4 +1,3 @@
-import Image from "next/image";
 import BlurImage from "../UI/BlurImage";
 
 interface Props {

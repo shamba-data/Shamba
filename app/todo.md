@@ -13,3 +13,4 @@
 ## Note to Self
 
 1. The Seo Image is hosted on Cloudinary
+2. Set up 2FA for FB Dev Account

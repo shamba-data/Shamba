@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const Footer = () => {
-  const date = new Date();
+  // const date = new Date();
   const autoResponse =
     "Thank you for Contacting Shamba Data, a member of our team will contact you soon and schedule a meeting to further discuss this";
   return (

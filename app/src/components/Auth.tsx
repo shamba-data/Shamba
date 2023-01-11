@@ -5,10 +5,10 @@ import { FaDiscord } from "react-icons/fa";
 
 const Auth: React.FC = () => {
   const { data: sessionData, status } = useSession();
-  const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
-    undefined,
-    { enabled: sessionData?.user !== undefined }
-  );
+  // const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
+  //   undefined,
+  //   { enabled: sessionData?.user !== undefined }
+  // );
   console.log(sessionData);
   if (status === "loading") {
     return <p>Loading ...</p>;
