@@ -19,6 +19,7 @@ const Footer = () => {
             method="POST"
           >
             <div className="relative mt-[10px]">
+              <label className="hidden">Email</label>
               <input
                 type="email"
                 name="Email"

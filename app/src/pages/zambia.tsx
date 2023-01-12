@@ -35,7 +35,12 @@ const Zambia = () => {
 
           <div className="">
             <div className="relative h-[350px] w-[350px] sm:mt-0">
-              <Image src="/phoneLady.webp" alt="Lady" layout="fill" />
+              <Image
+                src="/phoneLady.webp"
+                alt="Lady"
+                layout="fill"
+                priority={true}
+              />
             </div>
           </div>
         </section>

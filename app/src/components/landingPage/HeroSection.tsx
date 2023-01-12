@@ -35,7 +35,7 @@ const HeroSection = () => {
           </div>
         </div>
         <div className="relative z-10 mt-[2rem] h-[359px] w-[311px] sm:h-[400px] sm:w-[300px] lg:h-[500px] lg:w-[500px]">
-          <Image src="/Lady.webp" alt="lady" layout="fill" />
+          <Image src="/Lady.webp" alt="lady" layout="fill" priority={true} />
         </div>
         <div className="mb-[11rem] sm:mb-0 sm:hidden">
           <div className="absolute -right-[10%] h-[180px] w-[180px] -translate-y-[60%] rounded-full border-2 border-gold"></div>
@@ -51,7 +51,7 @@ const HeroSection = () => {
 
       <section className="sm:mt-[4rem] sm:flex sm:items-start md:gap-[5rem] lg:gap-[10rem]">
         <div className="relative hidden h-[340px] w-[300px] sm:block lg:h-[440px] lg:w-[400px]">
-          <Image src="/about.webp" alt="Lady" layout="fill" />
+          <Image src="/about.webp" alt="Lady" layout="fill" priority={true} />
         </div>
         <div className="mt-9 flex flex-col items-center justify-center sm:mt-0 sm:max-w-[300px] md:max-w-[350px] md:items-start lg:max-w-[900px]">
           <div
