@@ -27,6 +27,7 @@ export interface PostProps {
 }
 
 const Home: NextPage = ({ postdata, siteconfig, preview }: PostProps) => {
+  console.log(postdata[1]);
   const router = useRouter();
   // const { postdata, siteconfig, preview } = props;
 

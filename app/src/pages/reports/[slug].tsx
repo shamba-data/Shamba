@@ -7,7 +7,6 @@ import CategoryLabel from "../../components/blog/category";
 import { getAllPostsWithSlug, getPostAndMorePosts } from "../../lib/api";
 import GetImage from "../../utils/getImage";
 import { Footer, Nav } from "../../components/landingPage";
-import ErrorPage from "next/error";
 
 interface PostProps {
   postdata: [
@@ -36,9 +35,9 @@ const Post: NextPage = (props: any) => {
     enabled: preview || router.query.preview !== undefined,
   });
 
-  if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />;
-  }
+  // if (!router.isFallback && !post?.slug) {
+  //   return <ErrorPage statusCode={404} />;
+  // }
 
   const imageProps = postdata?.mainImage ? GetImage(postdata?.mainImage) : null;
 
@@ -87,17 +86,16 @@ export default Post;
 export async function getStaticPaths() {
   const allPosts = await getAllPostsWithSlug();
   return {
-    paths:
-      allPosts?.map((page) => ({
-        params: { slug: page.slug },
-      })) || [],
+    paths: allPosts?.map((page) => ({
+      params: { slug: page.slug },
+    })),
     fallback: true,
   };
 }
 
 export async function getStaticProps({ params, preview = false }) {
   const data = await getPostAndMorePosts(params.slug, preview);
-  // const data = await client.fetch(singlequery, { slug: params.slug });
+
   return {
     props: {
       preview,
