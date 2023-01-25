@@ -19,7 +19,7 @@ export const authOptions: NextAuthOptions = {
   },
   // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
-  debug:true,
+  debug: true,
   providers: [
     DiscordProvider({
       clientId: env.DISCORD_CLIENT_ID,
@@ -28,10 +28,19 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: env.GOOGLE_ID,
       clientSecret: env.GOOGLE_SECRET,
-      
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        }
+      }
+
     }),
-    // ...add more providers here
+
   ],
+  secret: process.env.JWT_SECRET,
+
 };
 
 export default NextAuth(authOptions);

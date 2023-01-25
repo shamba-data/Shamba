@@ -7,6 +7,7 @@ import { GetStaticProps } from "next";
 import PostList from "../components/PostList";
 import { getClient, usePreviewSubscription } from "../utils/sanity";
 import { postquery, configQuery, HomeQuery } from "../utils/groq";
+import { ChangeEvent, useState } from "react";
 
 export interface PostProps {
   postdata: [
@@ -27,9 +28,7 @@ export interface PostProps {
 }
 
 const Home: NextPage = ({ postdata, siteconfig, preview }: PostProps) => {
-  console.log(postdata[1]);
   const router = useRouter();
-  // const { postdata, siteconfig, preview } = props;
 
   const { data: posts } = usePreviewSubscription(postquery, {
     initialData: postdata,
@@ -42,9 +41,8 @@ const Home: NextPage = ({ postdata, siteconfig, preview }: PostProps) => {
   });
 
   const { data: sessionData, status } = useSession();
-  // console.log(sessionData.user.image);
 
-  // const imageProps = posts?.mainImage ? GetImage(postdata?.mainImage) : null;
+  const [searchedCompany, setSearchedCompany] = useState("");
 
   return (
     <>
@@ -67,6 +65,18 @@ const Home: NextPage = ({ postdata, siteconfig, preview }: PostProps) => {
             market. This data is compiled from the company sources and is close
             to accurate as possible
           </article>
+          <div>
+            <input
+              type="search"
+              value={searchedCompany}
+              className="mt-5 border-b-[2px] px-4 py-1 focus:outline-none "
+              placeholder="Search"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                setSearchedCompany(e.target.value);
+                console.log(searchedCompany);
+              }}
+            />
+          </div>
           {/* <div className="flex items-center space-x-2">
               {sessionData.user && (
                 <>
@@ -93,14 +103,26 @@ const Home: NextPage = ({ postdata, siteconfig, preview }: PostProps) => {
 
         <section className="">
           <div className="mt-10 grid gap-10 md:grid-cols-2 lg:gap-10 xl:grid-cols-3">
-            {posts.map((post) => (
-              <PostList
-                key={post._id}
-                post={post}
-                aspect="square"
-                preloadImage={true}
-              />
-            ))}
+            {posts
+              .filter((data) => {
+                if (searchedCompany === "") {
+                  return data;
+                } else if (
+                  data.title
+                    .toLowerCase()
+                    .includes(searchedCompany.toLowerCase())
+                ) {
+                  return data;
+                }
+              })
+              .map((post) => (
+                <PostList
+                  key={post._id}
+                  post={post}
+                  aspect="square"
+                  preloadImage={true}
+                />
+              ))}
           </div>
         </section>
       </main>
