@@ -7,6 +7,8 @@ import type { NextPage } from "next";
 import type { AppProps, AppType } from "next/app";
 import "../styles/globals.css";
 import "../components/BookDemo/styles.scss";
+import { Analytics } from "@vercel/analytics/react";
+
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
@@ -31,6 +33,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <SessionProvider session={session}>
       <main className={`${montserrat.variable} font-montserrat`}>
         <Component {...pageProps} />
+        <Analytics />
       </main>
     </SessionProvider>
   );

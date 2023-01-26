@@ -8,6 +8,7 @@ import PostList from "../components/PostList";
 import { getClient, usePreviewSubscription } from "../utils/sanity";
 import { postquery, configQuery, HomeQuery } from "../utils/groq";
 import { ChangeEvent, useState } from "react";
+import { Nav, Footer } from "../components/landingPage";
 
 export interface PostProps {
   postdata: [
@@ -55,7 +56,8 @@ const Home: NextPage = ({ postdata, siteconfig, preview }: PostProps) => {
       </Head>
 
       {/* {sessionData ? ( */}
-      <main className="max-w-screen container mx-auto px-8 py-5 font-montserrat lg:py-8 xl:max-w-screen-xl xl:px-5 ">
+      <Nav />
+      <main className="max-w-screen container mx-auto mt-[5rem] px-8 py-5 font-montserrat lg:py-8 xl:max-w-screen-xl xl:px-5 ">
         <nav className="">
           <h3 className="text-green-400 text-lg font-medium">Shamba Data</h3>
         </nav>
@@ -126,6 +128,7 @@ const Home: NextPage = ({ postdata, siteconfig, preview }: PostProps) => {
           </div>
         </section>
       </main>
+      <Footer />
       {/* ) : (
         <Auth />
       )} */}

@@ -25,7 +25,7 @@ const Nav = () => {
     <nav className="absolute top-0 z-[9999] w-full font-montserrat">
       <div
         onClick={() => setShowNav(!showNav)}
-        className="absolute right-5 top-5 z-10 cursor-pointer md:hidden"
+        className="absolute right-5 top-5 z-10 cursor-pointer lg:hidden"
       >
         {showNav ? (
           <FaTimes size={30} color="#fff" />
@@ -75,61 +75,65 @@ const Nav = () => {
       </ul>
 
       {/* for freaking wide screens */}
-      <ul className=" hidden text-xl text-white md:flex md:h-[100px] md:items-center md:justify-center md:space-x-5 md:bg-green md:text-lg">
-        <li>
-          <Link href="/">
-            <div className="relative hidden h-[65px] w-[148px] lg:block">
-              <Image src="/logo.png" alt="logo" layout="fill" />
-            </div>
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/"
-            className={router.pathname === "/" ? activeRoute : normalRoute}
-          >
-            {" "}
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/#about"
-            className={
-              router.pathname === "/#about" ? activeRoute : normalRoute
-            }
-          >
-            What we do
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/zambia"
-            className={
-              router.pathname === "/zambia" ? activeRoute : normalRoute
-            }
-          >
-            Market Information
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/careers"
-            className={
-              router.pathname === "/careers" ? activeRoute : normalRoute
-            }
-          >
-            Careers
-          </Link>
-        </li>
-        <li>
-          <button
-            className="font-semi-bold rounded-md bg-white px-4 py-2 text-black"
-            onClick={() => setPortal(!portal)}
-          >
-            Book an Enteprise Demo
-          </button>
-        </li>
+      <ul className=" hidden text-xl text-white md:h-[100px] md:items-center md:justify-between md:space-x-5 md:bg-green md:px-7 md:text-lg lg:flex">
+        <div>
+          <li>
+            <Link href="/">
+              <div className="relative hidden h-[65px] w-[148px] lg:block">
+                <Image src="/logo.png" alt="logo" layout="fill" />
+              </div>
+            </Link>
+          </li>
+        </div>
+        <div className="flex items-center space-x-7">
+          <li>
+            <Link
+              href="/"
+              className={router.pathname === "/" ? activeRoute : normalRoute}
+            >
+              {" "}
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/#about"
+              className={
+                router.pathname === "/#about" ? activeRoute : normalRoute
+              }
+            >
+              What we do
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/zambia"
+              className={
+                router.pathname === "/zambia" ? activeRoute : normalRoute
+              }
+            >
+              Market Information
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/careers"
+              className={
+                router.pathname === "/careers" ? activeRoute : normalRoute
+              }
+            >
+              Careers
+            </Link>
+          </li>
+          <li>
+            <button
+              className="font-semi-bold rounded-md bg-white px-4 py-2 text-black"
+              onClick={() => setPortal(!portal)}
+            >
+              Book an Enteprise Demo
+            </button>
+          </li>
+        </div>
       </ul>
       {portal && (
         <ClientOnlyPortal selector="#modal">

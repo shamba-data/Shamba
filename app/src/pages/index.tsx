@@ -19,20 +19,20 @@ const Index = () => {
       <HeadSeo title="Shamba Data" />
       <Nav />
 
-      <main className="container mt-[4rem] flex flex-col  items-center justify-center font-montserrat md:max-w-[200ch]  ">
+      <main className="container mt-[4rem] flex flex-col  items-center justify-center font-montserrat md:max-w-[200ch]">
         <section className="pt-[100px] text-center md:w-[700px] lg:w-[900px]">
           <div className="mx-[1rem] flex justify-between">
-            <div className="relative h-[100px] w-[100px]">
-              <Image src="/t1.png" alt="tomatoes" layout="fill" />
+            <div className="relative h-[100px] w-[100px] lg:h-[130px] lg:w-[130px]">
+              <Image src="/wheat.png" alt="tomatoes" layout="fill" />
             </div>
             <div className="relative mt-[1.5rem] h-[100px] w-[100px]">
-              <Image src="/Tomatoes.webp" alt="tomatoes" layout="fill" />
+              <Image src="/tomat.png" alt="tomatoes" layout="fill" />
             </div>
           </div>
 
           <div className="flex items-end justify-center">
-            <div className="relative hidden h-[90px] w-[90px] md:block lg:h-[120px] lg:w-[120px]">
-              <Image src="/chilli.webp" alt="tomatoes" layout="fill" />
+            <div className="relative hidden h-[90px] w-[90px] translate-y-[3rem] translate-x-[1rem] md:block lg:h-[130px] lg:w-[130px]">
+              <Image src="/chilli.png" alt="tomatoes" layout="fill" />
             </div>
 
             <div className="lg:flex lg:items-center lg:justify-center">
@@ -43,21 +43,30 @@ const Index = () => {
             </div>
 
             <div className="relative hidden h-[90px] w-[90px] md:block lg:h-[120px] lg:w-[120px]">
-              <Image src="/tomat1.webp" alt="tomatoes" layout="fill" />
+              <Image src="/tango.png" alt="tomatoes" layout="fill" />
             </div>
           </div>
 
           <div className="flex flex-col items-center justify-center">
-            <article className="font-regular mt-[25px] max-w-lg text-lg md:-translate-y-[3rem] md:text-xl">
+            <article className="font-regular mt-[25px] max-w-lg text-lg md:mt-[40px] md:-translate-y-[3rem] md:text-xl">
               We collect, aggregate, and process data that feeds the African
               Continent
             </article>
-            <button
-              className="mt-[14px] cursor-pointer rounded-md bg-green px-4 py-2 font-medium text-white md:-translate-y-[3rem] md:py-4 lg:mt-[18px]"
-              onClick={() => setPortal(!portal)}
-            >
-              Book An Enterprise Demo
-            </button>
+            <div className="flex items-end justify-center">
+              <div className="relative hidden h-[90px] w-[90px] -translate-x-[8rem] md:block lg:h-[100px] lg:w-[100px]">
+                <Image src="/tomato-left.png" alt="tomatoes" layout="fill" />
+              </div>
+
+              <button
+                className="mt-[14px] cursor-pointer rounded-md bg-green px-4 py-2 font-medium text-white md:-translate-y-[3rem] md:py-4 lg:mt-[18px]"
+                onClick={() => setPortal(!portal)}
+              >
+                Book An Enterprise Demo
+              </button>
+              <div className="relative hidden h-[90px] w-[90px] translate-x-[8rem] md:block lg:h-[130px] lg:w-[130px]">
+                <Image src="/market-right.png" alt="tomatoes" layout="fill" />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -80,14 +89,19 @@ const Index = () => {
         )}
 
         <section
-          className="mt-[73px] flex flex-col text-center md:mt-[40px] md:w-[700px] lg:w-[900px]"
+          className="mt-[100px] flex flex-col text-center md:mt-[200px] md:w-[700px] lg:w-[900px]"
           id="about"
         >
-          <div className="md:flex md:space-x-7 md:text-left lg:space-x-10">
+          <div className="pl-2 text-left md:flex md:space-x-7 lg:space-x-10">
             <div className="mx-1 md:w-[400px]">
-              <h3 className="font-semi-bold text-2xl text-green">
-                We are here to solve the world&apos;s fundamental challenge,
-              </h3>
+              <div className="text-left">
+                <h3 className="font-semi-bold text-[1.4rem] text-green">
+                  We are here to solve the world&apos;s fundamental challenge,
+                </h3>
+                <span className="text-2xl font-medium text-gold">
+                  Feeding People.
+                </span>
+              </div>
               <p className="mt-[10px] text-[1.1rem]">
                 With the global population increasing, we need to find new
                 solutions that are scalable, and sustainable to the planet.
