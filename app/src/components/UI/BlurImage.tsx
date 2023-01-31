@@ -24,13 +24,14 @@ export default function BlurImage({ imageUrl, preload, rounded }: Props) {
           objectFit="cover"
           priority={preload ? true : false}
           className={cn(
-            "object-cover object-top duration-700 ease-in-out group-hover:opacity-75",
+            "object-cover object-top duration-700 ease-in-out",
             rounded ? "rounded-full" : "",
             isLoading
               ? "scale-110 blur-2xl grayscale"
               : "scale-100 blur-0 grayscale-0"
           )}
           onLoadingComplete={() => setLoading(false)}
+          draggable={false}
         />
       </div>
     </div>

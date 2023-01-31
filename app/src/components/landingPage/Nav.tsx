@@ -69,6 +69,10 @@ const Nav = () => {
             Market Information
           </Link>
         </li>
+
+        <li>
+          <Link href="/contactus">Contact Us</Link>
+        </li>
         <li>
           <Link href="/careers">Careers</Link>
         </li>

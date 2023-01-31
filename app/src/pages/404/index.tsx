@@ -10,7 +10,7 @@ export default function Index() {
           <BlurImage imageUrl="/404.png" preload={false} rounded={true} />
         </div>
         <p className="mt-[2rem] text-center">
-          The page you are looking for is not found Come back to the home page
+          The page you are looking for is not found Go back to the home page
         </p>
         <Link href="/">
           <button className="mt-[14px] cursor-pointer rounded-md bg-green px-4 py-2 font-medium text-white md:py-4 lg:mt-[18px]">
