@@ -4,14 +4,12 @@ import { Prisma } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import z from "zod";
 
-// const farmerInfoSelect = Prisma.validator<Prisma.FarmersSelect>()({
-//     id: true,
-//     fullName: true,
-//     phoneNumber: true,
-// })
-
-
-
+const farmerInfoSelect = Prisma.validator<Prisma.FarmersSelect>()({
+    id: true,
+    fullName: true,
+    phoneNumber: true,
+    subscribed: true,
+});
 
 
 
@@ -20,15 +18,14 @@ export const farmersRouter = router({
         .input(
             z.object({
                 id: z.string().cuid().optional(),
-                fullName: z.string().min(1),
-                phoneNumber: z.string().min(1)
+                fullName: z.string(),
+                phoneNumber: z.string(),
             })
         )
-        .mutation(async ({ input }) => {
-
-            const newFarmer = await prisma.farmers.create({
+        .mutation(async ({ input, ctx }) => {
+            const newFarmer = await ctx.prisma.farmers.create({
                 data: input,
-                // select: farmerInfoSelect
+                select: farmerInfoSelect
             });
 
             return newFarmer;

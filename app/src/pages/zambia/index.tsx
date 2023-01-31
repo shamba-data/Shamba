@@ -5,12 +5,12 @@ import {
   HeadSeo,
   About,
   MarketCards,
-} from "../components/landingPage";
+} from "../../components/landingPage";
 import Image from "next/legacy/image";
-import { trpc } from "../utils/trpc";
+import { trpc } from "../../utils/trpc";
 import { useState, ChangeEvent } from "react";
 import { inferProcedureInput } from "@trpc/server";
-import { AppRouter } from "../server/trpc/router/_app";
+import { AppRouter } from "../../server/trpc/router/_app";
 import { useRouter } from "next/router";
 
 const Zambia = () => {
@@ -65,7 +65,7 @@ const Zambia = () => {
                   fullName: formData.fullName,
                 };
                 if (farmersRouter.isSuccess) {
-                  router.push("/");
+                  router.push("/zambia/success");
                 }
                 try {
                   await farmersRouter.mutateAsync(input);
@@ -88,7 +88,7 @@ const Zambia = () => {
                       fullName: e.target.value,
                     });
                   }}
-                  className="w-[250px] rounded-md border-[1px] border-slate-300 bg-transparent py-2 px-2 text-gray-900 outline-none focus:outline-none"
+                  className="w-[250px] rounded-md border-[1px] border-slate-300 bg-transparent py-2 px-2 text-gray-900 outline-none focus:bg-white focus:outline-none"
                 />
               </div>
 
@@ -108,18 +108,6 @@ const Zambia = () => {
                   className="w-[250px] rounded-md border-[1px] border-slate-300 bg-transparent py-2 px-2 text-gray-900 outline-none focus:outline-none"
                 />
               </div>
-
-              <input
-                type="hidden"
-                name="_next"
-                value="https://shamba-data.com"
-              />
-              <input type="hidden" name="_captcha" value="false" />
-              <input
-                type="hidden"
-                name="_cc"
-                value="k.ngulube@alumni.alueducation.com"
-              />
 
               <button
                 disabled={farmersRouter.isLoading}
