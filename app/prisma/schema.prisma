@@ -64,3 +64,9 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model Farmers {
+  id          String @id @default(cuid())
+  fullName    String
+  phoneNumber String @unique
+}

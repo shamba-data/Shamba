@@ -1,13 +1,14 @@
 import { router } from "../trpc";
 import { authRouter } from "./auth";
-import { exampleRouter } from "./example";
 import { sanityRouter } from "./sanity";
+import { farmersRouter } from "./farmers";
 
 
 export const appRouter = router({
-  example: exampleRouter,
   auth: authRouter,
-  sanity: sanityRouter
+  sanity: sanityRouter,
+  farmer: farmersRouter
+
 });
 
 
