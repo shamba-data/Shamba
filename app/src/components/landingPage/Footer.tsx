@@ -74,7 +74,7 @@ const Footer = () => {
                 <li className="mt-5">Privacy Policy</li>
               </Link>
 
-              <Link href="/construction">
+              <Link href="/about/terms-of-service">
                 <li>Terms and Conditions</li>
               </Link>
 

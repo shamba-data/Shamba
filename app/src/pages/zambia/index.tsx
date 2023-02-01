@@ -64,12 +64,13 @@ const Zambia = () => {
                   phoneNumber: formData.phoneNumber,
                   fullName: formData.fullName,
                 };
-                if (farmersRouter.isSuccess) {
-                  router.push("/zambia/success");
-                }
+
                 try {
                   await farmersRouter.mutateAsync(input);
                   setFormData(formStates);
+                  if (farmersRouter.isSuccess) {
+                    router.push("/zambia/success");
+                  }
                 } catch (cause) {
                   console.error({ cause }, "Failed to add the new Users");
                 }

@@ -4,8 +4,17 @@
  * This is especially useful for Docker builds.
  */
 !process.env.SKIP_ENV_VALIDATION && (await import("./src/env/server.mjs"));
+// import withMDX from "@next/mdx";
+// const mdxConfig = withMDX({
+//   extension: "/.mdx?$/",
+//   options: {
+//     remarkPlugins: [],
+//     rehypePlugins: [],
+//   },
+// });
 
 /** @type {import("next").NextConfig} */
+
 const config = {
   reactStrictMode: true,
   swcMinify: true,
@@ -16,5 +25,6 @@ const config = {
   images: {
     domains: ["cdn.sanity.io", "cdn.discordapp.com", "images.unsplash.com"],
   },
+  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
 };
 export default config;
