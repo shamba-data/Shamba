@@ -16,6 +16,6 @@
     "incremental": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "../*.mdx", "**/*.tsx", "**/*.cjs", "**/*.mjs", "client.js", "src/utils/getImage.ts", "src/components/landingPage/layout.js", "src/pages/_document.js", "src/pages/about/terms-of-service.mdx"],
+  "include": ["next-env.d.ts", "**/*.ts", "../*.mdx", "**/*.tsx", "**/*.cjs", "**/*.mjs", "client.js", "src/utils/getImage.ts", "src/components/landingPage/layout.js", "src/pages/_document.js", "src/pages/about/terms-of-service.tsx"],
   "exclude": ["node_modules"]
 }

@@ -4,18 +4,18 @@
  * This is especially useful for Docker builds.
  */
 !process.env.SKIP_ENV_VALIDATION && (await import("./src/env/server.mjs"));
-// import withMDX from "@next/mdx";
-// const mdxConfig = withMDX({
-//   extension: "/.mdx?$/",
-//   options: {
-//     remarkPlugins: [],
-//     rehypePlugins: [],
-//   },
-// });
+import withMDX from "@next/mdx";
+const mdxConfig = withMDX({
+  extension: "/.mdx?$/",
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+});
 
 /** @type {import("next").NextConfig} */
 
-const config = {
+const config = mdxConfig({
   reactStrictMode: true,
   swcMinify: true,
   i18n: {
@@ -26,5 +26,5 @@ const config = {
     domains: ["cdn.sanity.io", "cdn.discordapp.com", "images.unsplash.com"],
   },
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
-};
+});
 export default config;
