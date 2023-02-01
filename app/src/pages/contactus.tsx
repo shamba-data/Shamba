@@ -1,21 +1,49 @@
 import { Footer, HeadSeo, Nav } from "../components/landingPage";
 import BlurImage from "../components/UI/BlurImage";
-
+import { GoLocation } from 'react-icons/go'
+import {BsTelephonePlus} from 'react-icons/bs'
+import {HiOutlineMail} from 'react-icons/hi'
 const Contact = () => {
   const labelClasses = "font-medium text-lg text-green tracking-wide";
   const inputClasses =
     "border-[1px] rounded-md px-2 py-2 w-[300px] focus:outline-none bg-white mt-2";
   const divClasses = "flex flex-col";
+  const companyInfoClasses = " flex flex-col w-full max-w-lg p-8 rounded-xl shadow-lg"
   return (
     <>
       <HeadSeo title="Contact Us" />
       <Nav />
       <main className="mt-[5rem] md:mt-[7rem] md:flex md:items-center md:justify-center">
         <section className="mt-[2rem] overflow-hidden pl-5 md:flex md:gap-[3rem] xl:mt-[4rem] xl:gap-[6rem]">
-          <div>
-            <h3 className="text-2xl font-medium tracking-wide xl:text-3xl">
-              Contact us
-            </h3>
+          <div className={companyInfoClasses}>
+            <div className="flex flex-col space-y-8 justify-between">
+              <div>
+                <h3 className="text-2xl font-medium tracking-wide xl:text-3xl">
+                  Contact us
+                </h3>
+                <p className="pt-2 text-zinc-500">
+                  Have a question? Reach out to our team using the details provided below
+                </p>
+              </div>
+              {/*company contact info*/}
+              <div className="flex flex-col space-y-4">
+                <div className="inline-flex space-x-2 items-center">
+                  <BsTelephonePlus className="text-green" size={24} />
+                  <span className="mt-2">260978964998</span>
+                </div>
+                <div className="inline-flex space-x-2 items-center">
+                  <HiOutlineMail className="text-green" size={24} />
+                  <span className="mt-2">b.mboya@alustudent.com</span>
+                </div>
+                <div className="inline-flex space-x-2 items-center">
+                  <GoLocation className="text-green" size={24} />
+                  <span className="mt-2">Plot 3870 Kafue Drive, Riverside, Kitwe</span>
+                </div>
+                
+              </div>
+
+            </div>
+            {/*contact us form */}
             <form className="mt-5 flex flex-col gap-5">
               <div className={divClasses}>
                 <label className={labelClasses}>Your Email</label>
@@ -63,6 +91,7 @@ const Contact = () => {
               rounded={false}
             />
           </div>
+
 
           <div className="h-[300px] w-[300px] translate-x-[10rem]  overflow-x-hidden rounded-full border-2 border-green md:hidden">
             <div className="absolute z-[10] h-[100px] w-[100px] translate-y-[10rem] -translate-x-2 rounded-full border-2 border-gold"></div>
