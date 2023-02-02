@@ -17,11 +17,13 @@ const Zambia = () => {
   const formStates = {
     phoneNumber: "",
     fullName: "",
+    password: "",
   };
 
   const [formData, setFormData] = useState(formStates);
   const farmersRouter = trpc.farmer.add.useMutation();
   const router = useRouter();
+  const TOSclass = "w-4 h-4 text-gray-900 bg-gray-100 border-slate-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
   return (
     <>
       <HeadSeo title="Market Information" />
@@ -76,7 +78,7 @@ const Zambia = () => {
                 }
               }}
             >
-              <div className="flex flex-col">
+              <div className="flex flex-col ">
                 <label>Full Name</label>
                 <input
                   type="text"
@@ -89,7 +91,7 @@ const Zambia = () => {
                       fullName: e.target.value,
                     });
                   }}
-                  className="w-[250px] rounded-md border-[1px] border-slate-300 bg-transparent py-2 px-2 text-gray-900 outline-none focus:bg-white focus:outline-none"
+                  className="w-[520px] rounded-md border-[1px] border-slate-300 bg-transparent py-2 px-2 text-gray-900 outline-none focus:bg-white focus:outline-none"
                 />
               </div>
 
@@ -106,10 +108,40 @@ const Zambia = () => {
                       phoneNumber: e.target.value,
                     });
                   }}
-                  className="w-[250px] rounded-md border-[1px] border-slate-300 bg-transparent py-2 px-2 text-gray-900 outline-none focus:outline-none"
+                className="w-[520px] rounded-md border-[1px] border-slate-300 bg-transparent py-2 px-2 text-gray-900 outline-none focus:outline-none"
                 />
               </div>
+              <div className="mt-5 flex flex-col">
+                <label>Password</label>
+                <input
+                  type="password"
+                  required
+                  id="password"
+                  value={formData.password}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                    setFormData({
+                      ...formData,
+                      password: e.target.value,
+                    });
+                  }}
+                  className="w-[520px] rounded-md border-[1px] border-slate-300 bg-transparent py-2 px-2 text-gray-900 outline-none focus:outline-none"
+                />
+              </div>
+              <div className="mt-5 flex">
+                <input id="terms and conditions" type="checkbox" required value="" className={TOSclass} />
+                <label className=" -mt-.1 ml-4 text-sm font-medium text-gray-900 dark:text-gray-300">
+                  By registering, you agree to our 
+                  <a
+                    className="ml-1 font-medium text-blue-600 dark:text-blue-500 hover:underline" 
+                    href="https://drive.google.com/file/d/1jtE0kkYDu6c4t0pUQC_s6IEBk0nrT_rY/view?usp=sharing" 
+                    
+                  >
+                    Terms
+                  </a>.
+                  You may receive sms/whatsapp notifications from us and can opt out any time
+                </label>
 
+              </div>
               <button
                 disabled={farmersRouter.isLoading}
                 type="submit"
