@@ -28,6 +28,7 @@ const Zambia = () => {
     "w-[350px] rounded-md border-[1px] border-slate-300 bg-transparent py-2 px-2 text-gray-900 outline-none focus:outline-none mt-2 focus:ring-green focus:ring-2";
   const TOSclass =
     "w-4 h-4 text-gray-900 bg-gray-100 border-slate-300 rounded focus:ring-gold focus:ring-2 ";
+
   return (
     <>
       <HeadSeo title="Market Information" />
@@ -36,8 +37,6 @@ const Zambia = () => {
         <HeroSection />
 
         <About />
-        {/* <FAQ /> */}
-
         <MarketCards />
 
         <div
@@ -73,8 +72,13 @@ const Zambia = () => {
                 };
 
                 try {
-                  await farmersRouter.mutateAsync(input);
+                  // await farmersRouter.mutateAsync(input);
                   setFormData(formStates);
+                  router.push(
+                    "https://secure.3gdirectpay.com/payv3.php?ID=AEA106C8-1D73-41B8-A058-CB2C1047F84D"
+                  );
+
+                  console.log("It Fucking worked");
                   if (farmersRouter.isSuccess) {
                     router.push("/zambia/success");
                   }
