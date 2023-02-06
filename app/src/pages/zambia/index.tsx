@@ -132,6 +132,7 @@ const Zambia = () => {
                 <label className=" -mt-.1 ml-4 text-sm font-medium text-gray-900 dark:text-gray-300">
                   By registering, you agree to our 
                   <a
+                    target="_blank" rel="noopener noreferrer"
                     className="ml-1 font-medium text-blue-600 dark:text-blue-500 hover:underline" 
                     href="https://drive.google.com/file/d/1jtE0kkYDu6c4t0pUQC_s6IEBk0nrT_rY/view?usp=sharing" 
                     
