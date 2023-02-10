@@ -84,7 +84,13 @@ const Nav = () => {
           <li>
             <Link href="/">
               <div className="relative hidden h-[65px] w-[148px] lg:block">
-                <Image src="/new_logo.png" alt="logo" layout="fill" />
+                <Image
+                  src="/new_logo.png"
+                  style={{
+                    borderRadius: "12px"
+                  }}
+                alt="logo" 
+                  layout="fill" />
               </div>
             </Link>
           </li>
