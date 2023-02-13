@@ -5,10 +5,10 @@ const Footer = () => {
   const autoResponse =
     "Thank you for Contacting Shamba Data, a member of our team will contact you soon and schedule a meeting to further discuss this";
   return (
-    <footer className="mt-[150px] w-full bg-green font-montserrat">
+    <footer className="mt-[100px] w-full bg-green font-montserrat">
       <div className="md:flex md:flex-row-reverse md:items-start md:justify-center md:gap-[2rem]">
         <div className="mt-[30px] flex flex-col items-center justify-center">
-          <h3 className="text-xl font-medium tracking-wide text-white">
+          <h3 className="pt-5 text-xl font-medium tracking-wide text-white">
             Shamba Data
           </h3>
           <p className="mt-[15px] text-center text-lg text-white">
@@ -45,22 +45,22 @@ const Footer = () => {
             <h3 className="text-lg font-medium text-white">Company</h3>
             <ul className="flex flex-col space-y-3 text-[#B5C9B2]">
               <Link href="/construction">
-                <li className="mt-5">About Us</li>
+                <li className="mt-5 cursor-pointer">About Us</li>
               </Link>
 
               <Link href="/contactus">
-                <li>Contact Us</li>
+                <li className=" cursor-pointer">Contact Us</li>
               </Link>
 
               <Link href="/construction">
-                <li>Why Choose Us</li>
+                <li className=" cursor-pointer">Why Choose Us</li>
               </Link>
               <Link href="/construction">
-                <li>Pricing</li>
+                <li className=" cursor-pointer">Pricing</li>
               </Link>
 
               <Link href="/construction">
-                <li>Testimonial</li>
+                <li className=" cursor-pointer">Testimonial</li>
               </Link>
             </ul>
           </div>
@@ -71,15 +71,18 @@ const Footer = () => {
 
             <ul className="flex flex-col space-y-3 text-[#B5C9B2]">
               <Link href="/construction">
-                <li className="mt-5">Privacy Policy</li>
+                <li className="mt-5 cursor-pointer">Privacy Policy</li>
               </Link>
 
-              <Link href="/about/terms-of-service">
-                <li>Terms and Conditions</li>
+              <Link
+                href="https://drive.google.com/file/d/1jtE0kkYDu6c4t0pUQC_s6IEBk0nrT_rY/view?usp=sharing"
+                replace
+              >
+                <li className="cursor-pointer">Terms and Conditions</li>
               </Link>
 
               <Link href="/construction">
-                <li>Blog</li>
+                <li className="cursor-pointer">Blog</li>
               </Link>
 
               <Link href="/contactus">
