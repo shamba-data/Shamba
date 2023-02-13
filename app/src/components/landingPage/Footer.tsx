@@ -85,8 +85,8 @@ const Footer = () => {
                 <li className="cursor-pointer">Blog</li>
               </Link>
 
-              <Link href="/construction">
-                <li className="cursor-pointer">Contact Us</li>
+              <Link href="/contactus">
+                <li>Contact Us</li>
               </Link>
             </ul>
           </div>

@@ -46,14 +46,26 @@ const Contact = () => {
                 </div>
               </div>
               {/*social media*/}
-              <div className=" mt-5 flex space-x-4">
-                <a href="#">
+              <div className=" flex space-x-4">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://web.facebook.com/profile.php?id=100090255693537"
+                >
                   <GrFacebook className="text-blue-800" size={31} />
                 </a>
-                <a href="https://www.linkedin.com/company/shamba-data/?viewAsMember=false">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.linkedin.com/company/shamba-data/?viewAsMember=true"
+                >
                   <BsLinkedin className="text-blue-700" size={32} />
                 </a>
-                <a href="https://twitter.com/shambaData">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://twitter.com/shambaData"
+                >
                   <AiOutlineTwitter className="text-cyan-500" size={36} />
                 </a>
               </div>
