@@ -44,17 +44,14 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-medium text-white">Company</h3>
             <ul className="flex flex-col space-y-3 text-[#B5C9B2]">
-              <Link href="/construction">
-                <li className="mt-5">About Us</li>
-              </Link>
-
               <Link href="/contactus">
                 <li>Contact Us</li>
               </Link>
-
+              {/*
               <Link href="/construction">
                 <li>Why Choose Us</li>
               </Link>
+
               <Link href="/construction">
                 <li>Pricing</li>
               </Link>
@@ -62,6 +59,8 @@ const Footer = () => {
               <Link href="/construction">
                 <li>Testimonial</li>
               </Link>
+              */}
+              
             </ul>
           </div>
           <div>
@@ -70,21 +69,19 @@ const Footer = () => {
             </h3>
 
             <ul className="flex flex-col space-y-3 text-[#B5C9B2]">
+              {/*
               <Link href="/construction">
                 <li className="mt-5">Privacy Policy</li>
               </Link>
-
-              <Link href="/about/terms-of-service">
+              */}
+              <Link target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1jtE0kkYDu6c4t0pUQC_s6IEBk0nrT_rY/view?usp=sharing">
                 <li>Terms and Conditions</li>
               </Link>
-
+              {/*
               <Link href="/construction">
                 <li>Blog</li>
               </Link>
-
-              <Link href="/contactus">
-                <li>Contact Us</li>
-              </Link>
+               */}
             </ul>
           </div>
         </div>
