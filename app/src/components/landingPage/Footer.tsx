@@ -8,13 +8,14 @@ const Footer = () => {
     <footer className="mt-[150px] w-full bg-green font-montserrat">
       <div className="md:flex md:flex-row-reverse md:items-start md:justify-center md:gap-[2rem]">
         <div className="mt-[30px] flex flex-col items-center justify-center">
-          <h3 className="text-xl font-medium tracking-wide text-white">
+          <h3 className="text-lg font-medium tracking-wide text-white">
             Shamba Data
           </h3>
-          <p className="mt-[15px] text-center text-lg text-white">
-            Subsribe to our News Letter
+          <p className="mt-[4.5px] text-center text-lg text-white">
+            Subscribe to receive our product updates
           </p>
           <form
+            className="-ml-[80px]"
             action="https://formsubmit.co/b.mboya@alustudent.com"
             method="POST"
           >
@@ -26,7 +27,7 @@ const Footer = () => {
                 placeholder="Enter your Email"
                 className="h-[44px] w-[194px] rounded-md bg-gold px-2 text-white placeholder:text-white focus:outline-none"
               />
-              <button className="absolute -right-[35%] top-[10px] h-[30px] w-[100px] rounded-md bg-white">
+              <button className="absolute -right-[57%] top-[.8px] h-[44px] w-[100px] rounded-md bg-white">
                 Submit
               </button>
             </div>
