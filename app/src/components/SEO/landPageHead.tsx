@@ -6,6 +6,7 @@ interface Props {
 const HeadSeo = ({ title }: Props) => {
   return (
     <Head>
+      <link rel="icon" type="image/x-icon" href="/icon.ico"></link>
       <meta
         name="keywords"
         content="Agriculture, data, agribusiness, food, food security, food availability, african impact initiative"

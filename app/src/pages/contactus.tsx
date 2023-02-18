@@ -46,7 +46,7 @@ const Contact = () => {
                 </div>
               </div>
               {/*social media*/}
-              <div className=" flex space-x-4">
+              <div className=" mt-5 flex space-x-4">
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -57,7 +57,7 @@ const Contact = () => {
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  href="https://www.linkedin.com/company/shamba-data/?viewAsMember=true"
+                  href="https://www.linkedin.com/company/shamba-data/?viewAsMember=false"
                 >
                   <BsLinkedin className="text-blue-700" size={32} />
                 </a>
