@@ -1,15 +1,15 @@
 import { Value, Nav, Footer, HeadSeo } from "../components/landingPage";
 import Image from "next/legacy/image";
 import { useState } from "react";
-import dynamic from "next/dynamic";
-import { FaTimes } from "react-icons/fa";
-const ClientOnlyPortal = dynamic(
-  () => import("../components/BookDemo/Portal"),
-  { ssr: false }
-);
-const BookDemo = dynamic(() => import("../components/BookDemo/index"), {
-  ssr: false,
-});
+// import dynamic from "next/dynamic";
+// import { FaTimes } from "react-icons/fa";
+// const ClientOnlyPortal = dynamic(
+//   () => import("../components/BookDemo/Portal"),
+//   { ssr: false }
+// );
+// const BookDemo = dynamic(() => import("../components/BookDemo/index"), {
+//   ssr: false,
+// });
 import Link from "next/link";
 
 const Index = () => {
@@ -57,19 +57,22 @@ const Index = () => {
                 <Image src="/tomato-left.png" alt="tomatoes" layout="fill" />
               </div>
 
-              <button
-                className="mt-[14px] cursor-pointer rounded-md bg-green px-4 py-2 font-medium text-white md:-translate-y-[3rem] md:py-4 lg:mt-[18px]"
-                onClick={() => setPortal(!portal)}
-              >
-                Book An Enterprise Demo
-              </button>
+              <Link href="/bookDemo">
+                <button
+                  className="mt-[14px] cursor-pointer rounded-md bg-green px-4 py-2 font-medium text-white md:-translate-y-[3rem] md:py-4 lg:mt-[18px]"
+                  // onClick={() => setPortal(!portal)}
+                >
+                  Book An Enterprise Demo
+                </button>
+              </Link>
+
               <div className="relative hidden h-[90px] w-[90px] translate-x-[8rem] md:block lg:h-[130px] lg:w-[130px]">
                 <Image src="/market-right.png" alt="tomatoes" layout="fill" />
               </div>
             </div>
           </div>
         </section>
-
+        {/* 
         {portal && (
           <ClientOnlyPortal selector="#modal">
             <section className="fixed  top-0 right-0 left-0 bottom-0 block bg-[rgba(0,0,0,0.8)] font-montserrat">
@@ -86,7 +89,7 @@ const Index = () => {
               </div>
             </section>
           </ClientOnlyPortal>
-        )}
+        )} */}
 
         <section
           className="mt-[100px] flex flex-col text-center md:mt-[200px] md:w-[700px] lg:w-[900px]"
