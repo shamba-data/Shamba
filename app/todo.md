@@ -7,7 +7,6 @@
 
 1. Payment
 2. The business pages on the Footer (Not that important but it kinda is)
-3. The Database Yoh!!
 
 ## Note to Self
 
