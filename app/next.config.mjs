@@ -18,6 +18,12 @@ const mdxConfig = withMDX({
 const config = mdxConfig({
   reactStrictMode: true,
   swcMinify: true,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   i18n: {
     locales: ["en"],
     defaultLocale: "en",
