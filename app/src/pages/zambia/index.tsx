@@ -75,7 +75,7 @@ const Zambia = () => {
                   // await farmersRouter.mutateAsync(input);
                   setFormData(formStates);
                   router.push(
-                    `https://secure.3gdirectpay.com/payv3.php?ID=15CF9A88-B00D-4A8F-B264-6169102B1827`
+                    `https://secure.3gdirectpay.com/payv3.php?ID=BF48FC56-014C-40CA-AE22-23B707FF9E4C`
                   );
 
                   console.log("It Fucking worked");
