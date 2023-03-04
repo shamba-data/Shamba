@@ -30,5 +30,29 @@ export const farmersRouter = router({
 
             return newFarmer;
 
-        })
+        }),
+    byId: publicProcedure
+        .input(
+            z.object({
+                phoneNumber: z.string(),
+            })
+        )
+        .query(async ({ input, ctx }) => {
+            const farmer = await ctx.prisma.farmers.findFirst({
+                where: {
+                    phoneNumber: input.phoneNumber,
+                },
+                select: farmerInfoSelect,
+            });
+
+            if (!farmer) {
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "Farmer not found",
+                });
+            }
+
+            return farmer;
+        }
+        ),
 })
