@@ -1,15 +1,6 @@
 import { Value, Nav, Footer, HeadSeo } from "../components/landingPage";
 import Image from "next/legacy/image";
 import { useState } from "react";
-// import dynamic from "next/dynamic";
-// import { FaTimes } from "react-icons/fa";
-// const ClientOnlyPortal = dynamic(
-//   () => import("../components/BookDemo/Portal"),
-//   { ssr: false }
-// );
-// const BookDemo = dynamic(() => import("../components/BookDemo/index"), {
-//   ssr: false,
-// });
 import Link from "next/link";
 
 const Index = () => {
@@ -72,24 +63,6 @@ const Index = () => {
             </div>
           </div>
         </section>
-        {/* 
-        {portal && (
-          <ClientOnlyPortal selector="#modal">
-            <section className="fixed  top-0 right-0 left-0 bottom-0 block bg-[rgba(0,0,0,0.8)] font-montserrat">
-              <div className="absolute top-[3%] right-[10%] bottom-[10%] left-[10%] z-[99999] w-full lg:top-[20%]">
-                <div className="relative h-[700px] w-[80vw] rounded-md bg-white shadow-md">
-                  <button
-                    onClick={() => setPortal(!portal)}
-                    className="absolute right-2 top-5 cursor-pointer"
-                  >
-                    <FaTimes size={30} fill="#46783E" />
-                  </button>
-                  <BookDemo />
-                </div>
-              </div>
-            </section>
-          </ClientOnlyPortal>
-        )} */}
 
         <section
           className="mt-[100px] flex flex-col text-center md:mt-[200px] md:w-[700px] lg:w-[900px]"

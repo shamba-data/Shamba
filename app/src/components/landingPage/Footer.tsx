@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const Footer = () => {
-  // const date = new Date();
+  const date = new Date();
   const autoResponse =
     "Thank you for Contacting Shamba Data, a member of our team will contact you soon and schedule a meeting to further discuss this";
   return (
@@ -90,11 +90,11 @@ const Footer = () => {
         </div> */}
       </div>
 
-      {/* <div className="mt-[72px] mb-[40px] md:flex md:items-center md:justify-center md:gap-[2rem]">
+      <div className="mt-[72px] mb-[40px] md:flex md:items-center md:justify-center md:gap-[2rem]">
         <h3 className="text-center text-lg text-white">
-          Copyright @ <span>{date}</span>
+          Copyright @ <span>{date.getFullYear().toLocaleString()}</span>
         </h3>
-      </div> */}
+      </div>
     </footer>
   );
 };

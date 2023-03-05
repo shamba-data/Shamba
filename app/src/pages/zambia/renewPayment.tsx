@@ -5,9 +5,11 @@ import { trpc as api } from "../../utils/trpc";
 import Link from "next/link";
 
 const Success = () => {
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
   const farmersRouter = api.farmer.byId.useQuery({ phoneNumber: phoneNumber });
+  const [errorCount, setErrorCount] = useState<number>(0); // just to prevent showing the error message on the first render
 
+  //   farmersRouter.isError && setErrorCount((prev) => prev + 1);
   const onSubmitHandler = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const farmer = await farmersRouter.refetch();
@@ -31,7 +33,7 @@ const Success = () => {
                 Please Enter your Phone Number below
               </p>
               <form onSubmit={onSubmitHandler}>
-                <div className="mt-5 flex flex-col md:flex-row md:items-center md:justify-between">
+                <div className="mt-5 flex flex-col md:items-center md:justify-between md:space-y-5">
                   <label>Phone Number</label>
                   <input
                     type="text"
@@ -72,7 +74,7 @@ const Success = () => {
 
                   <button
                     type="submit"
-                    className="mt-3 w-full rounded-md border border-gold bg-gold px-4 py-3 text-white md:mt-0 md:w-[300px]"
+                    className="mt-3  w-full rounded-md border border-gold bg-gold px-4 py-3 text-white  md:w-[300px]"
                   >
                     Proceed to Payment
                   </button>
