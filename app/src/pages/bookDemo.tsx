@@ -1,7 +1,5 @@
 //use-client
 import { Nav, Footer, HeadSeo } from "../components/landingPage";
-import Script from "next/script";
-import { useEffect } from "react";
 import Head from "next/head";
 
 export default function BookDemo() {

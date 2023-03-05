@@ -1,4 +1,4 @@
-import Nav from "../../components/landingPage/Nav";
+import { Nav, Footer } from "../../components/landingPage";
 import BlurImage from "../../components/UI/BlurImage";
 import Link from "next/link";
 export default function Index() {
@@ -22,6 +22,7 @@ export default function Index() {
           </button>
         </Link>
       </section>
+      <Footer />
     </>
   );
 }

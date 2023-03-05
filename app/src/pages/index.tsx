@@ -1,10 +1,8 @@
 import { Value, Nav, Footer, HeadSeo } from "../components/landingPage";
 import Image from "next/legacy/image";
-import { useState } from "react";
 import Link from "next/link";
 
 const Index = () => {
-  const [portal, setPortal] = useState(false);
   return (
     <>
       <HeadSeo title="Shamba Data" />

@@ -51,6 +51,15 @@ const Zambia = () => {
             <span className="font-medium text-green">K70/ month</span>. We will
             notify you once we launch
           </p>
+
+          <p className="mt-5 text-lg">
+            Renewing your Payment?
+            <Link href="/zambia/renewPayment">
+              <span className="cursor-pointer font-medium text-gold">
+                Renew Here
+              </span>
+            </Link>
+          </p>
         </div>
 
         <section className="relative mt-[2rem] mb-[3rem] flex justify-center md:max-w-[700px]">

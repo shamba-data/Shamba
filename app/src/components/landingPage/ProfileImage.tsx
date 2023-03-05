@@ -23,13 +23,6 @@ const ProfileImage = ({
         ></div>
         <div className="relative h-[200px] w-[200px]">
           <BlurImage imageUrl={imageUrl} preload={false} rounded={true} />
-          {/* <Image
-            src={imageUrl}
-            alt="profile"
-            layout="fill"
-            objectFit="cover"
-            className="rounded-full shadow-md"
-          /> */}
         </div>
       </div>
       <h3 className="mt-5">{name}</h3>
