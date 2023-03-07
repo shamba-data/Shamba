@@ -55,4 +55,16 @@ export const farmersRouter = router({
             return farmer;
         }
         ),
+    byPhoneNumber: publicProcedure
+        .query(async ({ ctx }) => {
+            const data: { phoneNumber: string, fullName: string }[] = []
+            const farmers = await ctx.prisma.farmers.findMany({
+                select: farmerInfoSelect,
+            });
+            farmers.forEach(farmer => {
+                data.push({ phoneNumber: farmer.phoneNumber, fullName: farmer.fullName })
+            })
+
+            return data;
+        })
 })
