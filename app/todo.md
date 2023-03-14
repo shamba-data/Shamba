@@ -1,7 +1,7 @@
 ## Remember to do these
 
 1. Add the Auth on the reports section
-2. The links on the footer directs to "under construction", change it
+
 
 ## Stuff for Kondwani
 
