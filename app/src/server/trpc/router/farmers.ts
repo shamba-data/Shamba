@@ -2,12 +2,9 @@ import { router, publicProcedure } from "../trpc";
 import { Prisma } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import z from "zod";
-import { GoMail } from "react-icons/go";
 
 
 const sendgrid = require('@sendgrid/mail');
-const nodemailer = require('nodemailer');
-
 const farmerInfoSelect = Prisma.validator<Prisma.FarmersSelect>()({
     id: true,
     fullName: true,
@@ -45,11 +42,11 @@ export const farmersRouter = router({
         )
         .mutation(async ({ input, ctx }) => {
             // stuff for sending the email
-            const SENDGRID_API_KEY = process.env.NEXT_PUBLIC_SENDGRID_API_KEY;
+            const SENDGRID_API_KEY = "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";
             sendgrid.setApiKey(SENDGRID_API_KEY);
             const msg = {
-                to: input.email,
-                from: "mboyabrighton321@GoMail.com",
+                to: "b.mboya@alustudent.com",
+                from: "b.mboya@alustudent.com",
                 subject: "Welcome to Shamba Data",
                 text: "Welcome to Shamba Data once More",
                 html: "<strong>and easy to do anywhere, even with Node.js</strong>",
@@ -60,7 +57,7 @@ export const farmersRouter = router({
                     console.log('Email sent \n', resp)
                 })
                 .catch((err) => {
-                    console.error(err)
+                    console.error(err, "I am the error")
                 })
 
             const newPreSignup = await ctx.prisma.preSignups.create({

@@ -103,6 +103,9 @@ const Zambia = () => {
                   // if (farmersRouter.isSuccess) {
                   //   router.push("/zambia/success");
                   // }
+                  if (preSignupsRouter.isSuccess) {
+                    router.push("/zambia/success");
+                  }
                 } catch (cause) {
                   console.error({ cause }, "Failed to add the new Users");
                 }
