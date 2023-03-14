@@ -15,14 +15,21 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 const Zambia = () => {
-  const formStates = {
-    phoneNumber: "",
-    fullName: "",
-    password: "",
-  };
+  // const formStates = {
+  //   phoneNumber: "",
+  //   fullName: "",
+  //   password: "",
+  // };
 
-  const [formData, setFormData] = useState(formStates);
+  // const [formData, setFormData] = useState(formStates);
+  const newFormStates = {
+    email: "",
+    fullName: "",
+    whatsappNumber: "",
+  };
+  const [formData, setFormData] = useState(newFormStates);
   const farmersRouter = trpc.farmer.add.useMutation();
+  const preSignupsRouter = trpc.farmer.preSignups.useMutation();
   const router = useRouter();
   const inputFieldClasses =
     "w-[350px] rounded-md border-[1px] border-slate-300 bg-transparent py-2 px-2 text-gray-900 outline-none focus:outline-none mt-2 focus:ring-green focus:ring-2";
@@ -67,6 +74,7 @@ const Zambia = () => {
             <div className="relative hidden h-[400px] w-[300px] md:block">
               <Image src="/bottom.webp" alt="Lady" layout="fill" />
             </div>
+            {/* to bring back the old one --> landingPage/PaymentForm */}
             <form
               className="flex flex-col justify-center pl-5 md:mt-[2rem] md:ml-[7rem]"
               // action="https://formsubmit.co/b.mboya@alustudent.com"
@@ -74,28 +82,48 @@ const Zambia = () => {
               onSubmit={async (e) => {
                 e.preventDefault();
                 console.log(formData);
-                type Input = inferProcedureInput<AppRouter["farmer"]["add"]>;
+                type Input = inferProcedureInput<
+                  AppRouter["farmer"]["preSignups"]
+                >;
                 const input: Input = {
-                  phoneNumber: formData.phoneNumber,
+                  email: formData.email,
                   fullName: formData.fullName,
+                  whatsappNumber: formData.whatsappNumber,
                 };
 
                 try {
                   // await farmersRouter.mutateAsync(input);
-                  setFormData(formStates);
-                  router.push(
-                    `https://secure.3gdirectpay.com/payv3.php?ID=09A1B806-229A-4AC6-8076-4E941308690B`
-                  );
+                  await preSignupsRouter.mutateAsync(input);
+                  setFormData(newFormStates);
+                  // router.push(
+                  //   `https://secure.3gdirectpay.com/payv3.php?ID=09A1B806-229A-4AC6-8076-4E941308690B`
+                  // );
 
-                  console.log("It Fucking worked");
-                  if (farmersRouter.isSuccess) {
-                    router.push("/zambia/success");
-                  }
+                  // console.log("It Fucking worked");
+                  // if (farmersRouter.isSuccess) {
+                  //   router.push("/zambia/success");
+                  // }
                 } catch (cause) {
                   console.error({ cause }, "Failed to add the new Users");
                 }
               }}
             >
+              <div className="mt-5 flex flex-col">
+                <label>Email</label>
+                <input
+                  type="email"
+                  required
+                  id="email"
+                  value={formData.email}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                    setFormData({
+                      ...formData,
+                      email: e.target.value,
+                    });
+                  }}
+                  className={inputFieldClasses}
+                />
+              </div>
               <div className="flex flex-col ">
                 <label>Full Name</label>
                 <input
@@ -119,32 +147,17 @@ const Zambia = () => {
                   type="text"
                   required
                   id="whatsappNumber"
-                  value={formData.phoneNumber}
+                  value={formData.whatsappNumber}
                   onChange={(e: ChangeEvent<HTMLInputElement>) => {
                     setFormData({
                       ...formData,
-                      phoneNumber: e.target.value,
+                      whatsappNumber: e.target.value,
                     });
                   }}
                   className={inputFieldClasses}
                 />
               </div>
-              <div className="mt-5 flex flex-col">
-                <label>Password</label>
-                <input
-                  type="password"
-                  required
-                  id="password"
-                  value={formData.password}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                    setFormData({
-                      ...formData,
-                      password: e.target.value,
-                    });
-                  }}
-                  className={inputFieldClasses}
-                />
-              </div>
+
               <div className="mt-5 flex items-center gap-3">
                 <input
                   id="terms and conditions"

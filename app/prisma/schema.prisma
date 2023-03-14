@@ -59,3 +59,11 @@ model Farmers {
   phoneNumber String? @unique
   subscribed  Boolean @default(false)
 }
+
+model PreSignups {
+  id          String   @id @default(cuid())
+  phoneNumber String?  @unique
+  email       String?
+  fullName    String?
+  createdAt   DateTime @default(now())
+}
