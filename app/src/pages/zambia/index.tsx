@@ -59,14 +59,14 @@ const Zambia = () => {
             notify you once we launch
           </p>
 
-          <p className="mt-5 text-lg">
+          {/* <p className="mt-5 text-lg">
             Renewing your Payment?
             <Link href="/zambia/renewPayment">
               <span className="cursor-pointer font-medium text-gold">
                 Renew Here
               </span>
             </Link>
-          </p>
+          </p> */}
         </div>
 
         <section className="relative mt-[2rem] mb-[3rem] flex justify-center md:max-w-[700px]">
@@ -76,7 +76,7 @@ const Zambia = () => {
             </div>
             {/* to bring back the old one --> landingPage/PaymentForm */}
             <form
-              className="flex flex-col justify-center pl-5 md:mt-[2rem] md:ml-[7rem]"
+              className="flex flex-col justify-center space-y-5 pl-5 md:mt-[2rem] md:ml-[7rem]"
               // action="https://formsubmit.co/b.mboya@alustudent.com"
               // method="POST"
               onSubmit={async (e) => {

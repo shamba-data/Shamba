@@ -45,11 +45,11 @@ export const farmersRouter = router({
             const SENDGRID_API_KEY = "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";
             sendgrid.setApiKey(SENDGRID_API_KEY);
             const msg = {
-                to: "b.mboya@alustudent.com",
+                to: input.email,
                 from: "b.mboya@alustudent.com",
                 subject: "Welcome to Shamba Data",
-                text: "Welcome to Shamba Data once More",
-                html: "<strong>and easy to do anywhere, even with Node.js</strong>",
+                text: "Welcome to Shamba Data",
+                html: "<p>Thank you for Signing Up for Shamba Data services. You will be receiving Market Information via your Whatsapp Inbox every morning.</p>",
             };
             sendgrid
                 .send(msg)
