@@ -1,6 +1,6 @@
 import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-// import { Montserrat } from "@next/font/google";
+import { Montserrat } from "@next/font/google";
 import { trpc } from "../utils/trpc";
 import type { ReactElement, ReactNode } from "react";
 import type { NextPage } from "next";

@@ -29,7 +29,11 @@ const Zambia = () => {
   };
   const [formData, setFormData] = useState(newFormStates);
   const farmersRouter = trpc.farmer.add.useMutation();
-  const preSignupsRouter = trpc.farmer.preSignups.useMutation();
+  const preSignupsRouter = trpc.farmer.preSignups.useMutation({
+    onSuccess: () => {
+      router.push("/zambia/success");
+    },
+  });
   const router = useRouter();
   const inputFieldClasses =
     "w-[350px] rounded-md border-[1px] border-slate-300 bg-transparent py-2 px-2 text-gray-900 outline-none focus:outline-none mt-2 focus:ring-green focus:ring-2";
@@ -100,12 +104,6 @@ const Zambia = () => {
                   // );
 
                   // console.log("It Fucking worked");
-                  // if (farmersRouter.isSuccess) {
-                  //   router.push("/zambia/success");
-                  // }
-                  if (preSignupsRouter.isSuccess) {
-                    router.push("/zambia/success");
-                  }
                 } catch (cause) {
                   console.error({ cause }, "Failed to add the new Users");
                 }
@@ -183,18 +181,19 @@ const Zambia = () => {
                   out any time.
                 </label>
               </div>
+
               <button
-                disabled={farmersRouter.isLoading}
+                disabled={preSignupsRouter.isLoading}
                 type="submit"
                 className="mt-7 w-[250px] cursor-pointer items-start rounded-md bg-green px-4 py-2 text-lg font-medium text-white"
               >
-                Sign Up
+                {preSignupsRouter.isLoading ? "Loading..." : " Sign Up"}
               </button>
             </form>
           </div>
         </section>
-        <Footer />
       </main>
+      <Footer />
     </>
   );
 };

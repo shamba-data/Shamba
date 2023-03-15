@@ -5,7 +5,7 @@ export default function Index() {
   return (
     <>
       <Nav />
-      <section className="flex min-h-screen flex-col items-center justify-center">
+      <section className="flex min-h-screen flex-col items-center justify-center font-montserrat">
         <div className="relative h-[200px] w-[300px]">
           <BlurImage imageUrl="/404.png" preload={false} rounded={true} />
         </div>
