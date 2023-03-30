@@ -1,9 +1,19 @@
 import Link from "next/link";
+import { trpc } from "../../utils/trpc";
+import { AppRouter } from "../../server/trpc/router/_app";
+import { inferProcedureInput } from "@trpc/server";
+import { useState, type ChangeEvent } from "react";
+import { useRouter } from "next/router";
 
 const Footer = () => {
   const date = new Date();
-  const autoResponse =
-    "Thank you for Contacting Shamba Data, a member of our team will contact you soon and schedule a meeting to further discuss this";
+  const router = useRouter();
+  const subscribersRouter = trpc.subscriber.add.useMutation({
+    onSuccess: () => {
+      router.push("/zambia/success");
+    },
+  });
+  const [email, setEmail] = useState<string>("");
   return (
     <footer className="mt-[100px] w-full bg-green font-montserrat">
       <div className="md:flex md:flex-row-reverse md:items-start md:justify-center md:gap-[2rem]">
@@ -16,29 +26,51 @@ const Footer = () => {
           </p>
           <form
             className="-ml-[80px]"
-            action="https://formsubmit.co/b.mboya@alustudent.com"
-            method="POST"
+            onSubmit={async (e: ChangeEvent<HTMLFormElement>) => {
+              e.preventDefault();
+              type Input = inferProcedureInput<AppRouter["subscriber"]["add"]>;
+              const input: Input = {
+                email: email,
+              };
+
+              try {
+                await subscribersRouter.mutateAsync(input);
+                setEmail("");
+              } catch (cause) {
+                console.log(cause);
+              }
+            }}
           >
             <div className="relative mt-[10px]">
               <label className="hidden">Email</label>
               <input
                 type="email"
                 name="Email"
+                value={email}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setEmail(e.target.value)
+                }
                 placeholder="Enter your Email"
                 className="h-[44px] w-[194px] rounded-md bg-gold px-2 text-white placeholder:text-white focus:outline-none"
               />
-              <button className="absolute -right-[57%] top-[.8px] h-[44px] w-[100px] rounded-md bg-white">
-                Submit
+              <button
+                className="absolute -right-[57%] top-[.8px] h-[44px] w-[100px] rounded-md bg-white"
+                type="submit"
+                disabled={
+                  email.trim().length === 0 || subscribersRouter.isLoading
+                }
+              >
+                {subscribersRouter.isLoading ? "Loading..." : "Subscribe"}
               </button>
             </div>
-            <input type="hidden" name="_next" value="https://shamba-data.com" />
+            {/* <input type="hidden" name="_next" value="https://shamba-data.com" />
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_autoresponse" value={autoResponse} />
             <input
               type="hidden"
               name="_cc"
               value="k.ngulube@alumni.alueducation.com"
-            />
+            /> */}
           </form>
         </div>
         {/* <div className="mt-[37px] flex flex-col items-start justify-start pl-[30px] sm:pb-[2rem] md:flex-row md:gap-[3rem] md:pl-0">

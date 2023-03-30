@@ -8,7 +8,7 @@ import {
 } from "../../components/landingPage";
 import Image from "next/legacy/image";
 import { trpc } from "../../utils/trpc";
-import { useState, ChangeEvent } from "react";
+import { useState, type ChangeEvent } from "react";
 import { inferProcedureInput } from "@trpc/server";
 import { AppRouter } from "../../server/trpc/router/_app";
 import { useRouter } from "next/router";
@@ -83,9 +83,9 @@ const Zambia = () => {
               className="flex flex-col justify-center space-y-5 pl-5 md:mt-[2rem] md:ml-[7rem]"
               // action="https://formsubmit.co/b.mboya@alustudent.com"
               // method="POST"
-              onSubmit={async (e) => {
+              onSubmit={async (e: ChangeEvent<HTMLFormElement>) => {
                 e.preventDefault();
-                console.log(formData);
+                // console.log(formData);
                 type Input = inferProcedureInput<
                   AppRouter["farmer"]["preSignups"]
                 >;
