@@ -66,3 +66,9 @@ model PreSignups {
   email          String?
   fullName       String?
 }
+
+// this is the model for users who are interested in our product updates
+model EmailSubsribers {
+  id    String  @id @default(cuid())
+  email String? @unique
+}
