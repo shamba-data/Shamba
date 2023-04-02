@@ -58,7 +58,7 @@ const Zambia = () => {
           </h3>
           <p className="mx-3 mt-5 text-center text-lg ">
             Our Service is priced at{" "}
-            <span className="font-medium text-green">K70/ month</span>. We will
+            <span className="font-medium text-green">K80/ month</span>. We will
             notify you once we launch
           </p>
 
