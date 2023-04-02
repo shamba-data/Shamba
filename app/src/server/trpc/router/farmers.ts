@@ -35,7 +35,7 @@ export const farmersRouter = router({
     preSignups: publicProcedure
         .input(
             z.object({
-                email: z.string().email(),
+                id: z.string().cuid().optional(),
                 fullName: z.string(),
                 whatsappNumber: z.string(),
             })

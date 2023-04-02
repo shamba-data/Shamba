@@ -9,7 +9,8 @@
     "lint": "next lint",
     "start": "next start",
     "updatePrisma": "npx prisma generate && npx prisma db push && next dev",
-    "studio": "npx prisma studio"
+    "studio": "npx prisma studio",
+    "open": "code . && pnpm run dev"
   },
   "dependencies": {
     "@builder.io/partytown": "^0.7.3",

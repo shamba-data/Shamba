@@ -3,11 +3,6 @@
 1. Add the Auth on the reports section
 
 
-## Stuff for Kondwani
-
-1. Payment
-2. The business pages on the Footer (Not that important but it kinda is)
-
 ## Note to Self
 
 1. The Seo Image is hosted on Cloudinary

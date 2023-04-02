@@ -23,7 +23,6 @@ const Zambia = () => {
 
   // const [formData, setFormData] = useState(formStates);
   const newFormStates = {
-    email: "",
     fullName: "",
     whatsappNumber: "",
   };
@@ -90,7 +89,6 @@ const Zambia = () => {
                   AppRouter["farmer"]["preSignups"]
                 >;
                 const input: Input = {
-                  email: formData.email,
                   fullName: formData.fullName,
                   whatsappNumber: formData.whatsappNumber,
                 };
@@ -109,7 +107,7 @@ const Zambia = () => {
                 }
               }}
             >
-              <div className="mt-5 flex flex-col">
+              {/* <div className="mt-5 flex flex-col">
                 <label>Email</label>
                 <input
                   type="email"
@@ -124,7 +122,7 @@ const Zambia = () => {
                   }}
                   className={inputFieldClasses}
                 />
-              </div>
+              </div> */}
               <div className="flex flex-col ">
                 <label>Full Name</label>
                 <input
@@ -181,6 +179,12 @@ const Zambia = () => {
                   out any time.
                 </label>
               </div>
+
+              {preSignupsRouter.error && (
+                <div className="text-sm text-red-500">
+                  <h3>Something went wrong, try again</h3>
+                </div>
+              )}
 
               <button
                 disabled={preSignupsRouter.isLoading}
