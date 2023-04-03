@@ -114,9 +114,9 @@ export const farmersRouter = router({
                 let config = {
                     method: 'post',
                     maxBodyLength: Infinity,
-                    url: `https://graph.facebook.com/${process.env.Version}/${process.env.phone_number_id}/messages`,
+                    url: `https://graph.facebook.com/${process.env.Version}/${process.env.NEXT_PUBLIC_phone_number_id}/messages`,
                     headers: {
-                        'Authorization': `Bearer ${process.env.access_token}`,
+                        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_access_token}`,
                         'Content-Type': 'application/json'
                     },
                     data: whatsappData,
