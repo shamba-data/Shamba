@@ -2,6 +2,7 @@ import { router, publicProcedure } from "../trpc";
 import { Prisma } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import z from "zod";
+const axios = require('axios');
 
 
 // const sendgrid = require('@sendgrid/mail');
@@ -11,6 +12,7 @@ const farmerInfoSelect = Prisma.validator<Prisma.FarmersSelect>()({
     phoneNumber: true,
     subscribed: true,
 });
+
 
 
 
@@ -70,6 +72,67 @@ export const farmersRouter = router({
             return farmer;
         }
         ),
+    marketInfo: publicProcedure
+        .input(
+            z.object({
+                info: z.string(),
+
+            }))
+        .mutation(async ({ input, ctx }) => {
+            let phoneNumbers = [];
+            const farmers = await ctx.prisma.farmers.findMany({
+                select: farmerInfoSelect,
+            })
+            farmers.forEach(farmer => {
+                // phoneNumbers.push(farmer.phoneNumber)
+                sendInfo(farmer.phoneNumber, input.info)
+            })
+            function sendInfo(phoneNumber: string, info: string) {
+                let whatsappData = JSON.stringify({
+                    "messaging_product": "whatsapp",
+                    "recipient_type": "individual",
+                    "to": phoneNumber,
+                    "type": "template",
+                    "template": {
+                        "name": "market_update",
+                        "language": {
+                            "code": "en_GB"
+                        },
+                        "components": [
+                            {
+                                "type": "body",
+                                "parameters": [
+                                    {
+                                        "type": "text",
+                                        "text": info
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                })
+                let config = {
+                    method: 'post',
+                    maxBodyLength: Infinity,
+                    url: `https://graph.facebook.com/${process.env.Version}/${process.env.phone_number_id}/messages`,
+                    headers: {
+                        'Authorization': `Bearer ${process.env.access_token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    data: whatsappData,
+                };
+                axios.request(config)
+                    .then((response) => {
+                        console.log(JSON.stringify(response.data));
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+            }
+
+        }),
+
+
     byPhoneNumber: publicProcedure
         .query(async ({ ctx }) => {
             const data: { phoneNumber: string, fullName: string }[] = []
