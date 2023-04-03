@@ -41,25 +41,6 @@ export const farmersRouter = router({
             })
         )
         .mutation(async ({ input, ctx }) => {
-            // stuff for sending the email
-            // const SENDGRID_API_KEY = "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";
-            // sendgrid.setApiKey(SENDGRID_API_KEY);
-            // const msg = {
-            //     to: input.email,
-            //     from: "b.mboya@alustudent.com",
-            //     subject: "Welcome to Shamba Data",
-            //     text: "Welcome to Shamba Data",
-            //     html: "<p>Thank you for Signing Up for Shamba Data services. You will be receiving Market Information via your Whatsapp Inbox every morning.</p>",
-            // };
-            // sendgrid
-            //     .send(msg)
-            //     .then((resp) => {
-            //         console.log('Email sent \n', resp)
-            //     })
-            //     .catch((err) => {
-            //         console.error(err, "I am the error")
-            //     })
-
             const newPreSignup = await ctx.prisma.preSignups.create({
                 data: input,
             });
