@@ -11,6 +11,7 @@ const Index = () => {
   const infoRouter = api.farmer.marketInfo.useMutation({
     onSuccess: () => {
       router.push("/zambia/marketSuccess");
+      router.reload();
     },
   });
   return (
