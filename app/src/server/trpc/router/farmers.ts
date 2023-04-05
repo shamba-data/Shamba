@@ -5,7 +5,7 @@ import z from "zod";
 const axios = require('axios');
 
 
-// const sendgrid = require('@sendgrid/mail');
+
 const farmerInfoSelect = Prisma.validator<Prisma.FarmersSelect>()({
     id: true,
     fullName: true,
