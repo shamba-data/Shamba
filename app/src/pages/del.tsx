@@ -1,14 +1,24 @@
 import React from "react";
+import { trpc as api } from "../utils/trpc";
+import { AppRouter } from "../server/trpc/router/_app";
+import convert from "xml-js";
+import { useQuery } from "@tanstack/react-query";
 
-let data;
-const getToken = async () => {
-  const token = await fetch("http://localhost:3000/api/token");
-  data = await token.json();
-};
 const del = () => {
-  // api request to get token from the server
+  //   const token = getToken();
+  const tokenXml = api.payments.getToken.useQuery().data;
 
-  console.log(data, "nooo");
+  console.log(tokenXml);
+  //   if (tokenXml !== null) {
+  //     //@ts-ignore
+  //     const parsedToken = convert.xml2js(tokenXml, {
+  //       compact: false,
+  //       spaces: 4,
+  //     });
+  //     const token = parsedToken["API3G"];
+  //   }
+
+  //   console.log(router.data, "nooo");
 
   return <div>del</div>;
 };

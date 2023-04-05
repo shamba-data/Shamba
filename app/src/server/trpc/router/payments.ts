@@ -58,11 +58,11 @@ async function getToken() {
         data: data
     };
 
-    const tokenXml = await (await axios.request(config)).data;
+    const tokenXml = await axios.request(config);
 
 
 
-    return tokenXml
+    return tokenXml.data;
     // const response = await axios.request(config);
     // return response.data;
 
@@ -74,9 +74,8 @@ export const payments = router({
         .query(async ({ input, ctx }) => {
             const tokenXml = await getToken();
             //@ts-ignore
-            const parsedToken = convert.xml2js(tokenXml, { compact: false, spaces: 4 });
-            const token = parsedToken["API3G"];
-            return token;
+            const parsedXml = convert.xml2js(tokenXml, { compact: true, spaces: 4 });
+            return parsedXml['API3G']['TransToken']['_text'];
         })
 
 })
