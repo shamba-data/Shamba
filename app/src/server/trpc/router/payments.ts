@@ -73,10 +73,18 @@ async function getToken() {
 export const payments = router({
     getToken: publicProcedure
         .query(async ({ input, ctx }) => {
-            const tokenXml = await getToken();
-            //@ts-ignore
-            const parsedXml = convert.xml2js(tokenXml, { compact: true, spaces: 4 });
-            return parsedXml['API3G']['TransToken']['_text'];
+            try {
+                const tokenXml = await getToken();
+                //@ts-ignore
+                const parsedXml = convert.xml2js(tokenXml, { compact: true, spaces: 4 });
+                return parsedXml['API3G']['TransToken']['_text'];
+            } catch (error) {
+                console.log(error)
+                throw new TRPCError({
+                    code: 'INTERNAL_SERVER_ERROR',
+                    message: 'Could not get token',
+                });
+            }
         }),
 
     sendMobileToken: publicProcedure
@@ -98,16 +106,28 @@ export const payments = router({
             <MNO>airtel</MNO>
             <MNOcountry>zambia</MNOcountry>
             </API3G>
-            `
+            `;
             let config = {
                 method: 'post',
                 maxBodyLength: Infinity,
                 url: 'https://secure.3gdirectpay.com/API/v6/',
-                'Content-Type': 'application/xml',
-                'Cookie': 'AFIDENT=0B6758B3-BB98-438A-A666-7BF2F9CA6B31',
-                'Access-Control-Allow-Origin': '*',
+                headers: {
+                    'Content-Type': 'application/xml',
+                    'Cookie': 'AFIDENT=0B6758B3-BB98-438A-A666-7BF2F9CA6B31',
+                    'Access-Control-Allow-Origin': '*',
+                },
                 data: transactionRequest
-            },
+            };
+            try {
+                const response = await axios.request(config);
+                return response.data;
+            } catch (cause) {
+                throw new TRPCError({
+                    code: 'INTERNAL_SERVER_ERROR',
+                    message: 'Failed to send the mobile transaction token',
+                    cause,
+                });
+            }
 
         })
 
