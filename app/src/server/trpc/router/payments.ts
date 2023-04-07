@@ -69,6 +69,7 @@ async function getToken() {
 }
 
 
+
 export const payments = router({
     getToken: publicProcedure
         .query(async ({ input, ctx }) => {
@@ -76,6 +77,39 @@ export const payments = router({
             //@ts-ignore
             const parsedXml = convert.xml2js(tokenXml, { compact: true, spaces: 4 });
             return parsedXml['API3G']['TransToken']['_text'];
+        }),
+
+    sendMobileToken: publicProcedure
+        .input(
+            z.object({
+                transactionToken: z.string(),
+                phoneNumber: z.string(),
+            })
+        )
+        .query(async ({ input, ctx }) => {
+            const { transactionToken, phoneNumber } = input;
+            let transactionRequest = `
+            <?xml version="1.0" encoding="UTF-8"?>
+            <API3G>
+            <CompanyToken>0B6758B3-BB98-438A-A666-7BF2F9CA6B31</CompanyToken>
+            <Request>ChargeTokenMobile</Request>
+            <TransactionToken>${transactionToken}</TransactionToken>
+            <PhoneNumber>${phoneNumber}</PhoneNumber>
+            <MNO>airtel</MNO>
+            <MNOcountry>zambia</MNOcountry>
+            </API3G>
+            `
+            let config = {
+                method: 'post',
+                maxBodyLength: Infinity,
+                url: 'https://secure.3gdirectpay.com/API/v6/',
+                'Content-Type': 'application/xml',
+                'Cookie': 'AFIDENT=0B6758B3-BB98-438A-A666-7BF2F9CA6B31',
+                'Access-Control-Allow-Origin': '*',
+                data: transactionRequest
+            },
+
         })
+
 
 })
