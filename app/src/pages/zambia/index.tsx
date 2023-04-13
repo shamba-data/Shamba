@@ -44,25 +44,26 @@ const Zambia = () => {
       <HeadSeo title="Market Information" />
       <Nav />
       <main className="container mt-[5rem] flex flex-col items-center  justify-center font-montserrat md:max-w-[200ch]">
-        <HeroSection />
+        <>
+          <HeroSection />
 
-        <About />
-        <MarketCards />
+          <About />
+          <MarketCards />
 
-        <div
-          className="mt-[3rem] flex flex-col items-center justify-center sm:mt-[5rem]"
-          id="signUp"
-        >
-          <h3 className="mt-[2rem] text-2xl text-green">
-            Sign Up for <span className="text-gold"> Shamba Data</span>
-          </h3>
-          <p className="mx-3 mt-5 text-center text-lg ">
-            Our Service is priced at{" "}
-            <span className="font-medium text-green">K80/ month</span>. We will
-            notify you once we launch
-          </p>
+          <div
+            className="mt-[3rem] flex flex-col items-center justify-center sm:mt-[5rem]"
+            id="signUp"
+          >
+            <h3 className="mt-[2rem] text-2xl text-green">
+              Sign Up for <span className="text-gold"> Shamba Data</span>
+            </h3>
+            <p className="mx-3 mt-5 text-center text-lg ">
+              Our Service is priced at{" "}
+              <span className="font-medium text-green">K80/ month</span>. We
+              will notify you once we launch
+            </p>
 
-          {/* <p className="mt-5 text-lg">
+            {/* <p className="mt-5 text-lg">
             Renewing your Payment?
             <Link href="/zambia/renewPayment">
               <span className="cursor-pointer font-medium text-gold">
@@ -70,7 +71,8 @@ const Zambia = () => {
               </span>
             </Link>
           </p> */}
-        </div>
+          </div>
+        </>
 
         <section className="relative mt-[2rem] mb-[3rem] flex justify-center md:max-w-[700px]">
           <div className="md:flex">
