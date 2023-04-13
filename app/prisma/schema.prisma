@@ -58,6 +58,15 @@ model Farmers {
   fullName    String?
   phoneNumber String? @unique
   subscribed  Boolean @default(false)
+  expiresAt   String
+  createdAt   String
+}
+
+model TransactionHistory {
+  id          String   @id @default(cuid())
+  phoneNumber String?
+  amount      Int?
+  createdAt   DateTime @default(now())
 }
 
 model PreSignups {

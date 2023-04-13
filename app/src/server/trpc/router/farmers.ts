@@ -11,10 +11,9 @@ const farmerInfoSelect = Prisma.validator<Prisma.FarmersSelect>()({
     fullName: true,
     phoneNumber: true,
     subscribed: true,
+    expiresAt: true,
+    createdAt: true
 });
-
-
-
 
 export const farmersRouter = router({
     add: publicProcedure
@@ -23,6 +22,8 @@ export const farmersRouter = router({
                 id: z.string().cuid().optional(),
                 fullName: z.string(),
                 phoneNumber: z.string(),
+                expiresAt: z.string(),
+                createdAt: z.string(),
             })
         )
         .mutation(async ({ input, ctx }) => {

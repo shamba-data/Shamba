@@ -27,10 +27,17 @@ type TransactionResponse = {
 
 }
 
+const response = {
+    _declaration: { _attributes: { version: '1.0', encoding: 'utf-8' } },
+    API3G: {
+        Response: "OK"
+    }
+}
+
 export default function postRequest(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
-        //@ts-ignore
-        const xmlResponse = convert.xml2js(req.body, { compact: true, spaces: 4 });
+
+        const xmlResponse = convert.xml2js(req.body, { compact: true, alwaysChildren: true });
         const data: TransactionResponse = {
             Result: xmlResponse["API3G"]["Result"]["_text"],
             ResultExplanation: xmlResponse["API3G"]["ResultExplanation"]["_text"],
@@ -56,6 +63,15 @@ export default function postRequest(req: NextApiRequest, res: NextApiResponse) {
             AccRef: xmlResponse["API3G"]["AccRef"]["_text"],
         }
         console.log(data);
-        return res.status(200).json({ Response: 'OK' });
+
+
+        //sending the response to dpo
+        const xml = convert.js2xml(response, { compact: true, ignoreComment: true, spaces: 4 });
+        // returning an xml response
+        res.setHeader('Content-Type', 'text/xml');
+        res.write(xml);
+        res.status(200).end();
+
+
     }
 }
