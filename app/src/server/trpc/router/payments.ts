@@ -129,6 +129,25 @@ export const payments = router({
                 });
             }
 
+        }),
+    updateSubscription: publicProcedure
+        .input(
+            z.object({
+                phoneNumber: z.string(),
+            })
+        )
+        .query(async ({ input, ctx }) => {
+            const { phoneNumber } = input;
+            const updatedFarmer = await ctx.prisma.farmers.update({
+                where: {
+                    phoneNumber: phoneNumber
+                },
+                data: {
+                    subscribed: true
+                }
+            });
+            return updatedFarmer;
+
         })
 
 

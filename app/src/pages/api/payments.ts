@@ -1,5 +1,6 @@
 import { type NextApiRequest, type NextApiResponse } from "next";
 import convert from "xml-js";
+import { prisma } from "../../server/db/client";
 
 type TransactionResponse = {
     Result: string;
@@ -34,7 +35,7 @@ const response = {
     }
 }
 
-export default function postRequest(req: NextApiRequest, res: NextApiResponse) {
+export default async function postRequest(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
 
         const xmlResponse = convert.xml2js(req.body, { compact: true, alwaysChildren: true });
@@ -62,7 +63,20 @@ export default function postRequest(req: NextApiRequest, res: NextApiResponse) {
             MobilePaymentRequest: xmlResponse["API3G"]["MobilePaymentRequest"]["_text"],
             AccRef: xmlResponse["API3G"]["AccRef"]["_text"],
         }
-        console.log(data);
+
+        // updating the prisma db
+        try {
+            const updatedFarmer = await prisma.farmers.update({
+                where: {
+                    phoneNumber: data.CustomerPhone
+                },
+                data: {
+                    subscribed: true
+                }
+            })
+        } catch (error) {
+            console.log(error)
+        }
 
 
         //sending the response to dpo
@@ -71,7 +85,7 @@ export default function postRequest(req: NextApiRequest, res: NextApiResponse) {
         res.setHeader('Content-Type', 'text/xml');
         res.write(xml);
         res.status(200).end();
-
-
     }
+
+
 }

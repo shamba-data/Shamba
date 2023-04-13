@@ -13,12 +13,6 @@ function addMonth(dateObj: Date, num: number) {
 
 const del = () => {
   const tokenXml = api.payments.getToken.useQuery().data;
-  // const paymentRouter = api.payments.sendMobileToken.useQuery({
-  //   phoneNumber: "260978964998",
-  //   transactionToken: tokenXml,
-  // });
-
-  console.log(tokenXml);
   const router = useRouter();
   const FormStates = {
     fullName: "",
@@ -36,7 +30,6 @@ const del = () => {
     .split("T")[0]
     .replaceAll("-", "/");
   const expiresAtDate = addMonth(new Date(), 1);
-  console.log(expiresAtDate);
 
   return (
     <React.Fragment>
@@ -57,6 +50,11 @@ const del = () => {
 
           try {
             await farmersRouter.mutateAsync(input);
+            //send the ussd for payments
+            const paymentRouter = api.payments.sendMobileToken.useQuery({
+              phoneNumber: formData.whatsappNumber,
+              transactionToken: tokenXml,
+            });
             setFormData(FormStates);
             if (farmersRouter.isSuccess) {
               router.push("/zambia/success");
