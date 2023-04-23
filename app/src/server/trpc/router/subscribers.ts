@@ -16,6 +16,7 @@ export const subscriberRouter = router({
             })
         )
         .mutation(async ({ input, ctx }) => {
+
             const subsriber = await ctx.prisma.emailSubsribers.create({
                 data: input,
                 select: subscriberSelect,

@@ -1,6 +1,10 @@
 import { type NextApiRequest, type NextApiResponse } from "next";
+import { prisma } from "../../server/db/client";
+import { Prisma } from "@prisma/client";
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
+
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+    // console.log(req.body, "hey booo")
     if (req.method === "GET") {
         try {
             console.log("GET: Someone is pinging me");
@@ -29,11 +33,30 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === "POST") {
         try {
             console.log("POST: Someone is pinging me");
+            console.log(req.body)
             const message = req.body.entry[0].changes[0].value.messages[0];
             const profileInfo = req.body.entry[0].changes[0].value.contacts[0].profile;
             console.log(message)
             console.log(profileInfo)
 
+            try {
+                const updateMessages = await prisma.messages.create({
+                    data: {
+                        message: message.text['body'],
+                        name: profileInfo.name,
+                        from: message.from
+                    },
+                    select: Prisma.validator<Prisma.MessagesSelect>()({
+                        id: true,
+                        message: true,
+                        name: true,
+                        from: true
+                    })
+                })
+            } catch (error) {
+                console.log(error)
+                return;
+            }
             return res.status(200).send('OK');
         } catch (error) {
             console.log(error);

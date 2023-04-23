@@ -80,3 +80,11 @@ model EmailSubsribers {
   id    String  @id @default(cuid())
   email String? @unique
 }
+
+// this is for all the messages we receive from the users
+model Messages {
+  id      String  @id @default(cuid())
+  name    String?
+  from    String?
+  message String?
+}
