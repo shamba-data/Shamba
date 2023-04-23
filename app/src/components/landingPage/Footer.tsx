@@ -63,36 +63,35 @@ const Footer = () => {
                 {subscribersRouter.isLoading ? "Loading..." : "Subscribe"}
               </button>
             </div>
-            {/* <input type="hidden" name="_next" value="https://shamba-data.com" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_autoresponse" value={autoResponse} />
-            <input
-              type="hidden"
-              name="_cc"
-              value="k.ngulube@alumni.alueducation.com"
-            /> */}
           </form>
         </div>
-        {/* <div className="mt-[37px] flex flex-col items-start justify-start pl-[30px] sm:pb-[2rem] md:flex-row md:gap-[3rem] md:pl-0">
+        <div className="mt-[37px] flex flex-col items-start justify-start pl-[30px] sm:pb-[2rem] md:flex-row md:gap-[3rem] md:pl-0">
           <div>
             <h3 className="text-lg font-medium text-white">Company</h3>
             <ul className="flex flex-col space-y-3 text-[#B5C9B2]">
               <Link href="/contactus">
                 <li className=" cursor-pointer">Contact Us</li>
               </Link>
-              
-              <Link href="/construction">
+
+              <Link href="/careers">
+                <li className=" cursor-pointer">Careers</li>
+              </Link>
+
+              <Link href="/zambia">
+                <li className=" cursor-pointer">Zambia</li>
+              </Link>
+
+              {/* <Link href="/construction">
                 <li className=" cursor-pointer">Why Choose Us</li>
-              </Link>
+              </Link> */}
 
-              <Link href="/construction">
+              {/* <Link href="/construction">
                 <li className=" cursor-pointer">Pricing</li>
-              </Link>
+              </Link> */}
 
-              <Link href="/construction">
+              {/* <Link href="/construction">
                 <li className=" cursor-pointer">Testimonial</li>
-              </Link>
-             
+              </Link> */}
             </ul>
           </div>
           <div>
@@ -101,8 +100,7 @@ const Footer = () => {
             </h3>
 
             <ul className="flex flex-col space-y-3 text-[#B5C9B2]">
-              
-              <Link href="/construction">
+              <Link href="https://drive.google.com/file/d/1jtE0kkYDu6c4t0pUQC_s6IEBk0nrT_rY/view?usp=sharing">
                 <li className="mt-5 cursor-pointer">Privacy Policy</li>
               </Link>
 
@@ -112,14 +110,13 @@ const Footer = () => {
               >
                 <li className="cursor-pointer">Terms and Conditions</li>
               </Link>
-            
-              <Link href="/construction">
+
+              {/* <Link href="/construction">
                 <li className="cursor-pointer">Blog</li>
-              </Link>
-              
+              </Link> */}
             </ul>
           </div>
-        </div> */}
+        </div>
       </div>
 
       <div className="mt-[72px] md:flex md:items-center md:justify-center md:gap-[2rem]">
