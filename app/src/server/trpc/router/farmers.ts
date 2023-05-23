@@ -2,7 +2,7 @@ import { router, publicProcedure } from "../trpc";
 import { Prisma } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import z from "zod";
-const axios = require('axios');
+import axios from 'axios';
 
 
 
@@ -15,6 +15,14 @@ const farmerInfoSelect = Prisma.validator<Prisma.FarmersSelect>()({
     createdAt: true
 });
 
+const preSignupInfoSelect = Prisma.validator<Prisma.PreSignupsSelect>()({
+    id: true,
+    fullName: true,
+    whatsappNumber: true,
+
+})
+
+
 export const farmersRouter = router({
     add: publicProcedure
         .input(
@@ -22,6 +30,7 @@ export const farmersRouter = router({
                 id: z.string().cuid().optional(),
                 fullName: z.string(),
                 phoneNumber: z.string(),
+                subscribed: z.boolean().optional(),
                 expiresAt: z.string(),
                 createdAt: z.string(),
             })
@@ -81,12 +90,16 @@ export const farmersRouter = router({
             }))
         .mutation(async ({ input, ctx }) => {
             let phoneNumbers = [];
-            const farmers = await ctx.prisma.farmers.findMany({
-                select: farmerInfoSelect,
+            const farmers = await ctx.prisma.preSignups.findMany({
+                select: preSignupInfoSelect,
             })
+            // const farmers = await ctx.prisma.farmers.findMany({
+            //     select: farmerInfoSelect,
+            // })
             farmers.forEach(farmer => {
                 // phoneNumbers.push(farmer.phoneNumber)
-                sendInfo(farmer.phoneNumber, input.info)
+                sendInfo(farmer.whatsappNumber, input.info)
+                // sendInfo(farmer.phoneNumber, input.info)
             })
             function sendInfo(phoneNumber: string, info: string) {
                 let whatsappData = JSON.stringify({
@@ -124,10 +137,12 @@ export const farmersRouter = router({
                 };
                 axios.request(config)
                     .then((response) => {
-                        console.log(JSON.stringify(response.data));
+                        console.log("I am not the error")
                     })
                     .catch((error) => {
-                        console.error(error);
+                        console.log("I got an error")
+
+                        console.log(error.response.data.error.error_data, "sth is wrong with the request")
                     });
             }
 

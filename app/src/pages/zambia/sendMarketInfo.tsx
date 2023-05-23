@@ -11,7 +11,7 @@ const Index = () => {
   const infoRouter = api.farmer.marketInfo.useMutation({
     onSuccess: () => {
       router.push("/zambia/marketSuccess");
-      router.reload();
+      // router.reload();
     },
   });
   return (
@@ -39,7 +39,7 @@ const Index = () => {
           }}
         >
           <textarea
-            className="mt-2 h-[200px] w-[350px] rounded-md border-[1px] border-slate-300 bg-transparent py-2 px-2 text-gray-900 outline-none focus:outline-none focus:ring-2 focus:ring-green"
+            className="mt-2 h-[200px] w-[1200px] rounded-md border-[1px] border-slate-300 bg-transparent py-2 px-2 text-gray-900 outline-none focus:outline-none focus:ring-2 focus:ring-green"
             value={info}
             onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
               setInfo(e.target.value)

@@ -1,4 +1,4 @@
-import React, { useState, type ChangeEvent } from "react";
+import React, { useState, type ChangeEvent, useEffect } from "react";
 import { trpc as api } from "../utils/trpc";
 import { AppRouter } from "../server/trpc/router/_app";
 import { inferProcedureInput } from "@trpc/server";
@@ -11,14 +11,22 @@ function addMonth(dateObj: Date, num: number) {
   return dateObj.toISOString().split("T")[0].replaceAll("-", "/");
 }
 
-const del = () => {
+const Del = () => {
   const tokenXml = api.payments.getToken.useQuery().data;
   const router = useRouter();
   const FormStates = {
     fullName: "",
     whatsappNumber: "",
   };
+  const [sendPayments, setSendPayments] = useState(false);
   const farmersRouter = trpc.farmer.add.useMutation();
+  // const sendPayments = () => {
+  //   const data = api.payments.sendMobileToken.useQuery({
+  //     phoneNumber: FormStates.whatsappNumber,
+  //     transactionToken: tokenXml,
+  //   });
+  //   console.log(data, "Hey boo");
+  // };
   const [formData, setFormData] = useState(FormStates);
   const inputFieldClasses =
     "w-[350px] rounded-md border-[1px] border-slate-300 bg-transparent py-2 px-2 text-gray-900 outline-none focus:outline-none mt-2 focus:ring-green focus:ring-2";
@@ -30,6 +38,15 @@ const del = () => {
     .split("T")[0]
     .replaceAll("-", "/");
   const expiresAtDate = addMonth(new Date(), 1);
+
+  useEffect(() => {
+    console.log("I got triggered");
+    sendPayments &&
+      api.payments.sendMobileToken.useQuery({
+        phoneNumber: formData.whatsappNumber,
+        transactionToken: tokenXml,
+      });
+  }, [sendPayments]);
 
   return (
     <React.Fragment>
@@ -49,12 +66,14 @@ const del = () => {
           };
 
           try {
-            await farmersRouter.mutateAsync(input);
+            setSendPayments(true);
+            // sendPayments();
+            // await farmersRouter.mutateAsync(input);
             //send the ussd for payments
-            const paymentRouter = api.payments.sendMobileToken.useQuery({
-              phoneNumber: formData.whatsappNumber,
-              transactionToken: tokenXml,
-            });
+            // const paymentRouter = api.payments.sendMobileToken.useQuery({
+            //   phoneNumber: formData.whatsappNumber,
+            //   transactionToken: tokenXml,
+            // });
             setFormData(FormStates);
             if (farmersRouter.isSuccess) {
               router.push("/zambia/success");
@@ -132,4 +151,4 @@ const del = () => {
   );
 };
 
-export default del;
+export default Del;

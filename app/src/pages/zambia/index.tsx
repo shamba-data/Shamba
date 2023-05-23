@@ -15,24 +15,18 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 const Zambia = () => {
-  // const formStates = {
-  //   phoneNumber: "",
-  //   fullName: "",
-  //   password: "",
-  // };
-
-  // const [formData, setFormData] = useState(formStates);
   const newFormStates = {
     fullName: "",
     whatsappNumber: "",
   };
   const [formData, setFormData] = useState(newFormStates);
-  const farmersRouter = trpc.farmer.add.useMutation();
   const preSignupsRouter = trpc.farmer.preSignups.useMutation({
     onSuccess: () => {
       router.push("/zambia/success");
     },
   });
+  const tokenXml = trpc.payments.getToken.useQuery().data;
+
   const router = useRouter();
   const inputFieldClasses =
     "w-[350px] rounded-md border-[1px] border-slate-300 bg-transparent py-2 px-2 text-gray-900 outline-none focus:outline-none mt-2 focus:ring-green focus:ring-2";
@@ -82,8 +76,6 @@ const Zambia = () => {
             {/* to bring back the old one --> landingPage/PaymentForm */}
             <form
               className="flex flex-col justify-center space-y-5 pl-5 md:mt-[2rem] md:ml-[7rem]"
-              // action="https://formsubmit.co/b.mboya@alustudent.com"
-              // method="POST"
               onSubmit={async (e: ChangeEvent<HTMLFormElement>) => {
                 e.preventDefault();
                 // console.log(formData);
@@ -96,12 +88,11 @@ const Zambia = () => {
                 };
 
                 try {
-                  // await farmersRouter.mutateAsync(input);
-                  await preSignupsRouter.mutateAsync(input);
-                  setFormData(newFormStates);
-                  // router.push(
-                  //   `https://secure.3gdirectpay.com/payv3.php?ID=09A1B806-229A-4AC6-8076-4E941308690B`
-                  // );
+                  // await preSignupsRouter.mutateAsync(input);
+                  const paymentRouter = trpc.payments.sendMobileToken.useQuery({
+                    transactionToken: tokenXml,
+                    phoneNumber: formData.whatsappNumber,
+                  });
 
                   // console.log("It Fucking worked");
                 } catch (cause) {
@@ -109,22 +100,6 @@ const Zambia = () => {
                 }
               }}
             >
-              {/* <div className="mt-5 flex flex-col">
-                <label>Email</label>
-                <input
-                  type="email"
-                  required
-                  id="email"
-                  value={formData.email}
-                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                    setFormData({
-                      ...formData,
-                      email: e.target.value,
-                    });
-                  }}
-                  className={inputFieldClasses}
-                />
-              </div> */}
               <div className="flex flex-col ">
                 <label>Full Name</label>
                 <input
