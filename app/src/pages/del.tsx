@@ -13,20 +13,36 @@ function addMonth(dateObj: Date, num: number) {
 
 const Del = () => {
   const tokenXml = api.payments.getToken.useQuery().data;
+  const paymentRouter = api.payments.sendMobileToken.useMutation();
   const router = useRouter();
   const FormStates = {
     fullName: "",
     whatsappNumber: "",
   };
-  const [sendPayments, setSendPayments] = useState(false);
+  const [whatsappNumber, setWhatsappNumber] = useState("");
+  function SendMobileToken(e) {
+    e.preventDefault();
+    console.log("sendMobileToken");
+    type Input = inferProcedureInput<AppRouter["payments"]["sendMobileToken"]>;
+    const input: Input = {
+      phoneNumber: whatsappNumber,
+      transactionToken: tokenXml,
+    };
+    try {
+      const data = paymentRouter.mutateAsync(input);
+      console.log(data);
+    } catch (cause) {
+      console.error({ cause }, "Failed to add the new Users");
+    }
+    // const payment = api.payments.sendMobileToken.useQuery({
+    //   phoneNumber: whatsappNumber,
+    //   transactionToken: tokenXml,
+    // });
+    // console.log(payment);
+  }
+
   const farmersRouter = trpc.farmer.add.useMutation();
-  // const sendPayments = () => {
-  //   const data = api.payments.sendMobileToken.useQuery({
-  //     phoneNumber: FormStates.whatsappNumber,
-  //     transactionToken: tokenXml,
-  //   });
-  //   console.log(data, "Hey boo");
-  // };
+
   const [formData, setFormData] = useState(FormStates);
   const inputFieldClasses =
     "w-[350px] rounded-md border-[1px] border-slate-300 bg-transparent py-2 px-2 text-gray-900 outline-none focus:outline-none mt-2 focus:ring-green focus:ring-2";
@@ -39,49 +55,11 @@ const Del = () => {
     .replaceAll("-", "/");
   const expiresAtDate = addMonth(new Date(), 1);
 
-  useEffect(() => {
-    console.log("I got triggered");
-    sendPayments &&
-      api.payments.sendMobileToken.useQuery({
-        phoneNumber: formData.whatsappNumber,
-        transactionToken: tokenXml,
-      });
-  }, [sendPayments]);
-
   return (
     <React.Fragment>
       <form
         className="flex flex-col justify-center pl-5 md:mt-[2rem] md:ml-[7rem]"
-        // action="https://formsubmit.co/b.mboya@alustudent.com"
-        // method="POST"
-        onSubmit={async (e) => {
-          e.preventDefault();
-          console.log(formData);
-          type Input = inferProcedureInput<AppRouter["farmer"]["add"]>;
-          const input: Input = {
-            phoneNumber: formData.whatsappNumber,
-            fullName: formData.fullName,
-            createdAt: createdAtDate,
-            expiresAt: expiresAtDate,
-          };
-
-          try {
-            setSendPayments(true);
-            // sendPayments();
-            // await farmersRouter.mutateAsync(input);
-            //send the ussd for payments
-            // const paymentRouter = api.payments.sendMobileToken.useQuery({
-            //   phoneNumber: formData.whatsappNumber,
-            //   transactionToken: tokenXml,
-            // });
-            setFormData(FormStates);
-            if (farmersRouter.isSuccess) {
-              router.push("/zambia/success");
-            }
-          } catch (cause) {
-            console.error({ cause }, "Failed to add the new Users");
-          }
-        }}
+        onSubmit={SendMobileToken}
       >
         <div className="flex flex-col ">
           <label>Full Name</label>
@@ -106,12 +84,13 @@ const Del = () => {
             type="text"
             required
             id="whatsappNumber"
-            value={formData.whatsappNumber}
+            value={whatsappNumber}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
-              setFormData({
-                ...formData,
-                whatsappNumber: e.target.value,
-              });
+              setWhatsappNumber(e.target.value);
+              // setFormData({
+              //   ...formData,
+              //   whatsappNumber: e.target.value,
+              // });
             }}
             className={inputFieldClasses}
           />

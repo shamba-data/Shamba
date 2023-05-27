@@ -88,12 +88,11 @@ const Zambia = () => {
                 };
 
                 try {
-                  // await preSignupsRouter.mutateAsync(input);
-                  const paymentRouter = trpc.payments.sendMobileToken.useQuery({
-                    transactionToken: tokenXml,
-                    phoneNumber: formData.whatsappNumber,
-                  });
-
+                  // // await preSignupsRouter.mutateAsync(input);
+                  // const paymentRouter = trpc.payments.sendMobileToken.useQuery({
+                  //   transactionToken: tokenXml,
+                  //   phoneNumber: formData.whatsappNumber,
+                  // });
                   // console.log("It Fucking worked");
                 } catch (cause) {
                   console.error({ cause }, "Failed to add the new Users");

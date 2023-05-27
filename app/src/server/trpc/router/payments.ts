@@ -94,7 +94,7 @@ export const payments = router({
                 phoneNumber: z.string(),
             })
         )
-        .query(async ({ input, ctx }) => {
+        .mutation(async ({ input, ctx }) => {
             const { transactionToken, phoneNumber } = input;
             let transactionRequest = `
             <?xml version="1.0" encoding="UTF-8"?>
