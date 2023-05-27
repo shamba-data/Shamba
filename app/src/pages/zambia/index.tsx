@@ -20,12 +20,39 @@ const Zambia = () => {
     whatsappNumber: "",
   };
   const [formData, setFormData] = useState(newFormStates);
-  const preSignupsRouter = trpc.farmer.preSignups.useMutation({
+  const preSignupsRouter = trpc.farmer.preSignups.useMutation();
+  const tokenXml = trpc.payments.getToken.useQuery().data;
+  const paymentRouter = trpc.payments.sendMobileToken.useMutation({
     onSuccess: () => {
       router.push("/zambia/success");
     },
   });
-  const tokenXml = trpc.payments.getToken.useQuery().data;
+
+  function sendMobileMoney(e: ChangeEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (
+      formData.whatsappNumber === "" ||
+      formData.fullName === "" ||
+      formData.whatsappNumber.startsWith("0") ||
+      formData.whatsappNumber.length !== 12 ||
+      !formData.whatsappNumber.startsWith("260")
+    ) {
+      alert("Please enter a whatsapp number in form of 260XXXXXXXXX");
+      return;
+    }
+    console.log(formData.whatsappNumber, "Yes daddy");
+    type Input = inferProcedureInput<AppRouter["payments"]["sendMobileToken"]>;
+    const input: Input = {
+      phoneNumber: formData.whatsappNumber,
+      transactionToken: tokenXml,
+    };
+    try {
+      paymentRouter.mutateAsync(input);
+      setFormData(newFormStates);
+    } catch (cause) {
+      console.error({ cause }, "Failed to add the new Users");
+    }
+  }
 
   const router = useRouter();
   const inputFieldClasses =
@@ -76,28 +103,7 @@ const Zambia = () => {
             {/* to bring back the old one --> landingPage/PaymentForm */}
             <form
               className="flex flex-col justify-center space-y-5 pl-5 md:mt-[2rem] md:ml-[7rem]"
-              onSubmit={async (e: ChangeEvent<HTMLFormElement>) => {
-                e.preventDefault();
-                // console.log(formData);
-                type Input = inferProcedureInput<
-                  AppRouter["farmer"]["preSignups"]
-                >;
-                const input: Input = {
-                  fullName: formData.fullName,
-                  whatsappNumber: formData.whatsappNumber,
-                };
-
-                try {
-                  // // await preSignupsRouter.mutateAsync(input);
-                  // const paymentRouter = trpc.payments.sendMobileToken.useQuery({
-                  //   transactionToken: tokenXml,
-                  //   phoneNumber: formData.whatsappNumber,
-                  // });
-                  // console.log("It Fucking worked");
-                } catch (cause) {
-                  console.error({ cause }, "Failed to add the new Users");
-                }
-              }}
+              onSubmit={sendMobileMoney}
             >
               <div className="flex flex-col ">
                 <label>Full Name</label>
