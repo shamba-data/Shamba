@@ -55,8 +55,8 @@ model VerificationToken {
 
 model Farmers {
   id          String  @id @default(cuid())
-  fullName    String?
-  phoneNumber String? @unique
+  fullName    String
+  phoneNumber String  @unique
   subscribed  Boolean @default(false)
   expiresAt   String
   createdAt   String

@@ -67,6 +67,7 @@ const Zambia = () => {
     };
     try {
       paymentRouter.mutateAsync(input);
+      preSignupsRouter.mutateAsync(presignupInput);
       setFormData(newFormStates);
     } catch (cause) {
       console.error({ cause }, "Failed to add the new Users");
