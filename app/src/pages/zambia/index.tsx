@@ -14,6 +14,12 @@ import { AppRouter } from "../../server/trpc/router/_app";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
+// function to add a month to a date for the expiresAt field
+function addMonth(dateObj: Date, num: number) {
+  dateObj.setMonth(dateObj.getMonth() + num);
+  return dateObj.toISOString().split("T")[0].replaceAll("-", "/");
+}
+
 const Zambia = () => {
   const newFormStates = {
     fullName: "",
@@ -30,6 +36,7 @@ const Zambia = () => {
 
   function sendMobileMoney(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
+
     if (
       formData.whatsappNumber === "" ||
       formData.fullName === "" ||
@@ -40,11 +47,23 @@ const Zambia = () => {
       alert("Please enter a whatsapp number in form of 260XXXXXXXXX");
       return;
     }
-    console.log(formData.whatsappNumber, "Yes daddy");
     type Input = inferProcedureInput<AppRouter["payments"]["sendMobileToken"]>;
     const input: Input = {
       phoneNumber: formData.whatsappNumber,
       transactionToken: tokenXml,
+    };
+    type presignupInput = inferProcedureInput<AppRouter["farmer"]["add"]>;
+    // some fancy ass stuff for the dates
+    const createdAtDate = new Date()
+      .toISOString()
+      .split("T")[0]
+      .replaceAll("-", "/");
+    const expiresAtDate = addMonth(new Date(), 1);
+    const presignupInput: presignupInput = {
+      fullName: formData.fullName,
+      phoneNumber: formData.whatsappNumber,
+      expiresAt: expiresAtDate,
+      createdAt: createdAtDate,
     };
     try {
       paymentRouter.mutateAsync(input);

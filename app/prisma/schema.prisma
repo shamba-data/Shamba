@@ -70,9 +70,9 @@ model TransactionHistory {
 }
 
 model PreSignups {
-  id             String  @id @default(cuid())
-  whatsappNumber String? @unique
-  fullName       String?
+  id             String @id @default(cuid())
+  whatsappNumber String @unique
+  fullName       String
 }
 
 // this is the model for users who are interested in our product updates
