@@ -8,6 +8,8 @@ import type { AppProps, AppType } from "next/app";
 import "../styles/globals.css";
 import "../components/BookDemo/styles.scss";
 import { Analytics } from "@vercel/analytics/react";
+import { ClerkProvider } from "@clerk/nextjs";
+import Script from "next/script";
 
 // const montserrat = Montserrat({
 //   subsets: ["latin"],
@@ -25,32 +27,28 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-const MyApp: AppType<{ session: Session | null }> = ({
-  Component,
-  pageProps: { session, ...pageProps },
-}) => {
+const MyApp = ({ Component, pageProps }) => {
   return (
-    <SessionProvider session={session}>
-      {/* <main className={`${montserrat.variable} font-montserrat`}> */}
-      <main className={`font-montserrat`}>
-        <Component {...pageProps} />
-        <Analytics />
-      </main>
-    </SessionProvider>
+    // <ClerkProvider {...pageProps}>
+    <Component {...pageProps} />
+    // {/* </ClerkProvider> */}
   );
 };
 
 // const MyApp: AppType<{ session: Session | null }> = ({
 //   Component,
 //   pageProps: { session, ...pageProps },
-// }: AppPropsWithLayout) => {
-//   const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>);
-//   return getLayout(
-//     <SessionProvider session={session}>
-//       <main className={`${montserrat.variable} font-montserrat`}>
+// }) => {
+//   return (
+//     <ClerkProvider {...pageProps}>
+//       {/* <SessionProvider session={session}> */}
+//       {/* <main className={`${montserrat.variable} font-montserrat`}> */}
+//       <main className={`font-montserrat`}>
 //         <Component {...pageProps} />
+//         <Analytics />
 //       </main>
-//     </SessionProvider>
+//       {/* </SessionProvider> */}
+//     </ClerkProvider>
 //   );
 // };
 
