@@ -18,12 +18,48 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../components/UI/select";
-import { DatePicker } from "../../components/UI/DatePicker";
+import { Calendar } from "../../components/UI/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "../../components/UI/popover";
+import { cn } from "../../lib/utils";
+import { CalendarIcon } from "@radix-ui/react-icons";
+import { format } from "date-fns";
 
 export default function Prices() {
+  const [selectedCrop, setSelectedCrop] = React.useState<string>("");
+  const [selectedPrice, setSelectedPrice] = React.useState<string>("");
+  const [date, setDate] = React.useState<Date>();
   return (
     <section className="flex h-screen flex-col items-center justify-center gap-5 bg-gray-100">
-      <DatePicker />
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            variant={"outline"}
+            className={cn(
+              "w-[350px] justify-start text-left font-normal",
+              !date && "text-muted-foreground"
+            )}
+          >
+            <CalendarIcon className="mr-2 h-4 w-4" />
+            {date ? format(date, "PPP") : <span>Pick a date</span>}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0" align="start">
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={(e) => {
+              setDate;
+              console.log(e, "how are you");
+            }}
+            initialFocus
+          />
+        </PopoverContent>
+      </Popover>
+      {/* <h3>Some date {date}</h3> */}
       <Card className="w-[350px]">
         <CardHeader>
           <CardTitle>Record Prices</CardTitle>
@@ -36,7 +72,11 @@ export default function Prices() {
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="framework">Crop</Label>
-                <Select>
+                <Select
+                  onValueChange={(value) => {
+                    setSelectedCrop(value);
+                  }}
+                >
                   <SelectTrigger id="framework">
                     <SelectValue placeholder="Crop Type" />
                   </SelectTrigger>

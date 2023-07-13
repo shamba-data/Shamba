@@ -1,5 +1,6 @@
 {
 	"dependencies": {
+		"@clerk/nextjs": "^4.21.15",
 		"@next/font": "^13.2.4"
 	}
 }
