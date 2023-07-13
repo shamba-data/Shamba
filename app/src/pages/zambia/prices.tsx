@@ -9,40 +9,87 @@ import {
   CardHeader,
   CardTitle,
 } from "../../components/UI/Card";
-import { Input } from "../../components/UI/Input";
-import { Label } from "../../components/UI/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../../components/UI/select";
+
 import { Calendar } from "../../components/UI/calendar";
+import {
+  CropSelect,
+  PricePicker,
+  SuccessAlert,
+} from "../../components/priceUpdates";
+import { ToastAction } from "../../components/UI/Toast";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "../../components/UI/popover";
+import { useToast } from "../../hooks/useToast";
 import { cn } from "../../lib/utils";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
+import { trpc } from "../../utils/trpc";
+import { inferProcedureInput } from "@trpc/server";
+import { AppRouter } from "../../server/trpc/router/_app";
+import { Toaster } from "../../components/UI/Toaster";
 
 export default function Prices() {
   const [selectedCrop, setSelectedCrop] = React.useState<string>("");
-  const [selectedPrice, setSelectedPrice] = React.useState<string>("");
+  const [selectedPrice, setSelectedPrice] = React.useState<number>();
   const [selectedDate, setSelectedDate] = React.useState<string>("");
   const [date, setDate] = React.useState<Date>();
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(selectedCrop, selectedPrice, selectedDate);
-  };
+  const { toast } = useToast();
 
+  const pricesRouter = trpc.farmer.updatePrice.useMutation({
+    onSuccess: () => {
+      toast({
+        title: "Updated",
+        description: "Succesfully added the prices",
+        duration: 1200,
+      });
+    },
+    onError: (error) => {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+        duration: 1200,
+      });
+    },
+  });
   const cancelUpdate = () => {
     setSelectedCrop("");
-    setSelectedPrice("");
+    setSelectedPrice(0);
     setSelectedDate("");
   };
+
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    type Input = inferProcedureInput<AppRouter["farmer"]["updatePrice"]>;
+    const input: Input = {
+      crop: selectedCrop,
+      price: selectedPrice as unknown as number,
+      Date: selectedDate,
+    };
+    if (!input.price || !input.crop || !input.Date) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+
+        duration: 1200,
+      });
+      return;
+    }
+
+    try {
+      await pricesRouter.mutateAsync(input);
+      cancelUpdate();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <section className="flex h-screen flex-col items-center justify-center gap-5 bg-gray-100">
       <Popover>
@@ -83,59 +130,21 @@ export default function Prices() {
         <CardContent>
           <form onSubmit={handleSubmit}>
             <div className="grid w-full items-center gap-4">
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="framework">Crop</Label>
-                <Select
-                  onValueChange={(value) => {
-                    setSelectedCrop(value);
-                  }}
-                >
-                  <SelectTrigger id="crops">
-                    <SelectValue placeholder="Crop Type" />
-                  </SelectTrigger>
-                  <SelectContent position="popper">
-                    <SelectItem value="tomatoes">Tomatoes</SelectItem>
-                    <SelectItem value="beans">beans</SelectItem>
-                    <SelectItem value="rice">Rice</SelectItem>
-                    <SelectItem value="g/nuts">G/nuts</SelectItem>
-                    <SelectItem value="onions">Onions</SelectItem>
-                    <SelectItem value="watermelon">Watermelon</SelectItem>
-                    <SelectItem value="pineapple">Pineapple</SelectItem>
-                    <SelectItem value="garlic">garlic</SelectItem>
-                    <SelectItem value="avocado">avocado</SelectItem>
-                    <SelectItem value="cucumber">cucumber</SelectItem>
-                    <SelectItem value="lemon">lemon</SelectItem>
-                    <SelectItem value="broilerChicken">
-                      broilerChicken
-                    </SelectItem>
-                    <SelectItem value="villageChicken">
-                      villageChicken
-                    </SelectItem>
-                    <SelectItem value="irishPotato">irish Potato</SelectItem>
-                    <SelectItem value="oranges">oranges</SelectItem>
-                    <SelectItem value="cabbage">Cabbage</SelectItem>
-                    <SelectItem value="goat">goat</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+              <CropSelect setSelectedCrop={setSelectedCrop} />
 
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="name">Prices</Label>
-                <Input
-                  id="name"
-                  placeholder="Price"
-                  type="number"
-                  onChange={(e) => {
-                    setSelectedPrice(e.target.value);
-                  }}
-                  value={selectedPrice}
-                />
-              </div>
+              <PricePicker
+                selectedPrice={selectedPrice}
+                setSelectedPrice={setSelectedPrice}
+              />
               <CardFooter className="flex justify-between ">
                 <Button variant="outline" onClick={cancelUpdate}>
                   Cancel
                 </Button>
-                <Button type="submit">Update Price</Button>
+
+                <Toaster />
+                <Button type="submit" disabled={pricesRouter.isLoading}>
+                  {pricesRouter.isLoading ? "Updating..." : "Update Price"}
+                </Button>
               </CardFooter>
             </div>
           </form>

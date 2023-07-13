@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@builder.io/partytown": "^0.7.3",
+    "@clerk/nextjs": "^4.21.15",
     "@mdx-js/loader": "^2.2.1",
     "@mdx-js/react": "*",
     "@next-auth/prisma-adapter": "1.0.5",
@@ -26,6 +27,7 @@
     "@radix-ui/react-popover": "^1.0.6",
     "@radix-ui/react-select": "^1.2.2",
     "@radix-ui/react-slot": "^1.0.2",
+    "@radix-ui/react-toast": "^1.1.4",
     "@sanity/client": "^3.4.1",
     "@sanity/image-url": "^1.0.1",
     "@sendgrid/mail": "^7.7.0",
