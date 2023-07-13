@@ -88,3 +88,10 @@ model Messages {
   from    String?
   message String?
 }
+
+model Prices {
+  id    Int    @id @default(autoincrement())
+  price Int
+  crop  String
+  Date  String
+}

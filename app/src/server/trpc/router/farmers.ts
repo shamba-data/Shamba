@@ -158,5 +158,20 @@ export const farmersRouter = router({
             })
 
             return data;
+        }),
+
+    updatePrice: publicProcedure
+        .input(
+            z.object({
+                price: z.number(),
+                crop: z.string(),
+                Date: z.string(),
+            })
+        )
+        .mutation(async ({ input, ctx }) => {
+            const newPrice = await ctx.prisma.prices.create({
+                data: input,
+            });
+            return newPrice;
         })
 })
