@@ -31,7 +31,18 @@ import { format } from "date-fns";
 export default function Prices() {
   const [selectedCrop, setSelectedCrop] = React.useState<string>("");
   const [selectedPrice, setSelectedPrice] = React.useState<string>("");
+  const [selectedDate, setSelectedDate] = React.useState<string>("");
   const [date, setDate] = React.useState<Date>();
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(selectedCrop, selectedPrice, selectedDate);
+  };
+
+  const cancelUpdate = () => {
+    setSelectedCrop("");
+    setSelectedPrice("");
+    setSelectedDate("");
+  };
   return (
     <section className="flex h-screen flex-col items-center justify-center gap-5 bg-gray-100">
       <Popover>
@@ -44,7 +55,11 @@ export default function Prices() {
             )}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
-            {date ? format(date, "PPP") : <span>Pick a date</span>}
+            {date ? (
+              format(date, "PPP")
+            ) : (
+              <span>{selectedDate ? selectedDate : "Pick a date"}</span>
+            )}
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
@@ -52,14 +67,12 @@ export default function Prices() {
             mode="single"
             selected={date}
             onSelect={(e) => {
-              setDate;
-              console.log(e, "how are you");
+              setSelectedDate(e?.toLocaleString().split(",")[0] as string);
             }}
             initialFocus
           />
         </PopoverContent>
       </Popover>
-      {/* <h3>Some date {date}</h3> */}
       <Card className="w-[350px]">
         <CardHeader>
           <CardTitle>Record Prices</CardTitle>
@@ -68,7 +81,7 @@ export default function Prices() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="framework">Crop</Label>
@@ -77,7 +90,7 @@ export default function Prices() {
                     setSelectedCrop(value);
                   }}
                 >
-                  <SelectTrigger id="framework">
+                  <SelectTrigger id="crops">
                     <SelectValue placeholder="Crop Type" />
                   </SelectTrigger>
                   <SelectContent position="popper">
@@ -108,15 +121,25 @@ export default function Prices() {
 
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Prices</Label>
-                <Input id="name" placeholder="Crop" />
+                <Input
+                  id="name"
+                  placeholder="Price"
+                  type="number"
+                  onChange={(e) => {
+                    setSelectedPrice(e.target.value);
+                  }}
+                  value={selectedPrice}
+                />
               </div>
+              <CardFooter className="flex justify-between ">
+                <Button variant="outline" onClick={cancelUpdate}>
+                  Cancel
+                </Button>
+                <Button type="submit">Update Price</Button>
+              </CardFooter>
             </div>
           </form>
         </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button variant="outline">Cancel</Button>
-          <Button>Update Price</Button>
-        </CardFooter>
       </Card>
     </section>
   );

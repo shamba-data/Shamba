@@ -4,8 +4,6 @@ import { TRPCError } from "@trpc/server";
 import z from "zod";
 import axios from 'axios';
 
-
-
 const farmerInfoSelect = Prisma.validator<Prisma.FarmersSelect>()({
     id: true,
     fullName: true,
