@@ -15,7 +15,7 @@ const Footer = () => {
   });
   const [email, setEmail] = useState<string>("");
   return (
-    <footer className="mt-[100px] w-full bg-green font-montserrat">
+    <footer className="mt-[0px] w-full bg-green font-montserrat">
       <div className="md:flex md:flex-row-reverse md:items-start md:justify-center md:gap-[2rem]">
         <div className="mt-[30px] flex flex-col items-center justify-center">
           <h3 className="pt-5 text-xl font-medium tracking-wide text-white">

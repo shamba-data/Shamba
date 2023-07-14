@@ -30,6 +30,7 @@ import { trpc } from "../../utils/trpc";
 import { inferProcedureInput } from "@trpc/server";
 import { AppRouter } from "../../server/trpc/router/_app";
 import { Toaster } from "../../components/UI/Toaster";
+import { HeadSeo, Nav, Footer } from "../../components/landingPage";
 
 export default function Prices() {
   const [selectedCrop, setSelectedCrop] = React.useState<string>("");
@@ -95,66 +96,71 @@ export default function Prices() {
   };
 
   return (
-    <section className="flex h-screen flex-col items-center justify-center gap-5 bg-gray-100">
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button
-            variant={"outline"}
-            className={cn(
-              "w-[350px] justify-start text-left font-normal",
-              !date && "text-muted-foreground"
-            )}
-          >
-            <CalendarIcon className="mr-2 h-4 w-4" />
-            {date ? (
-              format(date, "PPP")
-            ) : (
-              <span>{selectedDate ? selectedDate : "Pick a date"}</span>
-            )}
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={(e) => {
-              setSelectedDate(e?.toLocaleString().split(",")[0] as string);
-            }}
-            initialFocus
-          />
-        </PopoverContent>
-      </Popover>
-      <Card className="w-[350px]">
-        <CardHeader>
-          <CardTitle>Record Prices</CardTitle>
-          <CardDescription>
-            Select the Crops and enter the prices in number only.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit}>
-            <div className="grid w-full items-center gap-4">
-              <MarketPicker setSelectedMarket={setSelectedMarket} />
-              <CropSelect setSelectedCrop={setSelectedCrop} />
+    <>
+      <HeadSeo title="Price Update" />
+      <Nav />
+      <main className="mt-[3rem] flex h-screen flex-col items-center justify-center gap-5  bg-gray-100">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant={"outline"}
+              className={cn(
+                "w-[350px] justify-start text-left font-normal",
+                !date && "text-muted-foreground"
+              )}
+            >
+              <CalendarIcon className="mr-2 h-4 w-4" />
+              {date ? (
+                format(date, "PPP")
+              ) : (
+                <span>{selectedDate ? selectedDate : "Pick a date"}</span>
+              )}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <Calendar
+              mode="single"
+              selected={date}
+              onSelect={(e) => {
+                setSelectedDate(e?.toLocaleString().split(",")[0] as string);
+              }}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
+        <Card className="w-[350px]">
+          <CardHeader>
+            <CardTitle>Record Prices</CardTitle>
+            <CardDescription>
+              Select the Crops and enter the prices in number only.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit}>
+              <div className="grid w-full items-center gap-4">
+                <MarketPicker setSelectedMarket={setSelectedMarket} />
+                <CropSelect setSelectedCrop={setSelectedCrop} />
 
-              <PricePicker
-                selectedPrice={selectedPrice}
-                setSelectedPrice={setSelectedPrice}
-              />
-              <CardFooter className="flex justify-between ">
-                <Button variant="outline" onClick={cancelUpdate}>
-                  Cancel
-                </Button>
+                <PricePicker
+                  selectedPrice={selectedPrice}
+                  setSelectedPrice={setSelectedPrice}
+                />
+                <CardFooter className="flex justify-between ">
+                  <Button variant="outline" onClick={cancelUpdate}>
+                    Cancel
+                  </Button>
 
-                <Toaster />
-                <Button type="submit" disabled={pricesRouter.isLoading}>
-                  {pricesRouter.isLoading ? "Updating..." : "Update Price"}
-                </Button>
-              </CardFooter>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
-    </section>
+                  <Toaster />
+                  <Button type="submit" disabled={pricesRouter.isLoading}>
+                    {pricesRouter.isLoading ? "Updating..." : "Update Price"}
+                  </Button>
+                </CardFooter>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
+      </main>
+      <Footer />
+    </>
   );
 }
