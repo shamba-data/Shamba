@@ -9,12 +9,11 @@ import "../styles/globals.css";
 import "../components/BookDemo/styles.scss";
 import { Analytics } from "@vercel/analytics/react";
 import { ClerkProvider } from "@clerk/nextjs";
-import Script from "next/script";
 
-// const montserrat = Montserrat({
-//   subsets: ["latin"],
-//   variable: "--font-montserrat",
-// });
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+});
 
 export type NextPageWithLayout<
   TProps = Record<string, unknown>,
@@ -42,8 +41,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     // <ClerkProvider {...pageProps}>
     <SessionProvider session={session}>
-      {/* <main className={`${montserrat.variable} font-montserrat`}> */}
-      <main className={`font-montserrat`}>
+      <main className={`${montserrat.variable} font-montserrat`}>
+        {/* <main className={`font-montserrat`}> */}
         <Component {...pageProps} />
         <Analytics />
       </main>
