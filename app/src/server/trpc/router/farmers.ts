@@ -20,7 +20,6 @@ const preSignupInfoSelect = Prisma.validator<Prisma.PreSignupsSelect>()({
 
 })
 
-
 export const farmersRouter = router({
     add: publicProcedure
         .input(
@@ -166,6 +165,11 @@ export const farmersRouter = router({
                 price: z.number(),
                 crop: z.string(),
                 Date: z.string(),
+                market: z.enum([
+                    "Ndola",
+                    "Kasumbalesa",
+                    "Lusaka",
+                    "Kitwe"])
             })
         )
         .mutation(async ({ input, ctx }) => {

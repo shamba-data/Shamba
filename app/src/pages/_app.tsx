@@ -27,29 +27,29 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-const MyApp = ({ Component, pageProps }) => {
-  return (
-    // <ClerkProvider {...pageProps}>
-    <Component {...pageProps} />
-    // {/* </ClerkProvider> */}
-  );
-};
-
-// const MyApp: AppType<{ session: Session | null }> = ({
-//   Component,
-//   pageProps: { session, ...pageProps },
-// }) => {
+// const MyApp = ({ Component, pageProps }) => {
 //   return (
-//     <ClerkProvider {...pageProps}>
-//       {/* <SessionProvider session={session}> */}
-//       {/* <main className={`${montserrat.variable} font-montserrat`}> */}
-//       <main className={`font-montserrat`}>
-//         <Component {...pageProps} />
-//         <Analytics />
-//       </main>
-//       {/* </SessionProvider> */}
-//     </ClerkProvider>
+//     // <ClerkProvider {...pageProps}>
+//     <Component {...pageProps} />
+//     // {/* </ClerkProvider> */}
 //   );
 // };
+
+const MyApp: AppType<{ session: Session | null }> = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}) => {
+  return (
+    // <ClerkProvider {...pageProps}>
+    <SessionProvider session={session}>
+      {/* <main className={`${montserrat.variable} font-montserrat`}> */}
+      <main className={`font-montserrat`}>
+        <Component {...pageProps} />
+        <Analytics />
+      </main>
+    </SessionProvider>
+    // </ClerkProvider>
+  );
+};
 
 export default trpc.withTRPC(MyApp);

@@ -14,7 +14,7 @@ import { Calendar } from "../../components/UI/calendar";
 import {
   CropSelect,
   PricePicker,
-  SuccessAlert,
+  MarketPicker,
 } from "../../components/priceUpdates";
 import { ToastAction } from "../../components/UI/Toast";
 import {
@@ -36,6 +36,9 @@ export default function Prices() {
   const [selectedPrice, setSelectedPrice] = React.useState<number>();
   const [selectedDate, setSelectedDate] = React.useState<string>("");
   const [date, setDate] = React.useState<Date>();
+  const [selectedMarket, setSelectedMarket] = React.useState<
+    "Ndola" | "Kasumbalesa" | "Lusaka" | "Kitwe"
+  >("Kasumbalesa");
   const { toast } = useToast();
 
   const pricesRouter = trpc.farmer.updatePrice.useMutation({
@@ -70,6 +73,7 @@ export default function Prices() {
       crop: selectedCrop,
       price: selectedPrice as unknown as number,
       Date: selectedDate,
+      market: selectedMarket,
     };
     if (!input.price || !input.crop || !input.Date) {
       toast({
@@ -130,6 +134,7 @@ export default function Prices() {
         <CardContent>
           <form onSubmit={handleSubmit}>
             <div className="grid w-full items-center gap-4">
+              <MarketPicker setSelectedMarket={setSelectedMarket} />
               <CropSelect setSelectedCrop={setSelectedCrop} />
 
               <PricePicker

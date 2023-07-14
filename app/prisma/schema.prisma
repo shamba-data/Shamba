@@ -90,8 +90,9 @@ model Messages {
 }
 
 model Prices {
-  id    Int    @id @default(autoincrement())
-  price Int
-  crop  String
-  Date  String
+  id     Int    @id @default(autoincrement())
+  price  Int
+  crop   String
+  Date   String
+  market String
 }
