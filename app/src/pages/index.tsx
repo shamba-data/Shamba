@@ -8,7 +8,7 @@ const Index = () => {
       <HeadSeo title="Shamba Data" />
       <Nav />
 
-      <main className="container mt-[4rem] flex flex-col  items-center justify-center font-montserrat md:max-w-[200ch]">
+      <main className="container mt-[4rem] flex flex-col  items-center justify-center md:max-w-[200ch]">
         <section className="pt-[100px] text-center md:w-[700px] lg:w-[900px]">
           <div className="mx-[1rem] flex justify-between">
             <div className="relative h-[100px] w-[100px] lg:h-[130px] lg:w-[130px]">
@@ -122,8 +122,8 @@ const Index = () => {
         <section className="mt-[91px] mb-[100px]">
           <Value />
         </section>
-        <Footer />
       </main>
+      <Footer />
     </>
   );
 };

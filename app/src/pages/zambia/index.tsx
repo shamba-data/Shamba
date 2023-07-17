@@ -17,7 +17,7 @@ import Link from "next/link";
 // function to add a month to a date for the expiresAt field
 function addMonth(dateObj: Date, num: number) {
   dateObj.setMonth(dateObj.getMonth() + num);
-  return dateObj.toISOString().split("T")[0].replaceAll("-", "/");
+  return dateObj?.toISOString().split("T")[0].replaceAll("-", "/");
 }
 
 const Zambia = () => {
@@ -84,7 +84,7 @@ const Zambia = () => {
     <>
       <HeadSeo title="Market Information" />
       <Nav />
-      <main className="container mt-[5rem] flex flex-col items-center  justify-center font-montserrat md:max-w-[200ch]">
+      <main className="container mt-[5rem] flex flex-col items-center  justify-center md:max-w-[200ch]">
         <>
           <HeroSection />
 
