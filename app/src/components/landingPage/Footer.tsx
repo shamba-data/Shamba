@@ -100,11 +100,17 @@ const Footer = () => {
             </h3>
 
             <ul className="flex flex-col space-y-3 text-[#B5C9B2]">
-              <Link href="https://drive.google.com/file/d/1jtE0kkYDu6c4t0pUQC_s6IEBk0nrT_rY/view?usp=sharing">
+              <Link
+                href="https://drive.google.com/file/d/1jtE0kkYDu6c4t0pUQC_s6IEBk0nrT_rY/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <li className="mt-5 cursor-pointer">Privacy Policy</li>
               </Link>
 
               <Link
+                target="_blank"
+                rel="noopener noreferrer"
                 href="https://drive.google.com/file/d/1jtE0kkYDu6c4t0pUQC_s6IEBk0nrT_rY/view?usp=sharing"
                 replace
               >

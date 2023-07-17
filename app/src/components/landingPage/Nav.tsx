@@ -71,7 +71,7 @@ const Nav = () => {
                 router.pathname === "/zambia" ? activeRoute : normalRoute
               }
             >
-              Market Information
+              Zambia
             </Link>
           </li>
 
@@ -128,7 +128,7 @@ const Nav = () => {
                   router.pathname === "/zambia" ? activeRoute : normalRoute
                 }
               >
-                Market Information
+                Zambia
               </Link>
             </li>
             <li>

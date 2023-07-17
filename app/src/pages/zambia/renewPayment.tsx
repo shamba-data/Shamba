@@ -1,8 +1,8 @@
 import { type ChangeEvent, useState, useEffect } from "react";
-import { Footer, HeadSeo, Nav } from "../../components/landingPage";
 import BlurImage from "../../components/UI/BlurImage";
 import { trpc as api } from "../../utils/trpc";
 import Link from "next/link";
+import Layout from "../../components/Layout";
 
 let farmers: { phoneNumber: string; fullName: string }[] = [];
 
@@ -56,10 +56,8 @@ const Success = () => {
   }, [debounceQuery]);
 
   return (
-    <>
-      <HeadSeo title="Renew Payment" />
-      <Nav />
-      <main className="mt-[6rem] font-montserrat md:mt-[12rem] md:flex md:items-center md:justify-center">
+    <Layout pageTitle="Renew Payment">
+      <main className="mt-[6rem]  md:mt-[12rem] md:flex md:items-center md:justify-center">
         <>
           <section className="flex flex-col items-center md:flex-row  md:justify-center md:gap-[3rem] xl:gap-[6rem]">
             <div className="flex flex-col items-center md:w-[450px] md:items-start xl:w-[550px]">
@@ -129,8 +127,7 @@ const Success = () => {
           </section>
         </>
       </main>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

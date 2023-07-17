@@ -1,11 +1,4 @@
-import {
-  HeroSection,
-  Nav,
-  Footer,
-  HeadSeo,
-  About,
-  MarketCards,
-} from "../../components/landingPage";
+import { HeroSection, About, MarketCards } from "../../components/landingPage";
 import Image from "next/legacy/image";
 import { trpc } from "../../utils/trpc";
 import { useState, type ChangeEvent } from "react";
@@ -13,6 +6,7 @@ import { inferProcedureInput } from "@trpc/server";
 import { AppRouter } from "../../server/trpc/router/_app";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Layout from "../../components/Layout";
 
 // function to add a month to a date for the expiresAt field
 function addMonth(dateObj: Date, num: number) {
@@ -78,12 +72,10 @@ const Zambia = () => {
   const inputFieldClasses =
     "w-[350px] rounded-md border-[1px] border-slate-300 bg-transparent py-2 px-2 text-gray-900 outline-none focus:outline-none mt-2 focus:ring-green focus:ring-2";
   const TOSclass =
-    "w-4 h-4 text-gray-900 bg-gray-100 border-slate-300 rounded focus:ring-gold focus:ring-2 ";
+    "w-4 h-4 text-gray-900 bg-gray-100 border-slate-300 rounded accent-green ";
 
   return (
-    <>
-      <HeadSeo title="Market Information" />
-      <Nav />
+    <Layout pageTitle="Zambia">
       <main className="container mt-[5rem] flex flex-col items-center  justify-center md:max-w-[200ch]">
         <>
           <HeroSection />
@@ -104,14 +96,14 @@ const Zambia = () => {
               will notify you once we launch
             </p>
 
-            {/* <p className="mt-5 text-lg">
-            Renewing your Payment?
-            <Link href="/zambia/renewPayment">
-              <span className="cursor-pointer font-medium text-gold">
-                Renew Here
-              </span>
-            </Link>
-          </p> */}
+            <p className="mt-5  text-lg">
+              Renewing your Payment?
+              <Link href="/zambia/renewPayment">
+                <span className="cursor-pointer pl-3 font-medium text-gold">
+                  Renew Here
+                </span>
+              </Link>
+            </p>
           </div>
         </>
 
@@ -120,7 +112,6 @@ const Zambia = () => {
             <div className="relative hidden h-[400px] w-[300px] md:block">
               <Image src="/bottom.webp" alt="Lady" layout="fill" />
             </div>
-            {/* to bring back the old one --> landingPage/PaymentForm */}
             <form
               className="flex flex-col justify-center space-y-5 pl-5 md:mt-[2rem] md:ml-[7rem]"
               onSubmit={sendMobileMoney}
@@ -199,8 +190,7 @@ const Zambia = () => {
           </div>
         </section>
       </main>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

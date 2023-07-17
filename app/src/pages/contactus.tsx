@@ -4,6 +4,7 @@ import { BsTelephone, BsLinkedin } from "react-icons/bs";
 import { HiOutlineMail } from "react-icons/hi";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { GrFacebook } from "react-icons/gr";
+import Layout from "../components/Layout";
 
 const Contact = () => {
   const labelClasses = "font-medium text-lg text-green tracking-wide";
@@ -12,9 +13,7 @@ const Contact = () => {
   const divClasses = "flex flex-col";
 
   return (
-    <>
-      <HeadSeo title="Contact Us" />
-      <Nav />
+    <Layout pageTitle="Contact Us">
       <main className="mt-[5rem] md:mt-[7rem] md:flex md:items-center md:justify-center">
         <section className="mt-[2rem] overflow-hidden pl-5 lg:flex lg:gap-[3rem] xl:mt-[4rem] xl:gap-[6rem]">
           <div className=" flex max-h-[56rem] w-full max-w-4xl flex-col rounded-xl p-8 lg:flex-row">
@@ -117,8 +116,7 @@ const Contact = () => {
           </div>
         </section>
       </main>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 
