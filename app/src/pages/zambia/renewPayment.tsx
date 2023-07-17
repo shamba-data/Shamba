@@ -3,6 +3,7 @@ import BlurImage from "../../components/UI/BlurImage";
 import { trpc as api } from "../../utils/trpc";
 import Link from "next/link";
 import Layout from "../../components/Layout";
+import EditAccount from "../../components/priceUpdates/EditAccount";
 
 let farmers: { phoneNumber: string; fullName: string }[] = [];
 
@@ -62,16 +63,17 @@ const Success = () => {
           <section className="flex flex-col items-center md:flex-row  md:justify-center md:gap-[3rem] xl:gap-[6rem]">
             <div className="flex flex-col items-center md:w-[450px] md:items-start xl:w-[550px]">
               <h3 className="text-center text-2xl md:text-4xl">
-                Renew Your{" "}
+                Edit Your{" "}
                 <span className="font-medium text-gold">Shamba Data</span>{" "}
                 subscription
               </h3>
+              <EditAccount />
 
-              <p className="mt-5 text-center tracking-wide text-gray-900 md:text-left md:text-xl md:tracking-wider">
+              {/* <p className="mt-5 text-center tracking-wide text-gray-900 md:text-left md:text-xl md:tracking-wider">
                 Please Enter your Phone Number below
-              </p>
+              </p> */}
 
-              <div className="mt-5 flex flex-col md:items-center md:justify-between md:space-y-5">
+              {/* <div className="mt-5 flex flex-col md:items-center md:justify-between md:space-y-5">
                 <label>Phone Number</label>
                 <input
                   type="text"
@@ -115,7 +117,7 @@ const Success = () => {
                     Proceed to Payment
                   </button>
                 </Link>
-              </div>
+              </div> */}
             </div>
             <div className="relative mt-5 h-[500px] w-[350px] md:mt-0 md:w-[490px]">
               <BlurImage
