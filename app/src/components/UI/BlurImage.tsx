@@ -2,7 +2,7 @@
 import Image from "next/legacy/image";
 import { useState } from "react";
 
-function cn(...classes) {
+function cn(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 

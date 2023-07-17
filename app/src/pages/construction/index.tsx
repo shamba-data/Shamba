@@ -1,10 +1,10 @@
-import { Nav, Footer } from "../../components/landingPage";
 import BlurImage from "../../components/UI/BlurImage";
 import Link from "next/link";
+import Layout from "../../components/Layout";
+
 export default function Index() {
   return (
-    <>
-      <Nav />
+    <Layout pageTitle="Construction">
       <section className="flex min-h-screen flex-col items-center justify-center font-montserrat">
         <div className="relative h-[200px] w-[300px]">
           <BlurImage
@@ -22,7 +22,6 @@ export default function Index() {
           </button>
         </Link>
       </section>
-      <Footer />
-    </>
+    </Layout>
   );
 }

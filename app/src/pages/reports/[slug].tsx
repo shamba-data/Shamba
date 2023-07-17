@@ -6,8 +6,8 @@ import { usePreviewSubscription } from "../../utils/sanity";
 import CategoryLabel from "../../components/blog/category";
 import { getAllPostsWithSlug, getPostAndMorePosts } from "../../lib/api";
 import GetImage from "../../utils/getImage";
-import { Footer, Nav } from "../../components/landingPage";
-
+import Layout from "../../components/Layout";
+import React, { ClassAttributes, HTMLAttributes } from "react";
 interface PostProps {
   postdata: [
     _createdAt: string,
@@ -42,9 +42,7 @@ const Post: NextPage = (props: any) => {
   const imageProps = postdata?.mainImage ? GetImage(postdata?.mainImage) : null;
 
   return (
-    <>
-      <Nav />
-
+    <Layout pageTitle="Report">
       <main className="container mx-auto mt-[3rem] max-w-xs  py-5 font-montserrat  sm:mt-[7rem] sm:max-w-screen-md ">
         <div>
           <h3 className="text-lg font-medium">
@@ -61,13 +59,17 @@ const Post: NextPage = (props: any) => {
               <PortableText
                 content={post?.body}
                 serializers={{
-                  strong: (props) => (
+                  strong: (
+                    props: JSX.IntrinsicAttributes &
+                      ClassAttributes<HTMLHeadingElement> &
+                      HTMLAttributes<HTMLHeadingElement>
+                  ) => (
                     <h3
                       className="mt-[3rem] text-lg font-medium text-gold"
                       {...props}
                     />
                   ),
-                  li: ({ children }) => (
+                  li: ({ children }: any) => (
                     <li className="ml-5 list-disc">{children}</li>
                   ),
                 }}
@@ -76,8 +78,7 @@ const Post: NextPage = (props: any) => {
           </article>
         </div>
       </main>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

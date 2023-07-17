@@ -4,7 +4,6 @@ import { Prisma } from "@prisma/client";
 
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-    // console.log(req.body, "hey booo")
     if (req.method === "GET") {
         try {
             console.log("GET: Someone is pinging me");

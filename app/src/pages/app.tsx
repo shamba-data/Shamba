@@ -36,7 +36,6 @@ const Home = ({ postdata, siteconfig, preview }: PostProps) => {
     initialData: siteconfig,
     enabled: preview || router.query.preview !== undefined,
   });
-
   const [searchedCompany, setSearchedCompany] = useState("");
 
   return (
