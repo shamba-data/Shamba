@@ -1,14 +1,14 @@
-//use-client
+"use client";
 import { Nav, Footer, HeadSeo } from "../components/landingPage";
 import Head from "next/head";
 
 export default function BookDemo() {
-  //   useEffect(() => {
-  //     window.Calendly.initInlineWidget({
-  //       url: "https://calendly.com/my-calendar/30min?month=2022-05",
-  //       parentElement: document.getElementById("calendly-inline-widget"),
-  //     });
-  //   }, []);
+  // useEffect(() => {
+  //   window.Calendly.initInlineWidget({
+  //     url: "https://calendly.com/my-calendar/30min?month=2022-05",
+  //     parentElement: document.getElementById("calendly-inline-widget"),
+  //   });
+  // }, []);
   return (
     <>
       <Nav />

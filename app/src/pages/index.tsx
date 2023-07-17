@@ -1,6 +1,7 @@
 import { Value, Nav, Footer, HeadSeo } from "../components/landingPage";
 import Image from "next/legacy/image";
 import Link from "next/link";
+import { Suspense } from "react";
 
 const Index = () => {
   return (

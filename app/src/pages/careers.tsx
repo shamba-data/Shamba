@@ -1,11 +1,10 @@
-import { ProfileImage, Nav, Footer, HeadSeo } from "../components/landingPage";
+import { ProfileImage } from "../components/landingPage";
+import Layout from "../components/Layout";
 
 const careers = () => {
   return (
-    <>
-      <HeadSeo title="Careers" />
-      <Nav />
-      <main className="container mt-[3rem] flex  flex-col items-center justify-center font-montserrat md:max-w-[200ch]">
+    <Layout pageTitle="Careers">
+      <main className="container mt-[3rem] flex  flex-col items-center justify-center md:max-w-[200ch]">
         <div className="mt-[6rem] text-center">
           <h3 className="text-2xl font-medium md:text-3xl">
             Meet our team of{" "}
@@ -57,9 +56,8 @@ const careers = () => {
           Currently we don&apos;t have any openings. Keep in touch with us in
           our social media pages in case anythings comes up.
         </p>
-        <Footer />
       </main>
-    </>
+    </Layout>
   );
 };
 
