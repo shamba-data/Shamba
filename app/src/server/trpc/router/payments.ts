@@ -77,6 +77,7 @@ export const payments = router({
                 const tokenXml = await getToken();
                 //@ts-ignore
                 const parsedXml = convert.xml2js(tokenXml, { compact: true, spaces: 4 });
+                //@ts-ignore
                 return parsedXml['API3G']['TransToken']['_text'];
             } catch (error) {
                 console.log(error)
@@ -91,7 +92,10 @@ export const payments = router({
         .input(
             z.object({
                 transactionToken: z.string(),
-                phoneNumber: z.string(),
+                phoneNumber: z.string().regex(
+                    /^\260\d{9}$/,
+                    'Invalid phone number',
+                )
             })
         )
         .mutation(async ({ input, ctx }) => {

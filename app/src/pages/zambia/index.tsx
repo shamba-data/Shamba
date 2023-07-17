@@ -7,24 +7,46 @@ import { AppRouter } from "../../server/trpc/router/_app";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Layout from "../../components/Layout";
+import { useToast } from "../../hooks/useToast";
+import { ToastAction } from "../../components/UI/Toast";
+import { Toaster } from "../../components/UI/Toaster";
 
 // function to add a month to a date for the expiresAt field
+// function addMonth(dateObj: Date, num: number) {
+//   dateObj.setMonth(dateObj.getMonth() + num);
+//   return dateObj?.toISOString()?.split("T")[0].replaceAll("-", "/");
+// }
 function addMonth(dateObj: Date, num: number) {
   dateObj.setMonth(dateObj.getMonth() + num);
-  return dateObj?.toISOString().split("T")[0].replaceAll("-", "/");
+  const dateString = dateObj?.toISOString()?.split("T")[0];
+  if (dateString) {
+    return dateString.replace(/-/g, "/");
+  }
+  return "";
 }
 
 const Zambia = () => {
+  const { toast } = useToast();
   const newFormStates = {
     fullName: "",
     whatsappNumber: "",
   };
   const [formData, setFormData] = useState(newFormStates);
-  const preSignupsRouter = trpc.farmer.preSignups.useMutation();
+  // const preSignupsRouter = trpc.farmer.preSignups.useMutation();
+  const farmersRouter = trpc.farmer.add.useMutation({});
   const tokenXml = trpc.payments.getToken.useQuery().data;
   const paymentRouter = trpc.payments.sendMobileToken.useMutation({
     onSuccess: () => {
       router.push("/zambia/success");
+    },
+    onError: (error) => {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: ` ${error.message}`,
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+        duration: 1500,
+      });
     },
   });
 
@@ -38,7 +60,13 @@ const Zambia = () => {
       formData.whatsappNumber.length !== 12 ||
       !formData.whatsappNumber.startsWith("260")
     ) {
-      alert("Please enter a whatsapp number in form of 260XXXXXXXXX");
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "Please enter a whatsapp number in form of 260XXXXXXXXX",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+        duration: 2500,
+      });
       return;
     }
     type Input = inferProcedureInput<AppRouter["payments"]["sendMobileToken"]>;
@@ -46,14 +74,14 @@ const Zambia = () => {
       phoneNumber: formData.whatsappNumber,
       transactionToken: tokenXml,
     };
-    type presignupInput = inferProcedureInput<AppRouter["farmer"]["add"]>;
+    type newFarmerInput = inferProcedureInput<AppRouter["farmer"]["add"]>;
     // some fancy ass stuff for the dates
     const createdAtDate = new Date()
-      .toISOString()
-      .split("T")[0]
-      .replaceAll("-", "/");
+      ?.toISOString()
+      ?.split("T")[0]
+      ?.replaceAll("-", "/") as string;
     const expiresAtDate = addMonth(new Date(), 1);
-    const presignupInput: presignupInput = {
+    const newFarmerInput: newFarmerInput = {
       fullName: formData.fullName,
       phoneNumber: formData.whatsappNumber,
       expiresAt: expiresAtDate,
@@ -61,7 +89,7 @@ const Zambia = () => {
     };
     try {
       paymentRouter.mutateAsync(input);
-      preSignupsRouter.mutateAsync(presignupInput);
+      farmersRouter.mutateAsync(newFarmerInput);
       setFormData(newFormStates);
     } catch (cause) {
       console.error({ cause }, "Failed to add the new Users");
@@ -76,10 +104,10 @@ const Zambia = () => {
 
   return (
     <Layout pageTitle="Zambia">
+      <Toaster />
       <main className="container mt-[5rem] flex flex-col items-center  justify-center md:max-w-[200ch]">
         <>
           <HeroSection />
-
           <About />
           <MarketCards />
 
@@ -117,7 +145,15 @@ const Zambia = () => {
               onSubmit={sendMobileMoney}
             >
               <div className="flex flex-col ">
-                <label>Full Name</label>
+                <label className="relative">
+                  Full Name
+                  <sup className="text-medium absolute top-0 text-lg text-red-600">
+                    *
+                  </sup>
+                  <sup className="text-medium absolute top-0 text-lg text-red-600">
+                    *
+                  </sup>
+                </label>
                 <input
                   type="text"
                   required
@@ -130,13 +166,19 @@ const Zambia = () => {
                     });
                   }}
                   className={inputFieldClasses}
+                  placeholder="Hariet Ngulube"
                 />
               </div>
 
               <div className="mt-5 flex flex-col">
-                <label>Whatsapp Number</label>
+                <label className="relative">
+                  Whatsapp Number{" "}
+                  <sup className="text-medium absolute top-0 text-lg text-red-600">
+                    *
+                  </sup>
+                </label>
                 <input
-                  type="text"
+                  type="number"
                   required
                   id="whatsappNumber"
                   value={formData.whatsappNumber}
@@ -146,6 +188,9 @@ const Zambia = () => {
                       whatsappNumber: e.target.value,
                     });
                   }}
+                  pattern="^\260\d{9}$"
+                  placeholder="260XXXXXXXXX"
+                  inputMode="numeric"
                   className={inputFieldClasses}
                 />
               </div>
@@ -173,18 +218,18 @@ const Zambia = () => {
                 </label>
               </div>
 
-              {preSignupsRouter.error && (
+              {farmersRouter.error && (
                 <div className="text-sm text-red-500">
                   <h3>Something went wrong, try again</h3>
                 </div>
               )}
 
               <button
-                disabled={preSignupsRouter.isLoading}
+                disabled={farmersRouter.isLoading}
                 type="submit"
                 className="mt-7 w-[250px] cursor-pointer items-start rounded-md bg-green px-4 py-2 text-lg font-medium text-white"
               >
-                {preSignupsRouter.isLoading ? "Loading..." : " Sign Up"}
+                {farmersRouter.isLoading ? "Loading..." : " Sign Up"}
               </button>
             </form>
           </div>
