@@ -1,7 +1,11 @@
 import Link from "next/link";
 import { cx } from "../PostList";
+import { Key } from "react";
 
-function Label(props) {
+function Label(props: {
+  children: React.ReactNode;
+  color: "green" | "blue" | "orange" | "purple" | "pink";
+}) {
   const color = {
     green: "text-emerald-700",
     blue: "text-blue-600",
@@ -13,7 +17,7 @@ function Label(props) {
     <span
       className={cx(
         "mt-5 space-x-5 text-xs font-medium uppercase tracking-wider",
-        color[props.color] || color.pink
+        color[props.color] || color.green
       )}
     >
       {props.children}
@@ -21,11 +25,15 @@ function Label(props) {
   );
 }
 
-export default function CategoryLabel({ categories }) {
+export default function CategoryLabel({ categories }: any) {
+  type Category = {
+    title: "Tea" | "Coffee" | "Horticulture" | "Floriculture";
+    color: "green" | "blue" | "orange" | "purple" | "pink";
+  };
   return (
     <div className="flex gap-3">
       {categories?.length &&
-        categories.slice(0).map((category, index) => (
+        categories.slice(0).map((category: Category, index: Key) => (
           <Link href="#" key={index}>
             <Label color={category.color}>{category.title}</Label>
           </Link>

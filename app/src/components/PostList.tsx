@@ -4,15 +4,25 @@ import CategoryLabel from "./blog/category";
 import { parseISO, format } from "date-fns";
 import BlurImage from "./UI/BlurImage";
 
-export const cx = (...classNames) => classNames.filter(Boolean).join(" ");
+export const cx = (...classNames: string[]) =>
+  classNames.filter(Boolean).join(" ");
 
-export default function PostList({ post, aspect, preloadImage }) {
+interface PostListProps {
+  post: any;
+  aspect: "landscape" | "square";
+  preloadImage: boolean;
+}
+export default function PostList({
+  post,
+  aspect,
+  preloadImage,
+}: PostListProps) {
   const imageProps = post?.mainImage ? GetImage(post.mainImage) : null;
 
   return (
     <>
       <Link href="/reports/[slug]" as={`/reports/${post.slug.current}`}>
-        <div className="group w-[350px] cursor-pointer rounded-md shadow-md  ">
+        <div className="group min-h-[430px] w-[350px] cursor-pointer rounded-md shadow-md  ">
           <div
             className={cx(
               "relative h-[200px] w-[350px] overflow-hidden rounded-md bg-gray-100 transition-all hover:scale-105",

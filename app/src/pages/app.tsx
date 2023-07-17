@@ -1,14 +1,10 @@
-import { type NextPage } from "next";
-import Head from "next/head";
 import { useRouter } from "next/router";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { trpc } from "../utils/trpc";
 import { GetStaticProps } from "next";
 import PostList from "../components/PostList";
 import { getClient, usePreviewSubscription } from "../utils/sanity";
 import { postquery, configQuery, HomeQuery } from "../utils/groq";
 import { ChangeEvent, useState } from "react";
-import { Nav, Footer } from "../components/landingPage";
+import Layout from "../components/Layout";
 
 export interface PostProps {
   postdata: [
@@ -28,7 +24,7 @@ export interface PostProps {
   preview: any;
 }
 
-const Home: NextPage = ({ postdata, siteconfig, preview }: PostProps) => {
+const Home = ({ postdata, siteconfig, preview }: PostProps) => {
   const router = useRouter();
 
   const { data: posts } = usePreviewSubscription(postquery, {
@@ -41,23 +37,11 @@ const Home: NextPage = ({ postdata, siteconfig, preview }: PostProps) => {
     enabled: preview || router.query.preview !== undefined,
   });
 
-  const { data: sessionData, status } = useSession();
-
   const [searchedCompany, setSearchedCompany] = useState("");
 
   return (
-    <>
-      <Head>
-        <title>Shamba Data</title>
-        <meta
-          name="description"
-          content="Import/Export Information of Agriculture Products"
-        />
-      </Head>
-
-      {/* {sessionData ? ( */}
-      <Nav />
-      <main className="max-w-screen container mx-auto mt-[5rem] px-8 py-5 font-montserrat lg:py-8 xl:max-w-screen-xl xl:px-5 ">
+    <Layout pageTitle="Import Info">
+      <main className="max-w-screen container mx-auto mt-[5rem] px-8 py-5  lg:py-8 xl:max-w-screen-xl xl:px-5 ">
         <nav className="">
           <h3 className="text-green-400 text-lg font-medium">Shamba Data</h3>
         </nav>
@@ -128,39 +112,11 @@ const Home: NextPage = ({ postdata, siteconfig, preview }: PostProps) => {
           </div>
         </section>
       </main>
-      <Footer />
-      {/* ) : (
-        <Auth />
-      )} */}
-    </>
+    </Layout>
   );
 };
 
 export default Home;
-
-const AuthShowcase: React.FC = () => {
-  const { data: sessionData } = useSession();
-
-  const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
-
-  return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <p className="text-center text-2xl text-white">
-        {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-        {secretMessage && <span> - {secretMessage}</span>}
-      </p>
-      <button
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
-        onClick={sessionData ? () => signOut() : () => signIn()}
-      >
-        {sessionData ? "Sign out" : "Sign in"}
-      </button>
-    </div>
-  );
-};
 
 export const getStaticProps: GetStaticProps = async ({
   params,
