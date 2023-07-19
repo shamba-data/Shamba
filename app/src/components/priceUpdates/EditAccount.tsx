@@ -10,10 +10,14 @@ import {
 import { Input } from "../UI/Input";
 import { Label } from "../UI/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../UI/Tabs";
+import { trpc } from "../../utils/trpc";
+import { Toaster } from "../UI/Toaster";
+import { useToast } from "../../hooks/useToast";
 
 export default function EditAccount() {
   return (
     <Tabs defaultValue="account" className="mt-10 w-[400px]">
+      <Toaster />
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="account">Renew Subscription</TabsTrigger>
         <TabsTrigger value="password">Delete Account</TabsTrigger>

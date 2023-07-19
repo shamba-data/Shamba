@@ -7,7 +7,7 @@ import convert from 'xml-js';
 
 async function getToken() {
     let data = `
-                            <?xml version="1.0" encoding="utf-8"?>
+             <?xml version="1.0" encoding="utf-8"?>
                 <API3G>
                 <CompanyToken>0B6758B3-BB98-438A-A666-7BF2F9CA6B31</CompanyToken>
                 <Request>createToken</Request>

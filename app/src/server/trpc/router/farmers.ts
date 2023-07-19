@@ -177,5 +177,20 @@ export const farmersRouter = router({
                 data: input,
             });
             return newPrice;
+        }),
+    deleteFarmer: publicProcedure
+        .input(
+            z.object({
+                phoneNumber: z.string(),
+            })
+        )
+        .mutation(async ({ input, ctx }) => {
+            const deletedFarmer = await ctx.prisma.farmers.delete({
+                where: {
+                    phoneNumber: input.phoneNumber,
+                },
+                select: farmerInfoSelect,
+            });
+            return deletedFarmer;
         })
 })
