@@ -8,8 +8,8 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start",
-    "updatePrisma": "npx prisma generate && npx prisma db push && next dev",
-    "studio": "npx prisma studio",
+    "updatePrisma": "pnpm npx prisma generate && pnpm npx prisma db push",
+    "studio": "pnpm npx prisma studio",
     "open": "code . && pnpm run dev"
   },
   "dependencies": {
