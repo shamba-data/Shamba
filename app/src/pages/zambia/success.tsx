@@ -1,13 +1,11 @@
-import { Footer, HeadSeo, Nav } from "../../components/landingPage";
 import BlurImage from "../../components/UI/BlurImage";
+import Layout from "../../components/Layout";
 
 // This page when the user signs up, they will get redirected after succesful signing Up.
 const Success = () => {
   return (
-    <>
-      <HeadSeo title="Success" />
-      <Nav />
-      <main className="mt-[6rem] font-montserrat md:mt-[12rem] md:flex md:items-center md:justify-center">
+    <Layout pageTitle="Success">
+      <main className="mt-[6rem] md:mt-[12rem] md:flex md:items-center md:justify-center">
         <>
           <section className="flex flex-col items-center md:flex-row  md:justify-center md:gap-[3rem] xl:gap-[6rem]">
             <div className="flex flex-col items-center md:w-[450px] md:items-start xl:w-[550px]">
@@ -23,9 +21,8 @@ const Success = () => {
                 <span className="text-lg font-medium text-gold">
                   Shamba Data
                 </span>{" "}
-                {/* Services. You will now receive market updates on your Whatsapp
-                Inbox every Morning !!. */}
-                Services. We will Notify you once we Launch.
+                Services. You will now receive market updates on your Whatsapp
+                Inbox every Morning !!.
               </article>
             </div>
             <div className="relative mt-5 h-[500px] w-[350px] md:mt-0 md:w-[490px]">
@@ -38,8 +35,7 @@ const Success = () => {
           </section>
         </>
       </main>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 
