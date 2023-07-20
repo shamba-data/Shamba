@@ -85,6 +85,7 @@ const RegistrationForm = () => {
       paymentRouter.mutateAsync(input);
       farmersRouter.mutateAsync(newFarmerInput);
     } catch (cause) {
+      console.log(cause);
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",

@@ -26,7 +26,7 @@ export const farmersRouter = router({
             z.object({
                 id: z.string().cuid().optional(),
                 fullName: z.string(),
-                phoneNumber: z.string(),
+                phoneNumber: z.string().regex(/^260\d{9}$/),
                 subscribed: z.boolean().optional(),
                 expiresAt: z.string(),
                 createdAt: z.string(),

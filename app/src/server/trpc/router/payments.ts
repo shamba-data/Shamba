@@ -93,8 +93,7 @@ export const payments = router({
             z.object({
                 transactionToken: z.string(),
                 phoneNumber: z.string().regex(
-                    /^\260\d{9}$/,
-                    'Invalid phone number',
+                    /^260\d{9}$/
                 )
             })
         )
