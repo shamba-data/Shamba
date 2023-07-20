@@ -1,18 +1,21 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { inferProcedureInput } from "@trpc/server";
 import { AppRouter } from "../../server/trpc/router/_app";
-import { useState, type ChangeEvent } from "react";
 import { trpc } from "../../utils/trpc";
 import { ToastAction } from "../../components/UI/Toast";
 import { useToast } from "../../hooks/useToast";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { Label } from "../UI/label";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-type formInputs = {
-  fullName: string;
-  whatsappNumber: string;
-};
+const schema = z.object({
+  fullName: z.string().nonempty(),
+  whatsappNumber: z.string().regex(/^260\d{9}$/),
+});
+
+type ValidationSchema = z.infer<typeof schema>;
 
 // function to add a month to a date for the expiresAt field
 
@@ -39,14 +42,8 @@ const RegistrationForm = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<formInputs>();
+  } = useForm<ValidationSchema>({ resolver: zodResolver(schema) });
 
-  const newFormStates = {
-    fullName: "",
-    whatsappNumber: "",
-  };
-
-  const [formData, setFormData] = useState(newFormStates);
   const farmersRouter = trpc.farmer.add.useMutation({});
   const tokenXml = trpc.payments.getToken.useQuery().data;
   const paymentRouter = trpc.payments.sendMobileToken.useMutation({
@@ -64,50 +61,38 @@ const RegistrationForm = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<formInputs> = (data) => {
+  const onSubmit: SubmitHandler<ValidationSchema> = (data) => {
+    type Input = inferProcedureInput<AppRouter["payments"]["sendMobileToken"]>;
+    const input: Input = {
+      phoneNumber: data.whatsappNumber,
+      transactionToken: tokenXml,
+    };
+    type newFarmerInput = inferProcedureInput<AppRouter["farmer"]["add"]>;
+    // some fancy ass stuff for the dates
+    const createdAtDate = new Date()
+      ?.toISOString()
+      ?.split("T")[0]
+      ?.replaceAll("-", "/") as string;
+    const expiresAtDate = addMonth(new Date(), 1);
+    const newFarmerInput: newFarmerInput = {
+      fullName: data.fullName,
+      phoneNumber: data.whatsappNumber,
+      expiresAt: expiresAtDate,
+      createdAt: createdAtDate,
+    };
     console.log(data);
-    console.log(errors, "I am an error");
-    // if (
-    //   formData.whatsappNumber === "" ||
-    //   formData.fullName === "" ||
-    //   formData.whatsappNumber.startsWith("0") ||
-    //   formData.whatsappNumber.length !== 12 ||
-    //   !formData.whatsappNumber.startsWith("260")
-    // ) {
-    //   toast({
-    //     variant: "destructive",
-    //     title: "Uh oh! Something went wrong.",
-    //     description: "Please enter a whatsapp number in form of 260XXXXXXXXX",
-    //     action: <ToastAction altText="Try again">Try again</ToastAction>,
-    //     duration: 2500,
-    //   });
-    //   return;
-    // }
-    // type Input = inferProcedureInput<AppRouter["payments"]["sendMobileToken"]>;
-    // const input: Input = {
-    //   phoneNumber: formData.whatsappNumber,
-    //   transactionToken: tokenXml,
-    // };
-    // type newFarmerInput = inferProcedureInput<AppRouter["farmer"]["add"]>;
-    // // some fancy ass stuff for the dates
-    // const createdAtDate = new Date()
-    //   ?.toISOString()
-    //   ?.split("T")[0]
-    //   ?.replaceAll("-", "/") as string;
-    // const expiresAtDate = addMonth(new Date(), 1);
-    // const newFarmerInput: newFarmerInput = {
-    //   fullName: formData.fullName,
-    //   phoneNumber: formData.whatsappNumber,
-    //   expiresAt: expiresAtDate,
-    //   createdAt: createdAtDate,
-    // };
-    // try {
-    //   paymentRouter.mutateAsync(input);
-    //   farmersRouter.mutateAsync(newFarmerInput);
-    //   setFormData(newFormStates);
-    // } catch (cause) {
-    //   console.error({ cause }, "Failed to add the new Users");
-    // }
+    try {
+      paymentRouter.mutateAsync(input);
+      farmersRouter.mutateAsync(newFarmerInput);
+    } catch (cause) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: `Please make sure your number is a valid Zambian number`,
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+        duration: 1500,
+      });
+    }
   };
   return (
     <form
@@ -123,17 +108,19 @@ const RegistrationForm = () => {
         </Label>
 
         <input
-          type="text"
-          required
-          defaultValue=""
-          {...(register("fullName"), { minLength: 4 })}
+          {...register("fullName")}
           className={inputFieldClasses}
           placeholder="Hariet Ngulube"
         />
+        {errors?.fullName?.message && (
+          <span className="text-sm text-red-500">
+            Please enter your full name
+          </span>
+        )}
       </div>
 
       <div className="mt-5 flex flex-col">
-        <Label htmlFor="userName" className="relative">
+        <Label htmlFor="whatsappNumber" className="relative">
           Whatsapp Number{" "}
           <sup className="text-medium absolute bottom-0 text-lg text-red-600">
             *
@@ -141,21 +128,17 @@ const RegistrationForm = () => {
         </Label>
 
         <input
-          type="number"
-          defaultValue=""
-          {...(register("whatsappNumber"),
-          { pattern: "^\260d{9}$", maxLength: 12, required: true })}
-          //   pattern="^\260\d{9}$"
-          placeholder="260XXXXXXXXX"
-          inputMode="numeric"
+          type="string"
+          placeholder="0780321733"
+          {...register("whatsappNumber")}
           className={inputFieldClasses}
         />
+        {errors?.whatsappNumber?.message && (
+          <span className="text-sm text-red-500">
+            Please enter a whatsapp number in form of 260xxxxxxxxx
+          </span>
+        )}
       </div>
-      {errors.whatsappNumber && (
-        <span className="text-3xl text-red-500">
-          {errors.whatsappNumber.message}
-        </span>
-      )}
 
       <div className="mt-5 flex items-center gap-3">
         <input
@@ -184,15 +167,14 @@ const RegistrationForm = () => {
           <h3>Something went wrong, try again</h3>
         </div>
       )}
-      <input type="submit" />
 
-      {/* <button
+      <button
         disabled={farmersRouter.isLoading}
         type="submit"
         className="mt-7 w-[250px] cursor-pointer items-start rounded-md bg-green px-4 py-2 text-lg font-medium text-white"
       >
         {farmersRouter.isLoading ? "Loading..." : " Sign Up"}
-      </button> */}
+      </button>
     </form>
   );
 };

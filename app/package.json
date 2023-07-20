@@ -15,6 +15,7 @@
   "dependencies": {
     "@builder.io/partytown": "^0.7.3",
     "@clerk/nextjs": "^4.21.15",
+    "@hookform/resolvers": "^3.1.1",
     "@mdx-js/loader": "^2.2.1",
     "@mdx-js/react": "*",
     "@next-auth/prisma-adapter": "1.0.5",
