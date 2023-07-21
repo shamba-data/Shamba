@@ -68,6 +68,28 @@
  
     --ring: 12 6.5% 15.1%;
   }
+
+    /* Firefox */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: hsl(112, 22%, 36%);
+    }
+  
+    /* Chrome, Edge, and Safari */
+    *::-webkit-scrollbar {
+      width: 10px;
+    }
+  
+    *::-webkit-scrollbar-track {
+      background: var(--input);
+      border-radius: 5px;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background-color: hsl(112, 22%, 36%);
+      border-radius: 5px;
+      /* border: 1px solid var(--primary); */
+    }
 }
  
 @layer base {
