@@ -1,7 +1,5 @@
 import { HeroSection, About, MarketCards } from "../../components/landingPage";
 import Image from "next/legacy/image";
-import { useState, type ChangeEvent } from "react";
-
 import Link from "next/link";
 import Layout from "../../components/Layout";
 import { Toaster } from "../../components/UI/Toaster";
@@ -22,13 +20,13 @@ const Zambia = () => {
             className="mt-[3rem] flex flex-col items-center justify-center sm:mt-[5rem]"
             id="signUp"
           >
-            <h3 className="mt-[2rem] text-2xl text-green">
+            <h3 className="mt-[2rem] text-2xl font-medium text-green">
               Sign Up for <span className="text-gold"> Shamba Data</span>
             </h3>
-            <p className="mx-3 mt-5 text-center text-lg ">
-              Our Service is priced at{" "}
-              <span className="font-medium text-green">K80/ month</span>. We
-              will notify you once we launch
+            <p className="mx-3 mt-1 text-center text-lg ">
+              Our market update Service is priced at{" "}
+              <span className="font-medium text-green">K80/ month</span>.
+              {/* We will notify you once we launch */}
             </p>
 
             <p className="mt-5  text-lg">

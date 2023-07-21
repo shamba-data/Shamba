@@ -10,13 +10,14 @@ const HeroSection = () => {
               Get accurate
             </h3>
             <div className="flex items-center justify-center">
-              <p className="mt-4 w-[300px] text-center text-2xl font-medium md:w-full md:text-left">
+              <p className="mt-1 w-[300px] text-center text-2xl font-medium md:w-full md:text-left">
                 daily market prices for your crops in your Whatsapp.
               </p>
             </div>
-            <p className="mt-5 max-w-[350px] text-center text-xl font-light md:mt-3 md:max-w-[500px] md:text-left">
-              Sign up your <span className="text-green">Whatsapp Number</span>{" "}
-              to get the daily price notifications from 4 Zambian markets
+            <p className="mt-5 max-w-[350px] text-center text-xl md:mt-7  md:max-w-[500px] md:text-left">
+              Sign up with your{" "}
+              <span className="font-medium text-gold">Whatsapp Number</span> to
+              get the daily price notifications from 4 Zambian markets.
             </p>
           </div>
 
@@ -61,16 +62,16 @@ const HeroSection = () => {
             <h3 className="text-[1.8rem] font-medium">About</h3>
             <span className="text-[2.2rem]">Shamba Data</span>
           </div>
-          <article className="mx-1 mt-3 text-center text-xl font-light  md:text-left lg:max-w-[463px] lg:tracking-wider">
+          <p className="mx-1 mt-3 text-center text-xl  md:text-left lg:max-w-[463px] ">
             We understand that you struggle to get the market information you
             want.
-          </article>
-          <article className="mt-[1rem] text-center text-xl font-light md:text-left lg:max-w-[463px] lg:tracking-wider">
+          </p>
+          <p className="mt-[1rem] text-center text-xl  md:text-left lg:max-w-[463px] ">
             Therefore, farmer come join{" "}
             <span className="font-medium text-gold">Shamba data.</span>
             We provide you with accurate and up-to-date market information that
             helps you maximize profits from farming.
-          </article>
+          </p>
         </div>
 
         <div className="relative mb-[21rem] mt-6 sm:hidden">
