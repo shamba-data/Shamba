@@ -6,8 +6,7 @@ import { ToastAction } from "../../components/UI/Toast";
 import { useToast } from "../../hooks/useToast";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { Label } from "../UI/label";
-import { Input } from "../UI/Input";
+import { Label, Input, Button } from "../UI";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -168,13 +167,9 @@ const RegistrationForm = () => {
         </div>
       )}
 
-      <button
-        disabled={farmersRouter.isLoading}
-        type="submit"
-        className="mt-7 w-[250px] cursor-pointer items-start rounded-md bg-green px-4 py-2 text-lg font-medium text-white"
-      >
+      <Button disabled={farmersRouter.isLoading} type="submit">
         {farmersRouter.isLoading ? "Loading..." : " Sign Up"}
-      </button>
+      </Button>
     </form>
   );
 };

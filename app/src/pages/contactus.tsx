@@ -1,15 +1,13 @@
-import { Footer, HeadSeo, Nav } from "../components/landingPage";
 import { GoLocation } from "react-icons/go";
 import { BsTelephone, BsLinkedin } from "react-icons/bs";
 import { HiOutlineMail } from "react-icons/hi";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { GrFacebook } from "react-icons/gr";
 import Layout from "../components/Layout";
+import { Label, Input, Button } from "../components/UI";
 
 const Contact = () => {
-  const labelClasses = "font-medium text-lg text-green tracking-wide";
-  const inputClasses =
-    "border-[1px] rounded-md px-2 py-2 w-[300px] focus:outline-none bg-white mt-2";
+  const inputClasses = "mt-2";
   const divClasses = "flex flex-col";
 
   return (
@@ -73,8 +71,8 @@ const Contact = () => {
 
             <form className="mt-[2.5rem] flex flex-col gap-5">
               <div className={divClasses}>
-                <label className={labelClasses}>Your Email</label>
-                <input
+                <Label>Your Email</Label>
+                <Input
                   type="email"
                   placeholder="aimebah@gmail.com"
                   className={inputClasses}
@@ -83,8 +81,8 @@ const Contact = () => {
                 />
               </div>
               <div className={divClasses}>
-                <label className={labelClasses}>Your Topic</label>
-                <input
+                <Label>Your Topic</Label>
+                <Input
                   type="text"
                   placeholder="E.g cancel my subscription"
                   className={inputClasses}
@@ -94,20 +92,21 @@ const Contact = () => {
               </div>
 
               <div className={divClasses}>
-                <label className={labelClasses}>Your Message</label>
+                <Label>Your Message</Label>
                 <textarea
-                  className="m-0 block w-[300px] rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
+                  className="m-0 mt-2 block w-[300px] rounded border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-gray-700 transition ease-in-out focus:bg-white focus:text-gray-700 focus:outline-none focus:ring-2 focus:ring-green"
                   rows={3}
                   placeholder="Your message"
                 ></textarea>
               </div>
+              <Button type="submit">Submit</Button>
 
-              <button
+              {/* <button
                 type="submit"
                 className="w-[90px] rounded-md bg-green py-3 font-medium tracking-wide text-white xl:w-[100px] xl:text-lg"
               >
                 Submit
-              </button>
+              </button> */}
             </form>
           </div>
 
