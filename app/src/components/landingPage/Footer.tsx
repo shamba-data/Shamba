@@ -126,8 +126,8 @@ const Footer = () => {
       </div>
 
       <div className="mt-[72px] md:flex md:items-center md:justify-center md:gap-[2rem]">
-        <h3 className="text-center text-lg text-white">
-          Copyright @ <span>{date.getFullYear().toLocaleString()}</span>
+        <h3 className="text-center text-base text-white">
+          Copyright @ <span>{date.getFullYear().toString()}</span>
         </h3>
       </div>
     </footer>
