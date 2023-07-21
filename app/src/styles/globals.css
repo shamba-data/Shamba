@@ -18,7 +18,8 @@
     --card-foreground: 20 14.3% 4.1%;
  
     --border: 20 5.9% 90%;
-    --input: 20 5.9% 90%;
+    /* --input: #3C464B; */
+    --input: 20 5.9% 80%;
  
     --primary: 24 9.8% 10%;
     --primary-foreground: 60 9.1% 97.8%;

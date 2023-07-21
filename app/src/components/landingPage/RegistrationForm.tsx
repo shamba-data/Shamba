@@ -7,6 +7,7 @@ import { useToast } from "../../hooks/useToast";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { Label } from "../UI/label";
+import { Input } from "../UI/Input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -32,8 +33,6 @@ const RegistrationForm = () => {
   const router = useRouter();
   const { toast } = useToast();
 
-  const inputFieldClasses =
-    "w-[350px] h-9 rounded-md border-[1px] border-slate-300 bg-transparent py-1 px-3 text-gray-900 outline-none focus:outline-none mt-2 focus:ring-green focus:ring-2";
   const TOSclass =
     "w-4 h-4 text-gray-900 bg-gray-100 border-slate-300 rounded accent-green ";
 
@@ -108,9 +107,9 @@ const RegistrationForm = () => {
           </sup>
         </Label>
 
-        <input
+        <Input
           {...register("fullName")}
-          className={inputFieldClasses}
+          className="mt-2 w-[350px]"
           placeholder="Hariet Ngulube"
         />
         {errors?.fullName?.message && (
@@ -128,11 +127,11 @@ const RegistrationForm = () => {
           </sup>
         </Label>
 
-        <input
+        <Input
           type="string"
-          placeholder="0780321733"
+          placeholder="260780321733"
           {...register("whatsappNumber")}
-          className={inputFieldClasses}
+          className="mt-2 w-[350px]"
         />
         {errors?.whatsappNumber?.message && (
           <span className="text-sm text-red-500">
@@ -142,7 +141,7 @@ const RegistrationForm = () => {
       </div>
 
       <div className="mt-5 flex items-center gap-3">
-        <input
+        <Input
           id="terms and conditions"
           type="checkbox"
           required
