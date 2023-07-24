@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Button } from "../../components/UI/Button";
+import { Button } from "../../components/UI";
 import {
   Card,
   CardContent,

@@ -1,6 +1,5 @@
 import React from "react";
-import { Label } from "../../components/UI/label";
-import { Input } from "../../components/UI/Input";
+import { Input, Label } from "../../components/UI";
 
 const Index = ({ selectedPrice, setSelectedPrice }: any) => {
   return (

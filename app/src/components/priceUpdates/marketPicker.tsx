@@ -6,7 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../components/UI/select";
-import { Label } from "../../components/UI/label";
+import { Label } from "../../components/UI";
 
 const Index = ({ setSelectedMarket }: any) => {
   return (

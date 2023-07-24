@@ -1,4 +1,3 @@
-import { Button } from "../UI/Button";
 import {
   Card,
   CardContent,
@@ -7,8 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../UI/Card";
-import { Input } from "../UI/Input";
-import { Label } from "../UI/label";
+import { Input, Label, Button } from "../UI";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../UI/Tabs";
 import { trpc } from "../../utils/trpc";
 import { Toaster } from "../UI/Toaster";
