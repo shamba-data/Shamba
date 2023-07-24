@@ -2,6 +2,7 @@ import { Value, Nav, Footer, HeadSeo } from "../components/landingPage";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import { Suspense } from "react";
+import { Button } from "../components/UI";
 
 const Index = () => {
   return (
@@ -21,7 +22,7 @@ const Index = () => {
           </div>
 
           <div className="flex items-end justify-center">
-            <div className="relative hidden h-[90px] w-[90px] translate-y-[3rem] translate-x-[1rem] md:block lg:h-[130px] lg:w-[130px]">
+            <div className="relative hidden h-[90px] w-[90px] translate-x-[1rem] translate-y-[3rem] md:block lg:h-[130px] lg:w-[130px]">
               <Image src="/chilli.png" alt="tomatoes" layout="fill" />
             </div>
 
@@ -48,12 +49,13 @@ const Index = () => {
               </div>
 
               <Link href="/bookDemo">
-                <button
-                  className="mt-[14px] cursor-pointer rounded-md bg-green px-4 py-2 font-medium text-white md:-translate-y-[3rem] md:py-4 lg:mt-[18px]"
+                <Button
+                  size="lg"
+                  className="mt-[14px]  md:-translate-y-[3rem] md:py-4 lg:mt-[18px]"
                   // onClick={() => setPortal(!portal)}
                 >
                   Book An Enterprise Demo
-                </button>
+                </Button>
               </Link>
 
               <div className="relative hidden h-[90px] w-[90px] translate-x-[8rem] md:block lg:h-[130px] lg:w-[130px]">
@@ -108,9 +110,9 @@ const Index = () => {
                 the best prices and return have more financial returns
               </p>
               <Link href="/zambia">
-                <button className="mt-[27px] cursor-pointer rounded-md bg-gold px-4 py-2 font-medium text-white">
+                <Button size="sm" variant="secondary" className="mt-[27px]  ">
                   Learn More
-                </button>
+                </Button>
               </Link>
             </div>
             <div className="flex items-center justify-center">
@@ -120,7 +122,7 @@ const Index = () => {
             </div>
           </div>
         </section>
-        <section className="mt-[91px] mb-[100px]">
+        <section className="mb-[100px] mt-[91px]">
           <Value />
         </section>
       </main>
