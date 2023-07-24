@@ -15,6 +15,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ToastAction } from "../UI/Toast";
+import { useRouter } from "next/router";
 
 function DeleteAccount() {
   const { toast } = useToast();
@@ -96,9 +97,49 @@ function DeleteAccount() {
     </Card>
   );
 }
-export default function EditAccount() {
-  const { toast } = useToast();
 
+function RenewalPayment() {
+  const { toast } = useToast();
+  const router = useRouter();
+
+  const tokenXml = api.payments.getToken.useQuery().data;
+  const paymentRouter = api.payments.sendMobileToken.useMutation({
+    onSuccess: () => {
+      router.push("/zambia/success");
+    },
+    onError: (error) => {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: `${error.message}`,
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+        duration: 1500,
+      });
+    },
+  });
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Renewing Subscription</CardTitle>
+        <CardDescription>
+          Enter your phone number used to register and click on renew
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-2">
+        <form className="space-y-1">
+          <Label htmlFor="name">Phone Number</Label>
+          <Input id="name" defaultValue="260XXXXXXX" />
+        </form>
+        <CardFooter>
+          <Button>Renew Payment</Button>
+        </CardFooter>
+      </CardContent>
+    </Card>
+  );
+}
+
+export default function EditAccount() {
   return (
     <Tabs defaultValue="account" className="mt-10 w-[400px]">
       <Toaster />
@@ -107,23 +148,7 @@ export default function EditAccount() {
         <TabsTrigger value="password">Delete Account</TabsTrigger>
       </TabsList>
       <TabsContent value="account">
-        <Card>
-          <CardHeader>
-            <CardTitle>Renewing Subscription</CardTitle>
-            <CardDescription>
-              Enter your phone number used to register and click on renew
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <form className="space-y-1">
-              <Label htmlFor="name">Phone Number</Label>
-              <Input id="name" defaultValue="260XXXXXXX" />
-            </form>
-          </CardContent>
-          <CardFooter>
-            <Button>Renew Payment</Button>
-          </CardFooter>
-        </Card>
+        <RenewalPayment />
       </TabsContent>
       <TabsContent value="password">
         <DeleteAccount />
